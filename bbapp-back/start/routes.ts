@@ -7,10 +7,13 @@
 |
 */
 
-import router from '@adonisjs/core/services/router'
+import router from "@adonisjs/core/services/router";
+import PlatsController from "#controllers/plats_controller";
 
-router.get('/', async () => {
-  return {
-    hello: 'world',
-  }
-})
+router.group(() => {
+    router.group(() => {
+        router.get("/all", [PlatsController, 'getAll']);
+        router.get("/:id", [PlatsController, 'getPlat']);
+        router.post("/:id/save", [PlatsController, 'store']);
+    }).prefix("/plat");
+}).prefix("/api");
