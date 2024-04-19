@@ -10,7 +10,7 @@ export default class PlatsController {
         return Plat.find(request.param('id'));
     }
 
-    async store({request}: HttpContext): Promise<Plat|null> {
+    async save({request}: HttpContext): Promise<Plat|null> {
         const { nom } = request.all();
         let plat = await Plat.find(request.param('id') ?? 0);
         if (!plat) plat = new Plat();

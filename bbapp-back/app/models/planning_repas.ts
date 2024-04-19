@@ -1,9 +1,9 @@
 import { DateTime } from "luxon";
 import { BaseModel, column, manyToMany } from "@adonisjs/lucid/orm";
+import Plat from "#models/plat";
 import * as relations from "@adonisjs/lucid/types/relations";
-import PlanningRepas from "#models/planning_repas";
 
-export default class Plat extends BaseModel {
+export default class PlanningRepas extends BaseModel {
     @column({ isPrimary: true })
     declare id: number;
 
@@ -13,12 +13,17 @@ export default class Plat extends BaseModel {
     @column.dateTime({ autoCreate: true, autoUpdate: true })
     declare updatedAt: DateTime;
 
-    @column()
-    declare nom: string;
+    @column.dateTime()
+    declare date: DateTime;
 
     @column()
-    declare url: string;
+    declare moment: "midi" | "soir";
 
-    @manyToMany(() => PlanningRepas)
-    declare plannings: relations.ManyToMany<typeof PlanningRepas>
+    @manyToMany(() => Plat, {
+        pivotTimestamps: {
+            createdAt: 'creation_date',
+            updatedAt: false,
+        }
+    })
+    declare plats: relations.ManyToMany<typeof Plat>
 }
