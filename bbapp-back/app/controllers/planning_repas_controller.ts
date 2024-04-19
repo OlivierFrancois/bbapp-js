@@ -10,11 +10,9 @@ export default class PlanningRepasController {
     async getPlanning({request} : HttpContext): Promise<PlanningRepas[]> {
         const { startDate, endDate } = request.all();
 
-        const plannings = await PlanningRepas.query()
+        return await PlanningRepas.query()
             .whereBetween('date', [startDate, endDate])
-            .exec() ?? []
-
-        return plannings;
+            .exec() ?? [];
     }
 
     async save({request} : HttpContext): Promise<PlanningRepas> {
