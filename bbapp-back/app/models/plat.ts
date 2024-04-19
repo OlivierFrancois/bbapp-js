@@ -4,6 +4,8 @@ import * as relations from "@adonisjs/lucid/types/relations";
 import PlanningRepas from "#models/planning_repas";
 
 export default class Plat extends BaseModel {
+    static table = 'plat'
+
     @column({ isPrimary: true })
     declare id: number;
 

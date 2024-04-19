@@ -7,7 +7,8 @@ export default class PlatsController {
     }
 
     async getPlat({request}: HttpContext): Promise<Plat|null> {
-        return Plat.find(request.param('id'));
+        const platId = request.param('id');
+        return Plat.find(platId);
     }
 
     async save({request}: HttpContext): Promise<Plat|null> {
@@ -25,9 +26,9 @@ export default class PlatsController {
         let plat = await Plat.find(request.param('id') ?? 0);
         if (plat) {
             await plat.delete();
-            return {state: 'deleted'}
+            return {message: 'deleted'}
         } else {
-            return {state: 'not found'}
+            return {message: 'not found'}
         }
     }
 }

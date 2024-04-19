@@ -4,6 +4,8 @@ import Plat from "#models/plat";
 import * as relations from "@adonisjs/lucid/types/relations";
 
 export default class PlanningRepas extends BaseModel {
+    static table = 'planning_repas'
+
     @column({ isPrimary: true })
     declare id: number;
 
@@ -21,7 +23,7 @@ export default class PlanningRepas extends BaseModel {
 
     @manyToMany(() => Plat, {
         pivotTimestamps: {
-            createdAt: 'creation_date',
+            createdAt: 'created_at',
             updatedAt: false,
         }
     })
