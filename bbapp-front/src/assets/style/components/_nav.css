@@ -1,0 +1,21 @@
+@layer components {
+    .navbar {
+        @apply h-16 text-primary-content h-16 flex justify-center gap-2 items-center relative;
+
+        .navbar-item {
+            @apply p-4 text-secondary transition-all w-14 h-16 flex justify-center items-center;
+            font-size: 2rem;
+            position: relative;
+
+        }
+        .navbar-item:hover {
+            @apply bg-primary;
+        }
+        .navbar-item.active {
+            @apply text-white border-b-2 border-white;
+        }
+    }
+    .nav-link.closed {
+        @apply bg-green-400 text-white;
+    }
+}
