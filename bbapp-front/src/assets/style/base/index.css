@@ -1,1 +1,5 @@
 /**/
+
+#root {
+    @apply flex flex-col h-screen overflow-hidden bg-gradient-to-br from-primary to-primary/85 from-10%;
+}

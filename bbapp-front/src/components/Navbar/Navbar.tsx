@@ -1,4 +1,5 @@
 import React, {SetStateAction} from "react";
+import {NavLink} from "react-router-dom";
 
 interface Props {
     isNavbarOpened: boolean,
@@ -20,9 +21,14 @@ const NavbarItems = [
 export default function Navbar({isNavbarOpened}: Props) {
     return <nav className={`navbar ${isNavbarOpened ? 'opened' : 'closed'}`}>
         {NavbarItems.map((navItem, i) => (
-            <a href={navItem.url} className={'navbar-item'}>
+            <NavLink key={i}
+                     to={navItem.url}
+                     className={({isActive, isPending}) => {
+                         return "navbar-item " + (isActive ? "active" : isPending ? "pending" : "");
+                     }}
+            >
                 <i className={navItem.icon}></i>
-            </a>
+            </NavLink>
         ))}
     </nav>
 }
