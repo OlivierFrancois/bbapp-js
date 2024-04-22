@@ -1,4 +1,3 @@
-import React, {SetStateAction} from "react";
 import {NavLink} from "react-router-dom";
 
 interface Props {

@@ -1,10 +1,13 @@
 import Navbar from "../components/Navbar/Navbar.tsx";
 import {Outlet} from "react-router-dom";
+import {useState} from "react";
 
 export default function Root() {
+    const [isNavbarOpened, setIsNavbarOpened] = useState<boolean>(true)
+
     return (
         <>
-            <div className={'flex-1 overflow-scroll bg-white rounded-b-3xl'}>
+            <div className={`flex-1 overflow-scroll bg-white ${isNavbarOpened ? 'rounded-b-3xl' : ''}`}>
                 <Outlet />
             </div>
 
