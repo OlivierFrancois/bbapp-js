@@ -6,9 +6,9 @@ import {
 } from "react-router-dom";
 import './index.css'
 import ErrorPage from "./error-page";
-import PlanningRepas from "./routes/PlanningRepas.tsx";
+import PlanningRepasPage from "./routes/PlanningRepasPage.tsx";
 import Root from "./routes/Root.tsx";
-import Home from "./routes/Home.tsx";
+import HomePage from "./routes/HomePage.tsx";
 
 
 const router = createBrowserRouter([
@@ -19,11 +19,11 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Home/>
+                element: <HomePage/>
             },
             {
                 path: "/planning-repas",
-                element: <PlanningRepas/>
+                element: <PlanningRepasPage/>
             }
         ]
     },
