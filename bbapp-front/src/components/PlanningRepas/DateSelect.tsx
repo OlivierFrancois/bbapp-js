@@ -1,8 +1,6 @@
 import {useContext} from "react";
 import {PlanningRepasContext} from "../../routes/PlanningRepasPage.tsx";
 import dayjs from "dayjs";
-dayjs.locale('fr');
-
 
 export default function DateSelect() {
     const {date, setDate} = useContext(PlanningRepasContext);

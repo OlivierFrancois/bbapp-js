@@ -1,16 +1,21 @@
 import DateSelect from "../components/PlanningRepas/DateSelect.tsx";
 import PlanningRepas from "../components/PlanningRepas/PlanningRepas.tsx";
 import {createContext, useState} from "react";
+import dayjs from "dayjs";
 
 interface PlanningRepasContextI {
     date: string,
     setDate: React.Dispatch<React.SetStateAction<string>>
 }
 
+const LS_DATE = 'BBAPP_PLANNING_REPAS_DATE';
+
 export const PlanningRepasContext = createContext<PlanningRepasContextI>({} as PlanningRepasContextI)
 
 export default function PlanningRepasPage() {
-    const [date, setDate] = useState<string>('')
+    const LS_date = localStorage.getItem(LS_DATE) ? localStorage.getItem(LS_DATE) as string : dayjs().format('YYYY-MM-DD');
+
+    const [date, setDate] = useState<string>(LS_date);
 
     const mainContext = {date, setDate};
 

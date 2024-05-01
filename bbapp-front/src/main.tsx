@@ -9,7 +9,9 @@ import ErrorPage from "./error-page";
 import PlanningRepasPage from "./routes/PlanningRepasPage.tsx";
 import Root from "./routes/Root.tsx";
 import HomePage from "./routes/HomePage.tsx";
+import dayjs from "dayjs";
 
+dayjs.locale('fr');
 
 const router = createBrowserRouter([
     {
