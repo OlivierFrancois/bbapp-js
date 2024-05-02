@@ -1,7 +1,8 @@
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import {PlanningRepasContext} from "../../routes/PlanningRepasPage.tsx";
 import dayjs from "dayjs";
 import {MoonIcon, SunIcon} from "@heroicons/react/16/solid";
+import {PlanningRepasAPI} from "../../api/PlanningRepasAPI.tsx";
 
 export default function PlanningRepas() {
     const {date} = useContext(PlanningRepasContext);
@@ -11,6 +12,19 @@ export default function PlanningRepas() {
         currentDate = currentDate.add(1, 'day');
         dates.push(currentDate);
     }
+
+    useEffect(() => {
+        const payload = {
+            startDate: dayjs(date).startOf('week').format('YYYY-MM-DD'),
+            endDate: dayjs(date).endOf('week').format('YYYY-MM-DD')
+        }
+
+        console.log(payload);
+        PlanningRepasAPI.getPlanningWeek(payload)
+            .then(res => {
+                console.log(res);
+            })
+    }, [date]);
 
     return (
         <div className={'flex-1'}>

@@ -2,6 +2,8 @@ import DateSelect from "../components/PlanningRepas/DateSelect.tsx";
 import PlanningRepas from "../components/PlanningRepas/PlanningRepas.tsx";
 import {createContext, useState} from "react";
 import dayjs from "dayjs";
+import 'dayjs/locale/fr';
+dayjs.locale('fr');
 
 interface PlanningRepasContextI {
     date: string,
