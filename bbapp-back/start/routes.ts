@@ -19,8 +19,8 @@ router.group(() => {
     }).prefix("/plat");
 
     router.group(() => {
-        router.get("/:id", [PlanningRepasController, 'get']);
         router.get("/week", [PlanningRepasController, 'getPlanning']);
+        router.get("/:id", [PlanningRepasController, 'get']);
         router.post("/save", [PlanningRepasController, 'save']);
     }).prefix("/planning-repas");
 
