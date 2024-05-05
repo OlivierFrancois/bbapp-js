@@ -12,6 +12,7 @@ export default class PlanningRepasController {
 
         return await PlanningRepas.query()
             .whereBetween('date', [startDate, endDate])
+            .preload('plats')
             .exec() ?? [];
     }
 
