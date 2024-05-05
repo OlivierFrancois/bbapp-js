@@ -29,7 +29,7 @@ export default function PlanningRepasPage() {
     const LS_date = localStorage.getItem(LS_DATE) ? localStorage.getItem(LS_DATE) as string : dayjs().format('YYYY-MM-DD');
 
     const [date, setDate] = useState<string>(LS_date);
-    const [selectedCell, setSelectedCell] = useState<SelectedCell>(null)
+    const [selectedCell, setSelectedCell] = useState<SelectedCell | null>(null)
 
     const mainContext = {date, setDate, selectedCell, setSelectedCell};
 

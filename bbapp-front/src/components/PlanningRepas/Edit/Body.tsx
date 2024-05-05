@@ -1,12 +1,11 @@
-import React, {useContext, useState} from "react";
+import {useContext, useState} from "react";
 import {PlanningRepasContext} from "../../../routes/PlanningRepasPage.tsx";
 import Plat from "../../../interfaces/Plat.tsx";
-import {TrashIcon} from "@heroicons/react/16/solid";
 import PlatItem from "./PlatItem.tsx";
 
 export default function Body() {
     const {selectedCell} = useContext(PlanningRepasContext)
-    const [plats, setPlats] = useState<Plat[]>(selectedCell?.planningRepas?.plats ?? [])
+    const [plats] = useState<Plat[]>(selectedCell?.planningRepas?.plats ?? [])
 
     return (
         <div className={'p-3'}>
