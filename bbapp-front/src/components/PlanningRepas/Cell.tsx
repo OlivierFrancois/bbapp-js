@@ -12,7 +12,6 @@ export default function Cell({date, moment, planningRepas}: CellProps) {
     const {setSelectedCell} = useContext(PlanningRepasContext);
 
     const handleClick = () => {
-        console.log('poke');
         setSelectedCell({
             date: date,
             moment: moment,
@@ -20,9 +19,9 @@ export default function Cell({date, moment, planningRepas}: CellProps) {
         })
     }
 
-    return <div onClick={handleClick} className={'flex flex-col'}>
-        {planningRepas?.plats.map(plat => (
-            <div className={'capitalize'}>{plat.nom}</div>
+    return <div onClick={handleClick} className={'flex flex-col justify-center p-1 h-full'}>
+        {planningRepas?.plats.map((plat, key) => (
+            <div key={key} className={'capitalize'}>{plat.nom}</div>
         ))}
     </div>
 }

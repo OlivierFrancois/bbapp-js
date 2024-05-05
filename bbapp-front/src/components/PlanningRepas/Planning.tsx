@@ -54,7 +54,7 @@ export default function Planning() {
 
                 <tbody>
                     {dates.map((d, k) => (
-                        <tr key={k}>
+                        <tr className={'h-20'} key={k}>
                             <td>
                                 <div className="flex flex-col text-xs">
                                     <div className={'font-bold capitalize'}>{d.format('dddd')}</div>
@@ -62,12 +62,12 @@ export default function Planning() {
                                 </div>
                             </td>
 
-                            {moments.map(m => (
-                                <td className={'border-l'}>
+                            {moments.map((moment, key) => (
+                                <td key={key} className={'border-l h-20 !p-0'}>
                                     <Cell
                                         date={d.format('YYYY-MM-DD')}
-                                        moment={m}
-                                        planningRepas={planningRepas.find(p => dayjs(p.date).format('YYYY-MM-DD') === d.format('YYYY-MM-DD') && p.moment === m)}
+                                        moment={moment}
+                                        planningRepas={planningRepas.find(p => dayjs(p.date).format('YYYY-MM-DD') === d.format('YYYY-MM-DD') && p.moment === moment)}
                                     />
                                 </td>
                             ))}

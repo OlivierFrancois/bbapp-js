@@ -10,7 +10,7 @@ export default function Edit() {
     const {selectedCell} = useContext(PlanningRepasContext)
 
     return (
-        <div className={`transition-all absolute flex flex-col bg-white w-full border shadow`}
+        <div className={`z-20 transition-all absolute flex flex-col bg-white w-full border shadow`}
              style={{
                  height: AREA_HEIGHT,
                  bottom: selectedCell ? 0 : `-${AREA_HEIGHT}`

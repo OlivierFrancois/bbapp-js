@@ -1,6 +1,7 @@
 import DateSelect from "../components/PlanningRepas/DateSelect.tsx";
 import Planning from "../components/PlanningRepas/Planning.tsx";
-import {createContext, useState} from "react";
+import Cache from "../components/PlanningRepas/Cache.tsx";
+import React, {createContext, useState} from "react";
 import dayjs from "dayjs";
 import 'dayjs/locale/fr';
 import Edit from "../components/PlanningRepas/Edit/Edit.tsx";
@@ -34,12 +35,15 @@ export default function PlanningRepasPage() {
 
     return (
         <PlanningRepasContext.Provider value={mainContext}>
-            <div className={'h-full flex flex-col relative'}>
+            <div className={'h-full flex flex-col relative overflow-hidden'}>
+                <Cache/>
+
                 <DateSelect/>
 
                 <Planning/>
 
                 <Edit/>
+
             </div>
         </PlanningRepasContext.Provider>
     );
