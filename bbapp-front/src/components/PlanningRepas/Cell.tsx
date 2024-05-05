@@ -1,4 +1,6 @@
 import PlanningRepas from "../../interfaces/PlanningRepas.tsx";
+import {useContext} from "react";
+import {PlanningRepasContext} from "../../routes/PlanningRepasPage.tsx";
 
 interface CellProps {
     date: string,
@@ -7,7 +9,18 @@ interface CellProps {
 }
 
 export default function Cell({date, moment, planningRepas}: CellProps) {
-    return <div className={'flex flex-col'}>
+    const {setSelectedCell} = useContext(PlanningRepasContext);
+
+    const handleClick = () => {
+        console.log('poke');
+        setSelectedCell({
+            date: date,
+            moment: moment,
+            planningRepas: planningRepas,
+        })
+    }
+
+    return <div onClick={handleClick} className={'flex flex-col'}>
         {planningRepas?.plats.map(plat => (
             <div className={'capitalize'}>{plat.nom}</div>
         ))}
