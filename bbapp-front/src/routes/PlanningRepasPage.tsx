@@ -1,5 +1,5 @@
 import DateSelect from "../components/PlanningRepas/DateSelect.tsx";
-import PlanningRepas from "../components/PlanningRepas/PlanningRepas.tsx";
+import Planning from "../components/PlanningRepas/Planning.tsx";
 import {createContext, useState} from "react";
 import dayjs from "dayjs";
 import 'dayjs/locale/fr';
@@ -26,7 +26,7 @@ export default function PlanningRepasPage() {
             <div className={'h-full flex flex-col'}>
                 <DateSelect/>
 
-                <PlanningRepas/>
+                <Planning/>
             </div>
         </PlanningRepasContext.Provider>
     );
