@@ -1,4 +1,4 @@
-import { HttpContext } from "@adonisjs/core/http";
+import {HttpContext} from "@adonisjs/core/http";
 import Plat from "#models/plat";
 
 export default class PlatsController {
@@ -6,13 +6,19 @@ export default class PlatsController {
         return Plat.all();
     }
 
-    async getPlat({request}: HttpContext): Promise<Plat|null> {
+    async getPlat({request}: HttpContext): Promise<Plat | null> {
         const platId = request.param('id');
         return Plat.find(platId);
     }
 
-    async save({request}: HttpContext): Promise<Plat|null> {
-        const { nom } = request.all();
+    async getByName({request}: HttpContext): Promise<Plat[] | null> {
+        const {nom} = request.all();
+        return await Plat.query()
+            .where('nom', 'like', `%${nom}%`).exec()
+    }
+
+    async save({request}: HttpContext): Promise<Plat | null> {
+        const {nom} = request.all();
         let plat = await Plat.find(request.param('id') ?? 0);
         if (!plat) plat = new Plat();
 
