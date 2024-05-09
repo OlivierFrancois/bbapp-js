@@ -34,19 +34,19 @@ export default function Planning() {
 
     return (
         <div className={'flex-1'}>
-            <table className={'table table-fixed table-sm h-full [&_td]:px-2 [&_td]:py-1'}>
+            <table className={'table table-fixed table-sm h-full [&_td]:px-2 [&_td]:py-1 [&_th]:py-0'}>
                 <thead className={'bg-gray-50'}>
-                    <tr className={'h-16'}>
+                    <tr className={'h-8'}>
                         <th className={'w-24'}></th>
                         <th className={'text-primary'}>
                             <div className={'flex justify-center'}>
-                                <SunIcon className={'size-10'}/>
+                                <SunIcon className={'size-8'}/>
                             </div>
                         </th>
 
                         <th className={'text-primary'}>
                             <div className={'flex justify-center'}>
-                                <MoonIcon className={'size-10'}/>
+                                <MoonIcon className={'size-8'}/>
                             </div>
                         </th>
                     </tr>
