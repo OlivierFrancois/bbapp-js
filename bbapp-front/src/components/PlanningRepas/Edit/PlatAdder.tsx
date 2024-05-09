@@ -1,37 +1,45 @@
-import {CheckIcon} from "@heroicons/react/16/solid";
 import {useState} from "react";
 import {PlatAPI} from "../../../api/PlatAPI.tsx";
+import Plat from "../../../interfaces/Plat.tsx";
+import {XMarkIcon} from "@heroicons/react/16/solid";
 
 interface PlatAdderProps {
-    handlePlatSave?: () => void
+    handlePlatSave: (plat: Plat|null) => void
 }
 
 export default function PlatAdder({handlePlatSave}: PlatAdderProps) {
     const [platInput, setPlatInput] = useState<string>('')
-    const [log, setLog] = useState<string>('')
+    const [plats, setPlats] = useState<Plat[]>([])
 
     const handleInput = ({target}: React.ChangeEvent<HTMLInputElement>) => {
         setPlatInput(target.value);
-
-        PlatAPI.getPlatsByName({nom: target.value})
-            .then(res => {
-                setLog(JSON.stringify(res));
-            })
+        if (target.value.length > 0) {
+            PlatAPI.getPlatsByName({nom: target.value})
+                .then(res => {
+                    setPlats(res);
+                })
+        } else {
+            setPlats([]);
+        }
     }
 
     return (
-        <div>
-            <div className={'py-1 flex gap-5'}>
+        <div className={'relative'}>
+            <div className={'py-1 flex items-center gap-5'}>
                 <input type="text"
                        onInput={handleInput}
-                       placeholder={'Saisissez votre plat'}
+                       placeholder={'Recherchez un plat'}
                        value={platInput}
-                       className="input input-xs w-full input-bordered"/>
+                       className="input input-sm w-full input-bordered "/>
 
-                <CheckIcon onClick={handlePlatSave} className={'size-6'}></CheckIcon>
+                <XMarkIcon onClick={() => handlePlatSave(null)} className={'size-7'}></XMarkIcon>
             </div>
 
-            <div>{log}</div>
+            {plats.length > 0 &&
+                <div className={'absolute top-[85%] w-full border border-t-0 rounded'}>{plats.map(p => (
+                    <div className={'capitalize text-sm py-3 px-2 border-t hover:bg-gray-50'} onClick={() => handlePlatSave(p)}>{ p.nom }</div>
+                ))}</div>
+            }
         </div>
     )
 }

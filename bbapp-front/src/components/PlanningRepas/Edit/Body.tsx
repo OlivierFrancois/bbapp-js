@@ -6,15 +6,18 @@ import PlatAdder from "./PlatAdder.tsx";
 
 export default function Body() {
     const {selectedCell} = useContext(PlanningRepasContext)
-    const [plats] = useState<Plat[]>(selectedCell?.planningRepas?.plats ?? [])
+    const [plats, setPlats] = useState<Plat[]>(selectedCell?.planningRepas?.plats ?? [])
     const [platAdder, setPlatAdder] = useState<boolean>(false);
 
     const handleAddPlatInput = () => {
         setPlatAdder(true);
     }
 
-    const handlePlatSave = () => {
+    const handlePlatSave = (plat: Plat|null) => {
         setPlatAdder(false);
+        if (plat) {
+            setPlats([...plats, plat]);
+        }
     };
 
     return (

@@ -16,8 +16,8 @@ export default function Planning() {
     const dates = [];
     let currentDate = dayjs(date).startOf('week');
     while (currentDate.isBefore(dayjs(date).endOf('week')) || currentDate.isSame(dayjs(date).endOf('week'))) {
-        currentDate = currentDate.add(1, 'day');
         dates.push(currentDate);
+        currentDate = currentDate.add(1, 'day');
     }
 
     useEffect(() => {
