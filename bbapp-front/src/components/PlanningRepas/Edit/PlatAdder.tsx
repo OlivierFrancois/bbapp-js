@@ -42,9 +42,9 @@ export default function PlatAdder({handlePlatSave}: PlatAdderProps) {
 
                 {plats.length > 0
                     ? <div className={'absolute top-100 w-full border border-t-0 rounded'}>{plats.map((p, k) => (
-                        <div key={k} className={'capitalize text-sm py-3 px-2 border-t hover:bg-gray-50'} onClick={() => handlePlatSave(p)}>{ p.nom }</div>
+                        <div key={k} className={'first-letter:uppercase text-sm py-3 px-2 border-t hover:bg-gray-50'} onClick={() => handlePlatSave(p)}>{ p.nom }</div>
                     ))}</div>
-                    : platInput.length >= 3 && <div onClick={handleCreatePlat} className={'absolute top-100 w-full border border-t-0 rounded text-sm py-1 px-2 border-t hover:bg-gray-50 italic'}>Créer le plat "<span className={'capitalize font-medium'}>{platInput}</span>"</div>
+                    : platInput.length >= 3 && <div onClick={handleCreatePlat} className={'absolute top-100 w-full border border-t-0 rounded text-sm py-1 px-2 border-t hover:bg-gray-50 italic'}>Créer le plat "<span className={'first-letter:uppercase font-medium'}>{platInput}</span>"</div>
                 }
             </div>
 

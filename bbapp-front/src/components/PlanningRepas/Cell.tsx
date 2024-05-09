@@ -19,7 +19,7 @@ export default function Cell({date, moment, planningRepas}: CellProps) {
         })
     }
 
-    return <div onClick={handleClick} className={'flex flex-col justify-center p-1 h-full capitalize'}>
+    return <div onClick={handleClick} className={'flex flex-col justify-center p-1 h-full first-letter:uppercase'}>
         {planningRepas?.plats.map((plat) => plat.nom).join(', ')}
     </div>
 }

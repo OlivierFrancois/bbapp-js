@@ -10,7 +10,7 @@ export default function PlatItem({plat, handlePlatRemove}: Props) {
 
     return (
         <div className="flex items-center justify-between py-1">
-            <div className={'capitalize'}>{plat.nom}</div>
+            <div className={'first-letter:uppercase'}>{plat.nom}</div>
 
             <div onClick={() => handlePlatRemove(plat)}>
                 <TrashIcon className={'size-5'}/>
