@@ -11,7 +11,7 @@ export default function Root() {
                 <Outlet />
             </div>
 
-            <Navbar isNavbarOpened={true}/>
+            <Navbar isNavbarOpened={true} setIsNavbarOpened={setIsNavbarOpened}/>
         </>
     );
 }

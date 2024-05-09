@@ -12,10 +12,12 @@ export default function ErrorPage() {
                 </h1>
             </div>
 
-            <div className={'flex flex-col items-center justify-center'}>
+            <div className={'flex flex-col items-center justify-center gap-3'}>
                 <p className={'italic text-xl'}>
-                    {error.statusText || error.message}
+                    {(error as { statusText?: string })?.statusText || (error as Error)?.message}
                 </p>
+
+                <a className={'btn btn-sm'} href="/">Retour à l'accueil</a>
             </div>
         </div>
     );

@@ -1,7 +1,9 @@
 import {NavLink} from "react-router-dom";
+import React from "react";
 
 interface Props {
     isNavbarOpened: boolean,
+    setIsNavbarOpened: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 const NavbarItems = [
