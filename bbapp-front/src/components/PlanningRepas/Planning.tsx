@@ -9,7 +9,7 @@ import Cell from "./Cell.tsx";
 const moments = ['midi', 'soir'];
 
 export default function Planning() {
-    const {date} = useContext(PlanningRepasContext);
+    const {date, selectedCell} = useContext(PlanningRepasContext);
 
     const [planningRepas, setPlanningRepas] = useState<PlanningRepas[]>([]);
 
@@ -30,7 +30,7 @@ export default function Planning() {
             .then(res => {
                 setPlanningRepas(res);
             })
-    }, [date]);
+    }, [date, selectedCell]);
 
     return (
         <div className={'flex-1'}>

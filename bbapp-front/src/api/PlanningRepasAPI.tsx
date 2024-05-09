@@ -1,5 +1,4 @@
 import axios from 'axios';
-import Plat from '../interfaces/Plat';
 import PlanningRepas from "../interfaces/PlanningRepas.tsx";
 
 const API_HOST = import.meta.env.VITE_API_ENDPOINT;
@@ -14,7 +13,7 @@ interface PayloadGetWeekI {
 interface PayloadSave {
     date: string,
     moment: string,
-    plats: Plat[],
+    platIds: number[],
 }
 
 export class PlanningRepasAPI {

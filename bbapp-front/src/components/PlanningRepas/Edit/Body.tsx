@@ -1,24 +1,52 @@
-import {useContext, useState} from "react";
+import {useContext, useEffect, useRef, useState} from "react";
 import {PlanningRepasContext} from "../../../routes/PlanningRepasPage.tsx";
 import Plat from "../../../interfaces/Plat.tsx";
 import PlatItem from "./PlatItem.tsx";
 import PlatAdder from "./PlatAdder.tsx";
+import {PlanningRepasAPI} from "../../../api/PlanningRepasAPI.tsx";
 
 export default function Body() {
     const {selectedCell} = useContext(PlanningRepasContext)
+
     const [plats, setPlats] = useState<Plat[]>(selectedCell?.planningRepas?.plats ?? [])
     const [platAdder, setPlatAdder] = useState<boolean>(false);
+    const hasBeenRendered = useRef(false);
+
+    // TODO : ask benjamin
+    useEffect(() => {
+        if (hasBeenRendered.current) {
+            save()
+        }
+        hasBeenRendered.current = true;
+    }, [plats]);
+
+    if (!selectedCell) return <div></div>;
 
     const handleAddPlatInput = () => {
         setPlatAdder(true);
     }
-
     const handlePlatSave = (plat: Plat|null) => {
         setPlatAdder(false);
         if (plat) {
             setPlats([...plats, plat]);
         }
     };
+    const handlePlatRemove = (plat: Plat) => {
+        setPlats(plats.filter(p => p.id !== plat.id));
+    };
+
+    const save = () => {
+        const platIds = plats.map(p => p.id)
+        const payload = {
+            platIds: platIds,
+            date: selectedCell.date,
+            moment: selectedCell.moment
+        }
+        PlanningRepasAPI.save(payload)
+            .then(r => {
+                console.log(r)
+            });
+    }
 
     return (
         <div className={'p-3'}>
@@ -32,7 +60,7 @@ export default function Body() {
                 </div>
 
                 <div className={'flex flex-col divide-y'}>
-                    {plats.map(plat => <PlatItem plat={plat}/>)}
+                    {plats.map((plat, k) => <PlatItem key={k} handlePlatRemove={handlePlatRemove} plat={plat}/>)}
 
                     {platAdder && <PlatAdder handlePlatSave={handlePlatSave}/>}
                 </div>

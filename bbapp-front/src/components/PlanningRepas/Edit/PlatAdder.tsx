@@ -36,8 +36,8 @@ export default function PlatAdder({handlePlatSave}: PlatAdderProps) {
             </div>
 
             {plats.length > 0 &&
-                <div className={'absolute top-[85%] w-full border border-t-0 rounded'}>{plats.map(p => (
-                    <div className={'capitalize text-sm py-3 px-2 border-t hover:bg-gray-50'} onClick={() => handlePlatSave(p)}>{ p.nom }</div>
+                <div className={'absolute top-[85%] w-full border border-t-0 rounded'}>{plats.map((p, k) => (
+                    <div key={k} className={'capitalize text-sm py-3 px-2 border-t hover:bg-gray-50'} onClick={() => handlePlatSave(p)}>{ p.nom }</div>
                 ))}</div>
             }
         </div>
