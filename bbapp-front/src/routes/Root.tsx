@@ -7,7 +7,7 @@ export default function Root() {
 
     return (
         <>
-            <div className={`flex-1 overflow-scroll bg-white ${isNavbarOpened ? 'rounded-b-3xl' : ''}`}>
+            <div className={`flex-1 overflow-y-auto bg-white ${isNavbarOpened ? 'rounded-b-3xl' : ''}`}>
                 <Outlet />
             </div>
 
