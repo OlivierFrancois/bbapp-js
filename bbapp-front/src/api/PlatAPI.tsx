@@ -1,12 +1,16 @@
 import axios from 'axios';
 import Plat from "../interfaces/Plat";
 
-
 const API_HOST = import.meta.env.VITE_API_ENDPOINT;
 const URL_GET_ALL = `${API_HOST}/plat/all`;
 const URL_GET = `${API_HOST}/plat/:id`;
 const URL_GET_BY_NAME = `${API_HOST}/plat/by-name`;
 const URL_SAVE = `${API_HOST}/plat/:id/save`;
+
+interface PayloadSave {
+    id: number,
+    nom: string,
+}
 
 export class PlatAPI {
     static async get(id: number) : Promise<Plat[]>{
@@ -31,8 +35,8 @@ export class PlatAPI {
         })
     }
 
-    static async savePlat(plat: Plat): Promise<Plat|null>{
-        return axios.post(URL_SAVE.replace(':id', plat.id.toString()), {plat})
+    static async save(payload: PayloadSave): Promise<Plat|null>{
+        return axios.post(URL_SAVE.replace(':id', payload.id.toString()), {...payload})
             .then(res => {
             return res.data
         })

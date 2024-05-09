@@ -43,8 +43,8 @@ export default function Body() {
             moment: selectedCell.moment
         }
         PlanningRepasAPI.save(payload)
-            .then(r => {
-                console.log(r)
+            .then(() => {
+                //console.log(r)
             });
     }
 
