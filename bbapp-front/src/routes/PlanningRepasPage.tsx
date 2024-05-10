@@ -43,7 +43,6 @@ export default function PlanningRepasPage() {
                 <Planning/>
 
                 <Edit/>
-
             </div>
         </PlanningRepasContext.Provider>
     );

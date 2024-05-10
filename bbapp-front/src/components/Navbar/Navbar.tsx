@@ -19,8 +19,24 @@ const NavbarItems = [
     }
 ];
 
-export default function Navbar({isNavbarOpened}: Props) {
-    return <nav className={`navbar ${isNavbarOpened ? 'opened' : 'closed'}`}>
+export default function Navbar({isNavbarOpened, setIsNavbarOpened}: Props) {
+    const open = () => setIsNavbarOpened(true);
+    const close = (delay: number) => {
+        setTimeout(() => {
+            setIsNavbarOpened(false);
+        }, delay);
+    }
+
+    const handleClick = () => {
+        open();
+        close(2000);
+    }
+
+    return <nav className={`navbar-custom ${isNavbarOpened ? 'opened' : 'closed'}`}
+                onClick={handleClick}
+                onMouseEnter={open}
+                onMouseOut={() => close(0)}
+    >
         {NavbarItems.map((navItem, i) => (
             <NavLink key={i}
                      to={navItem.url}

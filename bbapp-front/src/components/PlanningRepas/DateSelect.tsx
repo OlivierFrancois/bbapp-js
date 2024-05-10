@@ -10,16 +10,16 @@ export default function DateSelect() {
     }
 
     return (
-        <div className={'bg-secondary h-12 text-secondary-content flex justify-between items-center p-1 text-2xl shadow'}>
-            <div onClick={() => handleDateChange(dayjs(date).add(-1, 'week').format('YYYY-MM-DD'))} className="btn btn-neutral btn-sm">
+        <div className={'bg-gradient-to-br from-primary to-primary/85 from-10% h-12 text-secondary-content flex justify-between items-center p-1 text-2xl shadow'}>
+            <div onClick={() => handleDateChange(dayjs(date).add(-1, 'week').format('YYYY-MM-DD'))} className="btn btn-sm">
                 <i className="fa fa-arrow-left"></i>
             </div>
 
-            <div onClick={() => handleDateChange(dayjs().format('YYYY-MM-DD'))} className="btn btn-primary btn-sm">
+            <div onClick={() => handleDateChange(dayjs().format('YYYY-MM-DD'))} className="btn btn-sm">
                 <i className="fa fa-calendar"></i> Cette semaine
             </div>
 
-            <div onClick={() => handleDateChange(dayjs(date).add(1, 'week').format('YYYY-MM-DD'))} className="btn btn-neutral btn-sm">
+            <div onClick={() => handleDateChange(dayjs(date).add(1, 'week').format('YYYY-MM-DD'))} className="btn btn-sm">
                 <i className="fa fa-arrow-right"></i>
             </div>
         </div>
