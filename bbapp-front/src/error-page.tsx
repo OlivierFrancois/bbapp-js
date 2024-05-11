@@ -1,6 +1,10 @@
 import { useRouteError } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar.tsx";
+import {useState} from "react";
 
 export default function ErrorPage() {
+    const [isNavbarOpened, setIsNavbarOpened] = useState<boolean>(false)
+
     const error: unknown = useRouteError();
     console.error(error);
 
@@ -19,6 +23,9 @@ export default function ErrorPage() {
 
                 <a className={'btn btn-sm'} href="/">Retour à l'accueil</a>
             </div>
+
+
+            <Navbar isNavbarOpened={isNavbarOpened} setIsNavbarOpened={setIsNavbarOpened}/>
         </div>
     );
 }
