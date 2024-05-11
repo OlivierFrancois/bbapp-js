@@ -22,7 +22,7 @@ export default class PlatsController {
         let plat = await Plat.find(request.param('id') ?? 0);
         if (!plat) plat = new Plat();
 
-        plat.nom = nom;
+        plat.nom = nom.toLowerCase();
         await plat.save();
 
         return plat;

@@ -7,6 +7,7 @@ import PlanningRepas from "../../interfaces/PlanningRepas.tsx";
 import Cell from "./Cell.tsx";
 
 const moments = ['midi', 'soir'];
+const cellHeight = 'h-[5.5rem]';
 
 export default function Planning() {
     const {date, selectedCell} = useContext(PlanningRepasContext);
@@ -35,7 +36,7 @@ export default function Planning() {
     return (
         <div className={'flex-1'}>
             <table className={'table border table-fixed table-sm [&_td]:px-2 [&_td]:py-1 [&_th]:py-0'}>
-                <thead className={'bg-gray-50'}>
+                <thead className={'bg-gray-100'}>
                     <tr className={'h-10'}>
                         <th className={'w-24'}></th>
                         <th className={'text-primary'}>
@@ -54,16 +55,16 @@ export default function Planning() {
 
                 <tbody>
                     {dates.map((d, k) => (
-                        <tr className={'h-24'} key={k}>
-                            <td>
-                                <div className="flex flex-col text-xs">
+                        <tr className={cellHeight} key={k}>
+                            <td className={cellHeight}>
+                                <div className="h-full flex flex-col justify-start text-xs">
                                     <div className={'font-bold capitalize'}>{d.format('dddd')}</div>
                                     <div>{d.format('DD/MM/YYYY')}</div>
                                 </div>
                             </td>
 
                             {moments.map((moment, key) => (
-                                <td key={key} className={'border-l h-20 !p-0'}>
+                                <td key={key} className={`border-l !p-0 ${cellHeight}`}>
                                     <Cell
                                         date={d.format('YYYY-MM-DD')}
                                         moment={moment}

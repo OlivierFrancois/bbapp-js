@@ -43,7 +43,7 @@ export default function Navbar({isNavbarOpened, setIsNavbarOpened}: Props) {
     return <nav className={`navbar-custom ${isNavbarOpened ? 'opened' : 'closed'}`}
                 onClick={handleClick}
                 onMouseEnter={open}
-                onMouseOut={() => close(0)}
+                onMouseLeave={() => close(0)}
     >
         {NavbarItems.map((navItem, i) => (
             <NavLink key={i}
