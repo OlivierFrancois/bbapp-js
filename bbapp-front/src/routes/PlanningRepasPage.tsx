@@ -44,7 +44,7 @@ export default function PlanningRepasPage() {
 
                 <Edit/>
 
-                <div className={'h-20'}></div>
+                <div className={'h-[4.5rem]'}></div>
             </div>
         </PlanningRepasContext.Provider>
     );
