@@ -7,7 +7,7 @@ export default function Root() {
 
     return (
         <>
-            <div className={`flex-1 overflow-y-auto bg-white`}>
+            <div className={`min-h-screen overflow-y-auto bg-white`}>
                 <Outlet />
             </div>
 

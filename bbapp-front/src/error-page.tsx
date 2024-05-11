@@ -5,7 +5,7 @@ export default function ErrorPage() {
     console.error(error);
 
     return (
-        <div id="error-page" className="flex-1 flex flex-col justify-center items-center gap-5">
+        <div id="error-page" className="min-h-screen flex flex-col justify-center items-center gap-5">
             <div className="flex flex-col justify-center items-center">
                 <h1 className={'font-semibold text-[5rem]'}>
                     <i className="fa fa-robot animate-bounce"></i>

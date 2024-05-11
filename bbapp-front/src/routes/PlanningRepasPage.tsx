@@ -35,7 +35,7 @@ export default function PlanningRepasPage() {
 
     return (
         <PlanningRepasContext.Provider value={mainContext}>
-            <div className={'h-full flex flex-col relative overflow-hidden'}>
+            <div className={'min-h-screen flex flex-col relative overflow-hidden'}>
                 <Cache/>
 
                 <DateSelect/>

@@ -1,6 +1,6 @@
 @layer components {
     .navbar-custom {
-        @apply fixed bottom-2 w-[90%] h-14 rounded-full;
+        @apply fixed left-1/2 -translate-x-1/2 bottom-2 w-[90%] h-14 rounded-full;
         @apply flex justify-evenly items-center gap-2;
         @apply bg-gradient-to-br from-primary/90 to-primary/85 from-10% text-primary-content;
         @apply transition-opacity ease-in-out duration-200;
