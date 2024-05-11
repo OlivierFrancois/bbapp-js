@@ -1,22 +1,30 @@
 import {NavLink} from "react-router-dom";
 import React from "react";
+import {CalendarDaysIcon, HomeIcon, ShoppingCartIcon} from "@heroicons/react/16/solid";
 
 interface Props {
     isNavbarOpened: boolean,
     setIsNavbarOpened: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
+const navbarItemClasses = 'size-20'
+
 const NavbarItems = [
     {
         name: 'Accueil',
         url: '/',
-        icon: 'fa fa-home',
+        icon: <HomeIcon className={navbarItemClasses}/>,
     },
     {
         name: 'Planning repas',
         url: '/planning-repas',
-        icon: 'fa fa-calendar',
-    }
+        icon: <CalendarDaysIcon className={navbarItemClasses}/>,
+    },
+    {
+        name: 'Courses',
+        url: '/course',
+        icon: <ShoppingCartIcon className={navbarItemClasses}/>,
+    },
 ];
 
 export default function Navbar({isNavbarOpened, setIsNavbarOpened}: Props) {
@@ -44,7 +52,7 @@ export default function Navbar({isNavbarOpened, setIsNavbarOpened}: Props) {
                          return "navbar-item " + (isActive ? "active" : isPending ? "pending" : "");
                      }}
             >
-                <i className={navItem.icon}></i>
+                {navItem.icon}
             </NavLink>
         ))}
     </nav>

@@ -34,9 +34,9 @@ export default function Planning() {
 
     return (
         <div className={'flex-1'}>
-            <table className={'table table-fixed table-sm h-full [&_td]:px-2 [&_td]:py-1 [&_th]:py-0'}>
+            <table className={'table border table-fixed table-sm [&_td]:px-2 [&_td]:py-1 [&_th]:py-0'}>
                 <thead className={'bg-gray-50'}>
-                    <tr className={'h-8'}>
+                    <tr className={'h-10'}>
                         <th className={'w-24'}></th>
                         <th className={'text-primary'}>
                             <div className={'flex justify-center'}>
@@ -54,7 +54,7 @@ export default function Planning() {
 
                 <tbody>
                     {dates.map((d, k) => (
-                        <tr className={'h-20'} key={k}>
+                        <tr className={'h-24'} key={k}>
                             <td>
                                 <div className="flex flex-col text-xs">
                                     <div className={'font-bold capitalize'}>{d.format('dddd')}</div>
