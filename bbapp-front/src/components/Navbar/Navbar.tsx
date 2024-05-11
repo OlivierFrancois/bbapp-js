@@ -7,7 +7,7 @@ interface Props {
     setIsNavbarOpened: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
-const navbarItemClasses = 'size-20'
+const navbarItemClasses = 'size-10'
 
 const NavbarItems = [
     {
@@ -49,10 +49,12 @@ export default function Navbar({isNavbarOpened, setIsNavbarOpened}: Props) {
             <NavLink key={i}
                      to={navItem.url}
                      className={({isActive, isPending}) => {
-                         return "navbar-item " + (isActive ? "active" : isPending ? "pending" : "");
+                         return "navbar-item " + (isActive ? "active" : (isPending ? "pending" : ""));
                      }}
             >
-                {navItem.icon}
+                <div className={'navbar-item-icon'}>
+                    {navItem.icon}
+                </div>
             </NavLink>
         ))}
     </nav>

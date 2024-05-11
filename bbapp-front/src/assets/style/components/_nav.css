@@ -1,22 +1,24 @@
 @layer components {
     .navbar-custom {
-        @apply fixed left-1/2 -translate-x-1/2 bottom-2 w-[90%] h-14 rounded-full;
+        @apply fixed left-1/2 -translate-x-1/2 bottom-2 w-[90%] h-14 rounded-full overflow-hidden;
         @apply flex justify-evenly items-center gap-2;
         @apply bg-gradient-to-br from-primary/90 to-primary/85 from-10% text-primary-content;
         @apply transition-opacity ease-in-out duration-200;
 
         .navbar-item {
-            @apply text-secondary transition-all w-10 h-10 flex justify-center items-center;
-            font-size: 1.75rem;
+            @apply rounded-full w-16 h-16 flex justify-center items-center;
+        }
+
+        .navbar-item .navbar-item-icon {
+            @apply text-secondary transition-all flex justify-center items-center;
             position: relative;
+        }
+        .navbar-item.active .navbar-item-icon {
+            @apply text-white border-b-2 border-white;
         }
 
         .navbar-item:hover {
             @apply bg-primary;
-        }
-
-        .navbar-item.active {
-            @apply text-white border-b-2 border-white;
         }
     }
 
