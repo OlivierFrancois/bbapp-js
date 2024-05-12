@@ -1,5 +1,4 @@
 import { useRouteError } from "react-router-dom";
-import Navbar from "./components/Navbar/Navbar.tsx";
 
 export default function ErrorPage() {
     const error: unknown = useRouteError();
