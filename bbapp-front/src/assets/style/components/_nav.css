@@ -23,6 +23,6 @@
     }
 
     .navbar-custom.closed {
-        @apply opacity-20 text-black;
+        @apply opacity-50 text-black;
     }
 }

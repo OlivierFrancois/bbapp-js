@@ -24,15 +24,13 @@ const NavbarItems = [
 ];
 
 export default function Navbar() {
-    const {isNavbarOpened, setIsNavbarOpened, navbarForceOpening} = useContext(AppContext)
+    const {isNavbarOpened, setIsNavbarOpened} = useContext(AppContext)
 
     const open = () => setIsNavbarOpened(true);
     const close = (delay: number) => {
-        if (!navbarForceOpening) {
-            setTimeout(() => {
-                setIsNavbarOpened(false);
-            }, delay);
-        }
+        setTimeout(() => {
+            setIsNavbarOpened(false);
+        }, delay);
     }
 
     const handleClick = () => {
