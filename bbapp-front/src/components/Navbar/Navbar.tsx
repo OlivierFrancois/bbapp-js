@@ -1,11 +1,7 @@
 import {NavLink} from "react-router-dom";
-import React from "react";
+import {useContext} from "react";
 import {CalendarDaysIcon, HomeIcon, ShoppingCartIcon} from "@heroicons/react/16/solid";
-
-interface Props {
-    isNavbarOpened: boolean,
-    setIsNavbarOpened: React.Dispatch<React.SetStateAction<boolean>>,
-}
+import {AppContext} from "../../routes/Root.tsx";
 
 const navbarItemClasses = 'size-10'
 
@@ -27,12 +23,16 @@ const NavbarItems = [
     },
 ];
 
-export default function Navbar({isNavbarOpened, setIsNavbarOpened}: Props) {
+export default function Navbar() {
+    const {isNavbarOpened, setIsNavbarOpened, navbarForceOpening} = useContext(AppContext)
+
     const open = () => setIsNavbarOpened(true);
     const close = (delay: number) => {
-        setTimeout(() => {
-            setIsNavbarOpened(false);
-        }, delay);
+        if (!navbarForceOpening) {
+            setTimeout(() => {
+                setIsNavbarOpened(false);
+            }, delay);
+        }
     }
 
     const handleClick = () => {
