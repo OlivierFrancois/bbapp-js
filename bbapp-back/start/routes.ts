@@ -8,21 +8,21 @@
 */
 
 import router from "@adonisjs/core/services/router";
-import PlatsController from "#controllers/plats_controller";
-import PlanningRepasController from "#controllers/planning_repas_controller";
+import MealController from "#controllers/meal_controller";
+import MealPlanController from "#controllers/meal_plan_controller";
 
 router.group(() => {
     router.group(() => {
-        router.get("/all", [PlatsController, 'getAll']);
-        router.get("/by-name", [PlatsController, 'getByName']);
-        router.get("/:id", [PlatsController, 'getPlat']);
-        router.post("/:id/save", [PlatsController, 'save']);
-    }).prefix("/plat");
+        router.get("/all", [MealController, 'getAll']);
+        router.get("/by-name", [MealController, 'getByName']);
+        router.get("/:id", [MealController, 'get']);
+        router.post("/:id/save", [MealController, 'save']);
+    }).prefix("/meal");
 
     router.group(() => {
-        router.get("/week", [PlanningRepasController, 'getPlanning']);
-        router.get("/:id", [PlanningRepasController, 'get']);
-        router.post("/save", [PlanningRepasController, 'save']);
-    }).prefix("/planning-repas");
+        router.get("/week", [MealPlanController, 'getWeekly']);
+        router.get("/:id", [MealPlanController, 'get']);
+        router.post("/save", [MealPlanController, 'save']);
+    }).prefix("/meal-plan");
 
 }).prefix("/api");
