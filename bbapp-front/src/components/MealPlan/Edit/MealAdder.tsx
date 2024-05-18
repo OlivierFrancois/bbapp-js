@@ -44,7 +44,7 @@ export default function MealAdder({handleMealSave}: MealAdderProps) {
                     ? <div className={'absolute top-100 w-full border border-t-0 rounded'}>{meals.map((p, k) => (
                         <div key={k} className={'first-letter:uppercase text-sm py-3 px-2 border-t hover:bg-gray-50'} onClick={() => handleMealSave(p)}>{ p.name }</div>
                     ))}</div>
-                    : mealInput.length >= 3 && <div onClick={handleCreateMeal} className={'absolute top-100 w-full border border-t-0 rounded text-sm py-1 px-2 border-t hover:bg-gray-50 italic'}>Créer le meal "<span className={'first-letter:uppercase font-medium'}>{mealInput}</span>"</div>
+                    : mealInput.length >= 3 && <div onClick={handleCreateMeal} className={'absolute top-100 w-full border border-t-0 rounded text-sm py-1 px-2 hover:bg-gray-50 italic'}>Créer le plat "<span className={'first-letter:uppercase font-medium'}>{mealInput}</span>"</div>
                 }
             </div>
 
