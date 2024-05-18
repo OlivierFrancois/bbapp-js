@@ -1,9 +1,9 @@
 import {useContext} from "react";
-import {PlanningRepasContext} from "../../routes/PlanningRepasPage.tsx";
+import {MealPlanContext} from "../../routes/MealPlanPage.tsx";
 import dayjs from "dayjs";
 
 export default function DateSelect() {
-    const {date, setDate} = useContext(PlanningRepasContext);
+    const {date, setDate} = useContext(MealPlanContext);
 
     const handleDateChange = (ymd: string) => {
         setDate(ymd);

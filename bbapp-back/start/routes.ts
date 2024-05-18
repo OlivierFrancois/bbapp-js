@@ -20,7 +20,7 @@ router.group(() => {
     }).prefix("/meal");
 
     router.group(() => {
-        router.get("/week", [MealPlanController, 'getWeekly']);
+        router.get("/period", [MealPlanController, 'getPeriod']);
         router.get("/:id", [MealPlanController, 'get']);
         router.post("/save", [MealPlanController, 'save']);
     }).prefix("/meal-plan");

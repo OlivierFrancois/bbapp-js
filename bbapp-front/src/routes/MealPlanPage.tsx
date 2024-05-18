@@ -1,31 +1,31 @@
-import DateSelect from "../components/PlanningRepas/DateSelect.tsx";
-import Planning from "../components/PlanningRepas/Planning.tsx";
-import Cache from "../components/PlanningRepas/Cache.tsx";
+import DateSelect from "../components/MealPlan/DateSelect.tsx";
+import Planner from "../components/MealPlan/Planner.tsx";
+import Cache from "../components/MealPlan/Cache.tsx";
 import React, {createContext, useState} from "react";
 import dayjs from "dayjs";
 import 'dayjs/locale/fr';
-import Edit from "../components/PlanningRepas/Edit/Edit.tsx";
-import PlanningRepas from "../interfaces/PlanningRepas.tsx";
+import Edit from "../components/MealPlan/Edit/Edit.tsx";
+import MealPlan from "../interfaces/MealPlan.tsx";
 dayjs.locale('fr');
 
 interface SelectedCell {
     date: string,
     moment: string,
-    planningRepas?: PlanningRepas,
+    mealPlan?: MealPlan,
 }
 
-interface PlanningRepasContextI {
+interface MealPlanContextI {
     date: string,
     setDate: React.Dispatch<React.SetStateAction<string>>
     selectedCell: SelectedCell | null
     setSelectedCell: React.Dispatch<React.SetStateAction<SelectedCell|null>>
 }
 
-const LS_DATE = 'BBAPP_PLANNING_REPAS_DATE';
+const LS_DATE = 'BBAPP_MEAL_PLAN_DATE';
 
-export const PlanningRepasContext = createContext<PlanningRepasContextI>({} as PlanningRepasContextI)
+export const MealPlanContext = createContext<MealPlanContextI>({} as MealPlanContextI)
 
-export default function PlanningRepasPage() {
+export default function MealPlanPage() {
     const LS_date = localStorage.getItem(LS_DATE) ? localStorage.getItem(LS_DATE) as string : dayjs().format('YYYY-MM-DD');
 
     const [date, setDate] = useState<string>(LS_date);
@@ -34,18 +34,18 @@ export default function PlanningRepasPage() {
     const mainContext = {date, setDate, selectedCell, setSelectedCell};
 
     return (
-        <PlanningRepasContext.Provider value={mainContext}>
+        <MealPlanContext.Provider value={mainContext}>
             <div className={'min-h-screen flex flex-col relative overflow-hidden'}>
                 <Cache/>
 
                 <DateSelect/>
 
-                <Planning/>
+                <Planner/>
 
                 <Edit/>
 
                 <div className={'h-[4.5rem]'}></div>
             </div>
-        </PlanningRepasContext.Provider>
+        </MealPlanContext.Provider>
     );
 }

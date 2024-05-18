@@ -1,18 +1,18 @@
 import {useContext, useEffect, useState} from "react";
-import {PlanningRepasContext} from "../../routes/PlanningRepasPage.tsx";
+import {MealPlanContext} from "../../routes/MealPlanPage.tsx";
 import dayjs from "dayjs";
 import {MoonIcon, SunIcon} from "@heroicons/react/16/solid";
-import {PlanningRepasAPI} from "../../api/PlanningRepasAPI.tsx";
-import PlanningRepas from "../../interfaces/PlanningRepas.tsx";
+import {MealPlanAPI} from "../../api/MealPlanAPI.tsx";
+import MealPlan from "../../interfaces/MealPlan.tsx";
 import Cell from "./Cell.tsx";
 
 const moments = ['midi', 'soir'];
 const cellHeight = 'h-[5.5rem]';
 
-export default function Planning() {
-    const {date, selectedCell} = useContext(PlanningRepasContext);
+export default function Planner() {
+    const {date, selectedCell} = useContext(MealPlanContext);
 
-    const [planningRepas, setPlanningRepas] = useState<PlanningRepas[]>([]);
+    const [mealPlans, setMealPlans] = useState<MealPlan[]>([]);
 
     const dates = [];
     let currentDate = dayjs(date).startOf('week');
@@ -27,9 +27,9 @@ export default function Planning() {
             endDate: dayjs(date).endOf('week').format('YYYY-MM-DD')
         }
 
-        PlanningRepasAPI.getPlanningWeek(payload)
+        MealPlanAPI.getPeriod(payload)
             .then(res => {
-                setPlanningRepas(res);
+                setMealPlans(res);
             })
     }, [date, selectedCell]);
 
@@ -68,7 +68,7 @@ export default function Planning() {
                                     <Cell
                                         date={d.format('YYYY-MM-DD')}
                                         moment={moment}
-                                        planningRepas={planningRepas.find(p => dayjs(p.date).format('YYYY-MM-DD') === d.format('YYYY-MM-DD') && p.moment === moment)}
+                                        mealPlan={mealPlans.find(p => dayjs(p.date).format('YYYY-MM-DD') === d.format('YYYY-MM-DD') && p.moment === moment)}
                                     />
                                 </td>
                             ))}

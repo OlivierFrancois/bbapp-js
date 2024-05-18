@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import './index.css'
 import ErrorPage from "./error-page";
-import PlanningRepasPage from "./routes/PlanningRepasPage.tsx";
+import MealPlanPage from "./routes/MealPlanPage.tsx";
 import Root from "./routes/Root.tsx";
 import HomePage from "./routes/HomePage.tsx";
 import dayjs from "dayjs";
@@ -24,8 +24,8 @@ const router = createBrowserRouter([
                 element: <HomePage/>
             },
             {
-                path: "/planning-repas",
-                element: <PlanningRepasPage/>
+                path: "/meal-plan",
+                element: <MealPlanPage/>
             }
         ]
     },

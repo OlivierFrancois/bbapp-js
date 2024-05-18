@@ -1,10 +1,10 @@
 import {useContext} from "react";
-import {PlanningRepasContext} from "../../../routes/PlanningRepasPage.tsx";
+import {MealPlanContext} from "../../../routes/MealPlanPage.tsx";
 import {XMarkIcon} from "@heroicons/react/16/solid";
 import dayjs from "dayjs";
 
 export default function Header() {
-    const {selectedCell, setSelectedCell} = useContext(PlanningRepasContext)
+    const {selectedCell, setSelectedCell} = useContext(MealPlanContext)
 
     const handleCloseClick = () => {
         setSelectedCell(null);

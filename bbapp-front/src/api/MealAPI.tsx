@@ -1,26 +1,26 @@
 import axios from 'axios';
-import Plat from "../interfaces/Plat";
+import Meal from "../interfaces/Meal.tsx";
 
 const API_HOST = import.meta.env.VITE_API_ENDPOINT;
-const URL_GET_ALL = `${API_HOST}/plat/all`;
-const URL_GET = `${API_HOST}/plat/:id`;
-const URL_GET_BY_NAME = `${API_HOST}/plat/by-name`;
-const URL_SAVE = `${API_HOST}/plat/:id/save`;
+const URL_GET_ALL = `${API_HOST}/meal/all`;
+const URL_GET = `${API_HOST}/meal/:id`;
+const URL_GET_BY_NAME = `${API_HOST}/meal/by-name`;
+const URL_SAVE = `${API_HOST}/meal/:id/save`;
 
 interface PayloadSave {
     id: number,
-    nom: string,
+    name: string,
 }
 
-export class PlatAPI {
-    static async get(id: number) : Promise<Plat[]>{
+export class MealAPI {
+    static async get(id: number) : Promise<Meal[]>{
         return axios.get(URL_GET.replace(':id', id.toString()))
             .then(res => {
             return res.data
         })
     }
 
-    static async getPlatsByName(payload : { nom: string }) : Promise<Plat[]>{
+    static async getByName(payload : { name: string }) : Promise<Meal[]>{
         return axios.get(URL_GET_BY_NAME, {
             params : payload
         }).then(res => {
@@ -28,14 +28,14 @@ export class PlatAPI {
         })
     }
 
-    static async getAll() : Promise<Plat[]>{
+    static async getAll() : Promise<Meal[]>{
         return axios.get(URL_GET_ALL, {})
             .then(res => {
             return res.data
         })
     }
 
-    static async save(payload: PayloadSave): Promise<Plat|null>{
+    static async save(payload: PayloadSave): Promise<Meal|null>{
         return axios.post(URL_SAVE.replace(':id', payload.id.toString()), {...payload})
             .then(res => {
             return res.data

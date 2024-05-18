@@ -1,10 +1,10 @@
-import Plat from "./Plat.tsx";
+import Meal from "./Meal.tsx";
 
-export default interface PlanningRepas {
+export default interface MealPlan {
     id: number,
     createdAt: string,
     updatedAt: string,
     date: string,
     moment: string,
-    plats: Plat[],
+    meals: Meal[],
 }

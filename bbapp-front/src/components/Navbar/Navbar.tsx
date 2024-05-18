@@ -13,12 +13,12 @@ const NavbarItems = [
     },
     {
         name: 'Planning repas',
-        url: '/planning-repas',
+        url: '/meal-plan',
         icon: <CalendarDaysIcon className={navbarItemClasses}/>,
     },
     {
         name: 'Courses',
-        url: '/course',
+        url: '/shop-list',
         icon: <ShoppingCartIcon className={navbarItemClasses}/>,
     },
 ];

@@ -7,7 +7,7 @@ export default class MealPlanController {
         return await MealPlan.find(mealPlanId);
     }
 
-    async getWeekly({request} : HttpContext): Promise<MealPlan[]> {
+    async getPeriod({request} : HttpContext): Promise<MealPlan[]> {
         const { startDate, endDate } = request.all();
 
         return await MealPlan.query()
