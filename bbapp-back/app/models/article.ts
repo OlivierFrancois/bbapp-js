@@ -25,6 +25,9 @@ export default class Article extends BaseModel {
     @manyToMany(() => Dish)
     declare dishes: relations.ManyToMany<typeof Dish>
 
+    @column()
+    declare categoryId: number
+
     @belongsTo(() => Category)
     declare category: relations.BelongsTo<typeof Category>
 

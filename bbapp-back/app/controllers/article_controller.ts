@@ -19,18 +19,20 @@ export default class ArticleController {
             .where('name', 'like', `%${name}%`).exec()
     }
 
-    async save({request}: HttpContext): Promise<Article | null> {
+    async save({request, response}: HttpContext): Promise<Article|void> {
         const {name, categoryId, order} = request.all();
+
         let article = await Article.find(request.param('id') ?? 0);
         if (!article) article = new Article();
 
         let category = await Category.find(categoryId ?? 0);
-        if (category) {
-            await article.related('category').associate(category);
+        if (!category) {
+            return response.status(400).json({ error: 'Category not found' });
         }
 
         article.name = name.toLowerCase();
         article.order = order ?? 0;
+        await article.related('category').associate(category);
 
         await article.save();
 
