@@ -13,7 +13,7 @@ const NavbarItems = [
     },
     {
         name: 'Planning repas',
-        url: '/meal-plan',
+        url: '/dish-schedule',
         icon: <CalendarDaysIcon className={navbarItemClasses}/>,
     },
     {

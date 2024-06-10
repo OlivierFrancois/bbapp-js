@@ -1,10 +1,10 @@
-import Meal from "./Meal.tsx";
+import Dish from "./Dish.tsx";
 
-export default interface MealPlan {
+export default interface DishScheduleItem {
     id: number,
     createdAt: string,
     updatedAt: string,
     date: string,
     moment: string,
-    meals: Meal[],
+    dishes: Dish[],
 }

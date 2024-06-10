@@ -1,18 +1,18 @@
 import {useContext, useEffect, useState} from "react";
-import {MealPlanContext} from "../../routes/MealPlanPage.tsx";
+import {DishScheduleContext} from "../../routes/DishSchedulePage.tsx";
 import dayjs from "dayjs";
 import {MoonIcon, SunIcon} from "@heroicons/react/16/solid";
-import {MealPlanAPI} from "../../api/MealPlanAPI.tsx";
-import MealPlan from "../../interfaces/MealPlan.tsx";
+import {DishScheduleAPI} from "../../api/DishScheduleAPI.tsx";
+import DishScheduleItem from "../../interfaces/DishScheduleItem.tsx";
 import Cell from "./Cell.tsx";
 
 const moments = ['midi', 'soir'];
 const cellHeight = 'h-[5.5rem]';
 
-export default function Planner() {
-    const {date, selectedCell} = useContext(MealPlanContext);
+export default function Schedule() {
+    const {date, selectedCell} = useContext(DishScheduleContext);
 
-    const [mealPlans, setMealPlans] = useState<MealPlan[]>([]);
+    const [dishScheduleItems, setDishScheduleItems] = useState<DishScheduleItem[]>([]);
 
     const dates = [];
     let currentDate = dayjs(date).startOf('week');
@@ -27,9 +27,9 @@ export default function Planner() {
             endDate: dayjs(date).endOf('week').format('YYYY-MM-DD')
         }
 
-        MealPlanAPI.getPeriod(payload)
+        DishScheduleAPI.getPeriod(payload)
             .then(res => {
-                setMealPlans(res);
+                setDishScheduleItems(res);
             })
     }, [date, selectedCell]);
 
@@ -68,7 +68,7 @@ export default function Planner() {
                                     <Cell
                                         date={d.format('YYYY-MM-DD')}
                                         moment={moment}
-                                        mealPlan={mealPlans.find(p => dayjs(p.date).format('YYYY-MM-DD') === d.format('YYYY-MM-DD') && p.moment === moment)}
+                                        dishScheduleItem={dishScheduleItems.find(p => dayjs(p.date).format('YYYY-MM-DD') === d.format('YYYY-MM-DD') && p.moment === moment)}
                                     />
                                 </td>
                             ))}

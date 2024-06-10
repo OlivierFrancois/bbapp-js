@@ -1,4 +1,4 @@
-export default interface Meal {
+export default interface Dish {
     id: number,
     name: string,
 }

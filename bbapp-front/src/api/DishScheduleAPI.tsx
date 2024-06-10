@@ -1,10 +1,10 @@
 import axios from 'axios';
-import MealPlan from "../interfaces/MealPlan.tsx";
+import DishScheduleItem from "../interfaces/DishScheduleItem.tsx";
 
 const API_HOST = import.meta.env.VITE_API_ENDPOINT;
-//const URL_GET = `${API_HOST}/meal-plan/:id`;
-const URL_GET_PERIOD = `${API_HOST}/meal-plan/period`;
-const URL_SAVE = `${API_HOST}/meal-plan/save`;
+//const URL_GET = `${API_HOST}/dish-schedule/:id`;
+const URL_GET_PERIOD = `${API_HOST}/dish-schedule/period`;
+const URL_SAVE = `${API_HOST}/dish-schedule/save`;
 
 interface PayloadGetWeekI {
     startDate: string,
@@ -13,11 +13,11 @@ interface PayloadGetWeekI {
 interface PayloadSave {
     date: string,
     moment: string,
-    mealIds: number[],
+    dishIds: number[],
 }
 
-export class MealPlanAPI {
-    static async getPeriod(payload : PayloadGetWeekI) : Promise<MealPlan[]>{
+export class DishScheduleAPI {
+    static async getPeriod(payload : PayloadGetWeekI) : Promise<DishScheduleItem[]>{
         return axios.get(URL_GET_PERIOD, {
             params : payload
         }).then(res => {
@@ -25,7 +25,7 @@ export class MealPlanAPI {
         })
     }
 
-    static async save(payload : PayloadSave): Promise<MealPlan> {
+    static async save(payload : PayloadSave): Promise<DishScheduleItem> {
         return axios.post(URL_SAVE, {
             ...payload
         }).then(res => {

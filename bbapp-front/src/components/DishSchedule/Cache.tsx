@@ -1,8 +1,8 @@
 import {useContext} from "react";
-import {MealPlanContext} from "../../routes/MealPlanPage.tsx";
+import {DishScheduleContext} from "../../routes/DishSchedulePage.tsx";
 
 export default function Cache() {
-    const {selectedCell, setSelectedCell} = useContext(MealPlanContext);
+    const {selectedCell, setSelectedCell} = useContext(DishScheduleContext);
 
     const handleClick = () => {
         setSelectedCell(null);
