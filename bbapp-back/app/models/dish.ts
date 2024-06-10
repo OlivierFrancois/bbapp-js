@@ -1,11 +1,11 @@
 import { DateTime } from "luxon";
 import { BaseModel, column, manyToMany } from "@adonisjs/lucid/orm";
 import * as relations from "@adonisjs/lucid/types/relations";
-import MealPlan from "#models/meal_plan";
+import DishScheduleItem from "#models/dish_schedule_item";
 import Article from "#models/article";
 
-export default class Meal extends BaseModel {
-    static table = 'meal'
+export default class Dish extends BaseModel {
+    static table = 'dish'
 
     @column({ isPrimary: true })
     declare id: number;
@@ -22,8 +22,8 @@ export default class Meal extends BaseModel {
     @column()
     declare url: string;
 
-    @manyToMany(() => MealPlan)
-    declare mealPlans: relations.ManyToMany<typeof MealPlan>
+    @manyToMany(() => DishScheduleItem)
+    declare dishScheduleItems: relations.ManyToMany<typeof DishScheduleItem>
 
     @manyToMany(() => Article)
     declare articles: relations.ManyToMany<typeof Article>

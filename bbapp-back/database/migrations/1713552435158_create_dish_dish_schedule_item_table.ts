@@ -1,23 +1,23 @@
 import { BaseSchema } from "@adonisjs/lucid/schema";
 
 export default class extends BaseSchema {
-    protected tableName = "meal_meal_plan";
+    protected tableName = "dish_dish_schedule_item";
 
     async up() {
         this.schema.createTable(this.tableName, (table) => {
             table.increments("id");
 
-            table.integer('meal_id')
+            table.integer('dish_id')
                 .unsigned()
-                .references('meal.id')
+                .references('dish.id')
                 .onDelete('CASCADE')
 
-            table.integer('meal_plan_id')
+            table.integer('dish_schedule_item_id')
                 .unsigned()
-                .references('meal_plan.id')
+                .references('dish_schedule_item.id')
                 .onDelete('CASCADE')
 
-            table.unique(['meal_id', 'meal_plan_id'])
+            table.unique(['dish_id', 'dish_schedule_item_id'])
             table.timestamp("created_at").notNullable();
         });
     }

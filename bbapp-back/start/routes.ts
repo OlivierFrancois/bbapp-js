@@ -8,21 +8,37 @@
 */
 
 import router from "@adonisjs/core/services/router";
-import MealController from "#controllers/meal_controller";
-import MealPlanController from "#controllers/meal_plan_controller";
+import DishController from "#controllers/dish_controller";
+import DishScheduleController from "#controllers/dish_schedule_controller";
+import CategoryController from "#controllers/category_controller";
+import ArticleController from "#controllers/article_controller";
 
 router.group(() => {
     router.group(() => {
-        router.get("/all", [MealController, 'getAll']);
-        router.get("/by-name", [MealController, 'getByName']);
-        router.get("/:id", [MealController, 'get']);
-        router.post("/:id/save", [MealController, 'save']);
-    }).prefix("/meal");
+        router.get("/all", [ArticleController, 'getAll']);
+        router.get("/by-name", [ArticleController, 'getByName']);
+        router.get("/:id", [ArticleController, 'get']);
+        router.post("/:id/save", [ArticleController, 'save']);
+    }).prefix("/article");
 
     router.group(() => {
-        router.get("/period", [MealPlanController, 'getPeriod']);
-        router.get("/:id", [MealPlanController, 'get']);
-        router.post("/save", [MealPlanController, 'save']);
-    }).prefix("/meal-plan");
+        router.get("/all", [CategoryController, 'getAll']);
+        router.get("/by-name", [CategoryController, 'getByName']);
+        router.get("/:id", [CategoryController, 'get']);
+        router.post("/:id/save", [CategoryController, 'save']);
+    }).prefix("/category");
+
+    router.group(() => {
+        router.get("/all", [DishController, 'getAll']);
+        router.get("/by-name", [DishController, 'getByName']);
+        router.get("/:id", [DishController, 'get']);
+        router.post("/:id/save", [DishController, 'save']);
+    }).prefix("/dish");
+
+    router.group(() => {
+        router.get("/period", [DishScheduleController, 'getPeriod']);
+        router.get("/:id", [DishScheduleController, 'get']);
+        router.post("/save", [DishScheduleController, 'save']);
+    }).prefix("/dish-schedule");
 
 }).prefix("/api");

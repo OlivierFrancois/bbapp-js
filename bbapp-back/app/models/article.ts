@@ -1,7 +1,7 @@
 import {DateTime} from 'luxon'
 import {BaseModel, belongsTo, column, manyToMany} from '@adonisjs/lucid/orm'
 import * as relations from "@adonisjs/lucid/types/relations";
-import Meal from "#models/meal";
+import Dish from "#models/dish";
 import Category from "#models/category";
 
 export default class Article extends BaseModel {
@@ -22,8 +22,8 @@ export default class Article extends BaseModel {
     @column()
     declare order: number | null;
 
-    @manyToMany(() => Meal)
-    declare meals: relations.ManyToMany<typeof Meal>
+    @manyToMany(() => Dish)
+    declare dishes: relations.ManyToMany<typeof Dish>
 
     @belongsTo(() => Category)
     declare category: relations.BelongsTo<typeof Category>
