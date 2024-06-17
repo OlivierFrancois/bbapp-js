@@ -1,11 +1,12 @@
 import DateSelect from "../components/DishSchedule/DateSelect.tsx";
 import Schedule from "../components/DishSchedule/Schedule.tsx";
-import Cache from "../components/DishSchedule/Cache.tsx";
 import React, {createContext, useState} from "react";
 import dayjs from "dayjs";
 import 'dayjs/locale/fr';
-import Edit from "../components/DishSchedule/Edit/Edit.tsx";
 import DishScheduleItem from "../interfaces/DishScheduleItem.tsx";
+import SlideUpModal from "../components/SlideUpModal/SlideUpModal.tsx";
+import Header from "../components/DishSchedule/Edit/Header.tsx";
+import Body from "../components/DishSchedule/Edit/Body.tsx";
 dayjs.locale('fr');
 
 interface SelectedCell {
@@ -36,14 +37,16 @@ export default function DishSchedulePage() {
     return (
         <DishScheduleContext.Provider value={mainContext}>
             <div className={'min-h-screen flex flex-col relative overflow-hidden'}>
-                <Cache/>
-
                 <DateSelect/>
 
                 <Schedule/>
 
-                <Edit/>
-
+                <SlideUpModal
+                    displayCondition={selectedCell !== null}
+                    handleClose={() => {setSelectedCell(null)}}
+                    headerContent={<Header/>}
+                    bodyContent={<Body />}
+                />
                 <div className={'h-[4.5rem]'}></div>
             </div>
         </DishScheduleContext.Provider>
