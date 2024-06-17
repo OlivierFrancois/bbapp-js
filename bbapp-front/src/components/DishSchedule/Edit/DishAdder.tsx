@@ -35,6 +35,7 @@ export default function DishAdder({handleDishSave}: DishAdderProps) {
         <div className={'py-1 flex items-center gap-5'}>
             <div className={'relative flex-1'}>
                 <input type="text"
+                       autoFocus
                        onInput={handleInput}
                        placeholder={'Recherchez un plat'}
                        value={dishInput}
