@@ -19,7 +19,7 @@ export default class Category extends BaseModel {
     declare name: string;
 
     @column()
-    declare order: number|null;
+    declare sortOrder: number|null;
 
     @hasMany(() => Article)
     declare articles: relations.HasMany<typeof Article>

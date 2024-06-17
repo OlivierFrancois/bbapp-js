@@ -5,13 +5,11 @@ export default class extends BaseSchema {
 
     async up() {
         this.schema.createTable(this.tableName, (table) => {
-            table.increments('id')
-
-            table.timestamp('created_at')
-            table.timestamp('updated_at')
-
+            table.increments('id');
+            table.timestamp('created_at').notNullable();
+            table.timestamp('updated_at').nullable();
             table.string('name', 100).notNullable();
-            table.integer('order');
+            table.integer('sort_order');
         })
     }
 

@@ -20,7 +20,7 @@ export default class Article extends BaseModel {
     declare name: string;
 
     @column()
-    declare order: number | null;
+    declare sortOrder: number | null;
 
     @manyToMany(() => Dish)
     declare dishes: relations.ManyToMany<typeof Dish>
