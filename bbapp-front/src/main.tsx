@@ -10,6 +10,7 @@ import DishSchedulePage from "./routes/DishSchedulePage.tsx";
 import Root from "./routes/Root.tsx";
 import HomePage from "./routes/HomePage.tsx";
 import dayjs from "dayjs";
+import DishPage from "./routes/DishPage.tsx";
 
 dayjs.locale('fr');
 
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
             {
                 path: "/dish-schedule",
                 element: <DishSchedulePage/>
+            },
+            {
+                path: "/dish",
+                element: <DishPage/>
             }
         ]
     },

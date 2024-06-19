@@ -1,6 +1,6 @@
 import {NavLink} from "react-router-dom";
 import {useContext} from "react";
-import {CalendarDaysIcon, HomeIcon, ShoppingCartIcon} from "@heroicons/react/16/solid";
+import {CalendarDaysIcon, HomeIcon, QuestionMarkCircleIcon, ShoppingCartIcon} from "@heroicons/react/16/solid";
 import {AppContext} from "../../routes/Root.tsx";
 
 const navbarItemClasses = 'size-10'
@@ -15,6 +15,11 @@ const NavbarItems = [
         name: 'Planning repas',
         url: '/dish-schedule',
         icon: <CalendarDaysIcon className={navbarItemClasses}/>,
+    },
+    {
+        name: 'Plats',
+        url: '/dish',
+        icon: <QuestionMarkCircleIcon className={navbarItemClasses}/>,
     },
     {
         name: 'Courses',

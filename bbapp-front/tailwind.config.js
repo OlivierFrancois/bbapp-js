@@ -20,7 +20,7 @@ export default {
 
           "secondary": '#87a8c9',
           "secondary-focus": '#b1c9ef',
-          "secondary-content": '#f0f3fa',
+          "secondary-content": '#fff',
 
           "accent": '#fff',
           "accent-focus": '#fff',
