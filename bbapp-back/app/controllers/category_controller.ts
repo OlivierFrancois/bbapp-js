@@ -19,12 +19,12 @@ export default class CategoryController {
     }
 
     async save({request}: HttpContext): Promise<Category | null> {
-        const {name, order} = request.all();
+        const {name, sortOrder} = request.all();
         let category = await Category.find(request.param('id') ?? 0);
         if (!category) category = new Category();
 
         category.name = name.toLowerCase();
-        category.order = order ?? 0;
+        category.sortOrder = sortOrder ?? 0;
 
         await category.save();
 

@@ -20,7 +20,7 @@ export default class ArticleController {
     }
 
     async save({request, response}: HttpContext): Promise<Article|void> {
-        const {name, categoryId, order} = request.all();
+        const {name, categoryId, sortOrder} = request.all();
 
         let article = await Article.find(request.param('id') ?? 0);
         if (!article) article = new Article();
@@ -31,7 +31,7 @@ export default class ArticleController {
         }
 
         article.name = name.toLowerCase();
-        article.order = order ?? 0;
+        article.sortOrder = sortOrder ?? 0;
         await article.related('category').associate(category);
 
         await article.save();
