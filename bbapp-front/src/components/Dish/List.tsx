@@ -11,7 +11,7 @@ export default function List() {
     useEffect(() => {
         DishAPI.getAll()
             .then(fetchedDishes => setDishes(fetchedDishes));
-    })
+    }, [])
 
     const handleClickCreate = () => {
         const dish: Dish = {id: 0, name: ''};
