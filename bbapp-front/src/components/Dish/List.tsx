@@ -18,8 +18,9 @@ export default function List() {
         setSelectedDish(dish);
     }
 
-    return <table className={'table table-sm table-pin-rows'}>
-        <thead className={'text-lg'}>
+    return <div className={'overflow-auto'}>
+        <table className={'table table-sm table-pin-rows'}>
+            <thead className={'text-lg'}>
             <tr>
                 <th className={'w-full'}>Plat</th>
 
@@ -27,25 +28,28 @@ export default function List() {
                     <button onClick={handleClickCreate} className={'btn btn-primary btn-sm'}>Nouveau</button>
                 </th>
             </tr>
-        </thead>
+            </thead>
 
-        <tbody>
+            <tbody>
             {dishes
-                .sort((a,b) => a.name.localeCompare(b.name))
+                .sort((a, b) => a.name.localeCompare(b.name))
                 .map((dish: Dish, key) => (
-                <tr key={`${key}_${dish.id}`}>
-                    <td className={' first-letter:uppercase'}>{dish.name}</td>
+                    <tr key={`${key}_${dish.id}`}>
+                        <td className={' first-letter:uppercase'}>{dish.name}</td>
 
-                    <td>
-                        <div className="flex items-center justify-end gap-2">
-                            <PencilIcon
-                                className={'size-5'}
-                                onClick={() => setSelectedDish(dish)}
-                            />
-                        </div>
-                    </td>
-                </tr>
-            ))}
-        </tbody>
-    </table>
+                        <td>
+                            <div className="flex items-center justify-end gap-2">
+                                <PencilIcon
+                                    className={'size-5'}
+                                    onClick={() => setSelectedDish(dish)}
+                                />
+                            </div>
+                        </td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+
+        <div className={'h-[4.5rem]'}></div>
+    </div>
 }

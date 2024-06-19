@@ -20,7 +20,7 @@ export default function DishPage() {
 
     return (
         <DishContext.Provider value={{selectedDish, setSelectedDish}}>
-            <div className={'min-h-screen flex flex-col gap-2 relative overflow-hidden'}>
+            <div className={'h-screen flex flex-col gap-2 relative overflow-hidden'}>
                 <div className={'font-semibold text-xl px-2 py-1'}>Liste des plats</div>
 
                 <hr/>
@@ -33,8 +33,6 @@ export default function DishPage() {
                     headerContent={<Header/>}
                     bodyContent={<Body />}
                 />
-
-                <div className={'h-[4.5rem]'}></div>
             </div>
         </DishContext.Provider>
     );
