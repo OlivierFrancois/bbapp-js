@@ -2,4 +2,5 @@
 
 #root {
     @apply relative min-h-screen overflow-hidden bg-white;
+    font-family: Roboto;
 }
