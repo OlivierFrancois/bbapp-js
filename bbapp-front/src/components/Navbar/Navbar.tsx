@@ -1,53 +1,33 @@
 import {NavLink} from "react-router-dom";
-import {useContext} from "react";
-import {CalendarDaysIcon, HomeIcon, QuestionMarkCircleIcon, ShoppingCartIcon} from "@heroicons/react/16/solid";
-import {AppContext} from "../../routes/Root.tsx";
 
-const navbarItemClasses = 'size-10'
+const navbarItemClasses = 'fa text-3xl'
 
 const NavbarItems = [
     {
         name: 'Accueil',
         url: '/',
-        icon: <HomeIcon className={navbarItemClasses}/>,
+        icon: <i className={`fa-home ${navbarItemClasses}`}></i>,
     },
     {
         name: 'Planning repas',
         url: '/dish-schedule',
-        icon: <CalendarDaysIcon className={navbarItemClasses}/>,
+        icon: <i className={`fa-calendar ${navbarItemClasses}`}></i>,
     },
     {
         name: 'Plats',
         url: '/dish',
-        icon: <QuestionMarkCircleIcon className={navbarItemClasses}/>,
+        icon: <i className={`fa-utensils ${navbarItemClasses}`}></i>,
     },
     {
         name: 'Courses',
         url: '/shop-list',
-        icon: <ShoppingCartIcon className={navbarItemClasses}/>,
+        icon: <i className={`fa-cart-shopping ${navbarItemClasses}`}></i>,
     },
 ];
 
 export default function Navbar() {
-    const {isNavbarOpened, setIsNavbarOpened} = useContext(AppContext)
 
-    const open = () => setIsNavbarOpened(true);
-    const close = (delay: number) => {
-        setTimeout(() => {
-            setIsNavbarOpened(false);
-        }, delay);
-    }
-
-    const handleClick = () => {
-        open();
-        close(2000);
-    }
-
-    return <nav className={`navbar-custom ${isNavbarOpened ? 'opened' : 'closed'}`}
-                onClick={handleClick}
-                onMouseEnter={open}
-                onMouseLeave={() => close(0)}
-    >
+    return <nav className={`navbar-custom opened`}>
         {NavbarItems.map((navItem, i) => (
             <NavLink key={i}
                      to={navItem.url}

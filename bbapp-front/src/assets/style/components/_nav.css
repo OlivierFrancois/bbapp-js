@@ -10,7 +10,7 @@
         }
 
         .navbar-item .navbar-item-icon {
-            @apply text-secondary transition-all flex justify-center items-center;
+            @apply text-secondary transition-all flex justify-center items-center p-1;
             position: relative;
         }
         .navbar-item.active .navbar-item-icon {
