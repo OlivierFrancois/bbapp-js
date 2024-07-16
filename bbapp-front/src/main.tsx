@@ -10,9 +10,11 @@ import DishSchedulePage from "./routes/DishSchedulePage.tsx";
 import Root from "./routes/Root.tsx";
 import HomePage from "./routes/HomePage.tsx";
 import dayjs from "dayjs";
+import weekOfYear from 'dayjs/plugin/weekOfYear';
 import DishPage from "./routes/DishPage.tsx";
 
 dayjs.locale('fr');
+dayjs.extend(weekOfYear);
 
 const router = createBrowserRouter([
     {

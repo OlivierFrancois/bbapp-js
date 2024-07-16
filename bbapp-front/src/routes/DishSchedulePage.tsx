@@ -15,11 +15,24 @@ interface SelectedCell {
     dishScheduleItem?: DishScheduleItem,
 }
 
+interface SwapItem {
+    date: string,
+    moment: string,
+    dishScheduleItem?: DishScheduleItem,
+}
+
 interface DishScheduleContextI {
     date: string,
-    setDate: React.Dispatch<React.SetStateAction<string>>
-    selectedCell: SelectedCell | null
-    setSelectedCell: React.Dispatch<React.SetStateAction<SelectedCell|null>>
+    setDate: React.Dispatch<React.SetStateAction<string>>,
+    selectedCell: SelectedCell | null,
+    setSelectedCell: React.Dispatch<React.SetStateAction<SelectedCell|null>>,
+    swapItem1: SwapItem | null,
+    setSwapItem1: React.Dispatch<React.SetStateAction<SwapItem|null>>,
+    swapItem2: SwapItem | null,
+    setSwapItem2: React.Dispatch<React.SetStateAction<SwapItem|null>>,
+    swapMod: boolean,
+    setSwapMod: React.Dispatch<React.SetStateAction<boolean>>,
+
 }
 
 const LS_DATE = 'BBAPP_DISH_SCHEDULE_DATE';
@@ -31,8 +44,11 @@ export default function DishSchedulePage() {
 
     const [date, setDate] = useState<string>(LS_date);
     const [selectedCell, setSelectedCell] = useState<SelectedCell | null>(null)
+    const [swapItem1, setSwapItem1] = useState<SwapItem|null>(null)
+    const [swapItem2, setSwapItem2] = useState<SwapItem|null>(null)
+    const [swapMod, setSwapMod] = useState<boolean>(false)
 
-    const mainContext = {date, setDate, selectedCell, setSelectedCell};
+    const mainContext = {date, setDate, selectedCell, setSelectedCell, swapMod, setSwapMod, swapItem1, setSwapItem1, swapItem2, setSwapItem2};
 
     return (
         <DishScheduleContext.Provider value={mainContext}>
