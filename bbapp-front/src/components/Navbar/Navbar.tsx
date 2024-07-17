@@ -31,7 +31,7 @@ export default function Navbar() {
     return <React.Fragment>
         <nav className={`navbar-custom navbar-custom-mobile`}>
             {NavbarItems.map((navItem, i) => (
-                <NavLink key={i}
+                <NavLink key={`mobile-${i}`}
                          to={navItem.url}
                          className={({isActive, isPending}) => {
                              return "navbar-item " + (isActive ? "active" : (isPending ? "pending" : ""));
@@ -48,7 +48,7 @@ export default function Navbar() {
             <div className={'mb-10 text-4xl font-medium text-center'}>Bbapp</div>
 
             {NavbarItems.map((navItem, i) => (
-                <NavLink key={i}
+                <NavLink key={`md-${i}`}
                          to={navItem.url}
                          className={({isActive, isPending}) => {
                              return "navbar-item " + (isActive ? "active" : (isPending ? "pending" : ""));
