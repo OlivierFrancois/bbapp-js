@@ -20,7 +20,7 @@ export default function DishPage() {
 
     return (
         <DishContext.Provider value={{selectedDish, setSelectedDish}}>
-            <div className={'h-screen flex flex-col gap-2 relative overflow-hidden'}>
+            <div className={'h-screen flex flex-col gap-2 relative overflow-hidden w-full'}>
 
 
                 <div

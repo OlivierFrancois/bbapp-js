@@ -15,11 +15,11 @@ export default function Root() {
 
     return (
         <AppContext.Provider value={context}>
-            <div className={`min-h-screen overflow-y-auto bg-white`}>
+            <Navbar />
+
+            <div className={`min-h-screen overflow-y-auto bg-white w-full`}>
                 <Outlet />
             </div>
-
-            <Navbar />
         </AppContext.Provider>
     );
 }
