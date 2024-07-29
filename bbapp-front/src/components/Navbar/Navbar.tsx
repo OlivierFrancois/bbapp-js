@@ -21,7 +21,7 @@ const NavbarItems = [
     },
     {
         name: 'Courses',
-        url: '/shop-list',
+        url: '/article',
         icon: <i className={`fa-cart-shopping ${navbarItemClasses}`}></i>,
     },
 ];

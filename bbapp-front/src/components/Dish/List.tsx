@@ -1,17 +1,16 @@
 import {useContext, useEffect, useState} from "react";
 import Dish from "../../interfaces/Dish.tsx";
 import {DishAPI} from "../../api/DishAPI.tsx";
-import {PencilIcon} from "@heroicons/react/16/solid";
 import {DishContext} from "../../routes/DishPage.tsx";
 
 export default function List() {
     const [dishes, setDishes] = useState<Dish[]>([]);
-    const {setSelectedDish} = useContext(DishContext);
+    const {selectedDish, setSelectedDish} = useContext(DishContext);
 
     useEffect(() => {
         DishAPI.getAll()
             .then(fetchedDishes => setDishes(fetchedDishes));
-    }, [])
+    }, [selectedDish])
 
     const handleClickCreate = () => {
         const dish: Dish = {id: 0, name: ''};
@@ -38,11 +37,11 @@ export default function List() {
                         <td className={' first-letter:uppercase'}>{dish.name}</td>
 
                         <td>
-                            <div className="flex items-center justify-end gap-2">
-                                <PencilIcon
-                                    className={'size-5'}
-                                    onClick={() => setSelectedDish(dish)}
-                                />
+                            <div className="flex justify-end">
+                                <div className="btn btn-secondary btn-xs btn-circle"
+                                     onClick={() => setSelectedDish(dish)}>
+                                    <i className={'fa fa-pen'} ></i>
+                                </div>
                             </div>
                         </td>
                     </tr>

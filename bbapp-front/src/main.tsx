@@ -12,6 +12,7 @@ import HomePage from "./routes/HomePage.tsx";
 import dayjs from "dayjs";
 import weekOfYear from 'dayjs/plugin/weekOfYear';
 import DishPage from "./routes/DishPage.tsx";
+import ArticlePage from "./routes/ArticlePage.tsx";
 
 dayjs.locale('fr');
 dayjs.extend(weekOfYear);
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
             {
                 path: "/dish",
                 element: <DishPage/>
+            },
+            {
+                path: "/article",
+                element: <ArticlePage/>
             }
         ]
     },
