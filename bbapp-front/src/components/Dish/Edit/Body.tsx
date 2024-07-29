@@ -5,15 +5,17 @@ import {DishAPI} from "../../../api/DishAPI.tsx";
 
 export default function Body() {
     const { selectedDish, setSelectedDish } = useContext(DishContext);
-    if (!selectedDish) return <div>UNKNOWN</div>
 
     const [hasChanged, setHasChanged] = useState<boolean>(false)
-    const [dish, setDish] = useState<Dish>(selectedDish)
+    const [dish, setDish] = useState<Dish|null>(selectedDish)
 
     useEffect(() => {
-        setHasChanged(dish.name !== selectedDish.name)
-    }, [dish]);
+        if (dish && selectedDish) {
+            setHasChanged(dish.name !== selectedDish.name)
+        }
+    }, [dish, selectedDish]);
 
+    if (!selectedDish || !dish) return <div>UNKNOWN</div>
 
     const handleDishNameChange = ({target}: React.ChangeEvent<HTMLInputElement>) => {
         setDish({...dish, name: target.value});
@@ -24,6 +26,12 @@ export default function Body() {
     const handleSaveDish = () => {
         DishAPI.save(dish)
             .then(returnedDish => setSelectedDish(returnedDish));
+    }
+    const handleDelete = () => {
+        DishAPI.delete(selectedDish.id)
+            .then(res => {
+                if (res.message === 'deleted') setSelectedDish(null);
+            })
     }
 
     return <div className={'p-2 flex flex-col gap-3'}>
@@ -49,5 +57,11 @@ export default function Body() {
 
             <div className="italic">Work in progress...</div>
         </div>
+
+        {dish.id > 0 &&
+            <div className={'flex mt-5'}>
+                <button className={'flex-1 btn btn-error btn-sm'} onClick={handleDelete}>Supprimer</button>
+            </div>
+        }
     </div>
 }

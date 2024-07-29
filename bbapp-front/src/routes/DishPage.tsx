@@ -21,22 +21,21 @@ export default function DishPage() {
     return (
         <DishContext.Provider value={{selectedDish, setSelectedDish}}>
             <div className={'h-screen flex flex-col gap-2 relative overflow-hidden w-full'}>
-
-
-                <div
-                    className={'bg-gradient-to-br from-primary to-primary/85 from-10% text-secondary-content font-semibold text-xl px-2 py-1 h-12 flex items-center'}>Liste des plats</div>
-
-                    <List/>
-
-                    <SlideUpModal
-                        displayCondition={selectedDish !== null}
-                        handleClose={() => {
-                            setSelectedDish(null)
-                        }}
-                        headerContent={<Header/>}
-                        bodyContent={<Body/>}
-                    />
+                <div className={'bg-gradient-to-br from-primary to-primary/85 from-10% text-secondary-content font-semibold text-xl px-2 py-1 h-12 flex items-center'}>
+                    Liste des plats
                 </div>
+
+                <List/>
+
+                <SlideUpModal
+                    displayCondition={selectedDish !== null}
+                    handleClose={() => {
+                        setSelectedDish(null)
+                    }}
+                    headerContent={<Header/>}
+                    bodyContent={<Body/>}
+                />
+            </div>
         </DishContext.Provider>
 );
 }

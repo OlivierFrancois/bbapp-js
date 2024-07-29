@@ -19,6 +19,7 @@ router.group(() => {
         router.get("/by-name", [ArticleController, 'getByName']);
         router.get("/:id", [ArticleController, 'get']);
         router.post("/:id/save", [ArticleController, 'save']);
+        router.post("/:id/delete", [ArticleController, 'delete']);
     }).prefix("/article");
 
     router.group(() => {
@@ -26,6 +27,7 @@ router.group(() => {
         router.get("/by-name", [CategoryController, 'getByName']);
         router.get("/:id", [CategoryController, 'get']);
         router.post("/:id/save", [CategoryController, 'save']);
+        router.post("/:id/delete", [CategoryController, 'delete']);
     }).prefix("/category");
 
     router.group(() => {
@@ -33,6 +35,7 @@ router.group(() => {
         router.get("/by-name", [DishController, 'getByName']);
         router.get("/:id", [DishController, 'get']);
         router.post("/:id/save", [DishController, 'save']);
+        router.post("/:id/delete", [DishController, 'delete']);
     }).prefix("/dish");
 
     router.group(() => {
