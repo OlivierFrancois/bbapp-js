@@ -16,7 +16,7 @@ export default function ArticleBody() {
                 (article.sortOrder !== selectedArticle.sortOrder)
             );
         }
-    }, [article]);
+    }, [article, selectedArticle]);
 
     const capitalizeFirstLetter = useCallback((string: string) => string ? string.charAt(0).toUpperCase() + string.slice(1) : string, []);
 

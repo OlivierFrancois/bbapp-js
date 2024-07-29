@@ -13,7 +13,7 @@ export default function CategoryBody() {
         if (category && selectedCategory) {
             setHasChanged(category.name !== selectedCategory.name || category.sortOrder !== selectedCategory.sortOrder)
         }
-    }, [category]);
+    }, [category, selectedCategory]);
 
 
     if (!selectedCategory || !category) return <div>UNKNOWN</div>
