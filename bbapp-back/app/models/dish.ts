@@ -1,8 +1,8 @@
 import { DateTime } from "luxon";
-import { BaseModel, column, manyToMany } from "@adonisjs/lucid/orm";
+import {BaseModel, column, hasMany, manyToMany} from "@adonisjs/lucid/orm";
 import * as relations from "@adonisjs/lucid/types/relations";
 import DishScheduleItem from "#models/dish_schedule_item";
-import Article from "#models/article";
+import RecipeItem from "#models/recipe_item";
 
 export default class Dish extends BaseModel {
     static table = 'dish'
@@ -25,6 +25,6 @@ export default class Dish extends BaseModel {
     @manyToMany(() => DishScheduleItem)
     declare dishScheduleItems: relations.ManyToMany<typeof DishScheduleItem>
 
-    @manyToMany(() => Article)
-    declare articles: relations.ManyToMany<typeof Article>
+    @hasMany(() => RecipeItem)
+    declare recipeItems: relations.HasMany<typeof RecipeItem>
 }
