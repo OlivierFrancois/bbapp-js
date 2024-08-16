@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Dish {
+  id                Int                @id @default(autoincrement())
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  name              String
+  url               String
+  dishScheduleItems DishScheduleItem[]
+  recipeItems       RecipeItem[]
+}
+
+model DishScheduleItem {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  date      DateTime
+  moment    String
+  dishes    Dish[]
+}
+
+model Article {
+  id          Int          @id @default(autoincrement())
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  name        String
+  sortOrder   Int?
+  category    Category     @relation(fields: [categoryId], references: [id])
+  categoryId  Int
+  recipeItems RecipeItem[]
+}
+
+model Category {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  name      String
+  sortOrder Int?
+  articles  Article[]
+}
+
+model RecipeItem {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  date      DateTime
+  dishId    Int
+  dish      Dish     @relation(fields: [dishId], references: [id])
+  articleId Int
+  article   Article  @relation(fields: [articleId], references: [id])
+  quantity  Int
+  unit      String
+}
