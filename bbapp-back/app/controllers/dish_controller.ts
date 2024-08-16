@@ -23,6 +23,9 @@ export default class DishController {
         if (!dish) dish = new Dish();
 
         dish.name = name.toLowerCase();
+
+        // TODO : Ajout/update des recipeItems
+
         await dish.save();
 
         return dish;
