@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query, Body, Post, Delete, Patch } from '@nestjs/common';
+import { Controller, Get, Param, Query, Body, Post, Delete, Patch, Put } from '@nestjs/common';
 import { DishService } from '../services/dish.service';
 import { Dish } from '@prisma/client';
 
@@ -22,13 +22,30 @@ export class DishController {
     }
 
     @Post()
-    async create(@Body() dish: Dish): Promise<Dish> {
-        return this.dishService.create(dish);
+    async create(@Body('name') name: string, @Body('url') url: string, @Body('recipeItems') recipeItemIds: number[]): Promise<Dish> {
+        const data = {
+            name,
+            url,
+            recipeItemIds,
+        };
+
+        return this.dishService.create(data);
     }
 
-    @Patch(':id')
-    async update(@Param('id') id: string, @Body() dish: Dish): Promise<Dish> {
-        return this.dishService.update(Number(id), dish);
+    @Put(':id')
+    async update(
+        @Param('id') id: string,
+        @Body('name') name: string,
+        @Body('url') url: string,
+        @Body('recipeItems') recipeItemIds: number[]
+    ): Promise<Dish> {
+        const data = {
+            name,
+            url,
+            recipeItemIds,
+        };
+
+        return this.dishService.update(Number(id), data);
     }
 
     @Delete(':id')
