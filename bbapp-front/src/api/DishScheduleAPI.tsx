@@ -4,7 +4,7 @@ import DishScheduleItem from "../interfaces/DishScheduleItem.tsx";
 const API_HOST = import.meta.env.VITE_API_ENDPOINT;
 //const URL_GET = `${API_HOST}/dish-schedule/:id`;
 const URL_GET_PERIOD = `${API_HOST}/dish-schedule/period`;
-const URL_SAVE = `${API_HOST}/dish-schedule/save`;
+const URL_SAVE = `${API_HOST}/dish-schedule`;
 
 interface PayloadGetWeekI {
     startDate: string,

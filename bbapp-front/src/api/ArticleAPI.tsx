@@ -2,11 +2,11 @@ import axios from 'axios';
 import Article from "../interfaces/Article.tsx";
 
 const API_HOST = import.meta.env.VITE_API_ENDPOINT;
-const URL_GET_ALL = `${API_HOST}/article/all`;
+const URL_GET_BY_NAME = `${API_HOST}/article/search/by-name`;
 const URL_GET = `${API_HOST}/article/:articleId`;
-const URL_GET_BY_NAME = `${API_HOST}/article/by-name`;
-const URL_SAVE = `${API_HOST}/article/:articleId/save`;
-const URL_DELETE = `${API_HOST}/article/:articleId/delete`;
+const URL_GET_ALL = `${API_HOST}/article`;
+const URL_SAVE = `${API_HOST}/article/:articleId`;
+const URL_DELETE = `${API_HOST}/article/:articleId`;
 
 interface PayloadSave {
     id: number,
@@ -44,7 +44,7 @@ export class ArticleAPI {
     }
 
     static async delete(articleId: number): Promise<{message: string}>{
-        return axios.post(URL_DELETE.replace(':articleId', articleId.toString()))
+        return axios.delete(URL_DELETE.replace(':articleId', articleId.toString()))
             .then(res => {
             return res.data
         })

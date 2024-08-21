@@ -2,11 +2,11 @@ import axios from 'axios';
 import Category from "../interfaces/Category.tsx";
 
 const API_HOST = import.meta.env.VITE_API_ENDPOINT;
-const URL_GET_ALL = `${API_HOST}/category/all`;
+const URL_GET_BY_NAME = `${API_HOST}/category/search/by-name`;
 const URL_GET = `${API_HOST}/category/:categoryId`;
-const URL_GET_BY_NAME = `${API_HOST}/category/by-name`;
-const URL_SAVE = `${API_HOST}/category/:categoryId/save`;
-const URL_DELETE = `${API_HOST}/category/:categoryId/delete`;
+const URL_DELETE = `${API_HOST}/category/:categoryId`;
+const URL_SAVE = `${API_HOST}/category/:categoryId`;
+const URL_GET_ALL = `${API_HOST}/category`;
 
 interface PayloadSave {
     id: number,
@@ -44,7 +44,7 @@ export class CategoryAPI {
     }
 
     static async delete(categoryId: number): Promise<{message: string}>{
-        return axios.post(URL_DELETE.replace(':categoryId', categoryId.toString()))
+        return axios.delete(URL_DELETE.replace(':categoryId', categoryId.toString()))
             .then(res => {
                 return res.data
             })

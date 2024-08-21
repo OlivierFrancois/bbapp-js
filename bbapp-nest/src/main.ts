@@ -1,9 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
+    app.enableCors();
 
     // Swagger
     const config = new DocumentBuilder().setTitle('Bbapp API').setDescription(`Documentation de l'API de Bbapp`).setVersion('0.1').build();

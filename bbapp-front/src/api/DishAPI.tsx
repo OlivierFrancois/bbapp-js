@@ -2,11 +2,11 @@ import axios from 'axios';
 import Dish from "../interfaces/Dish.tsx";
 
 const API_HOST = import.meta.env.VITE_API_ENDPOINT;
-const URL_GET_ALL = `${API_HOST}/dish/all`;
+const URL_GET_ALL = `${API_HOST}/dish`;
 const URL_GET = `${API_HOST}/dish/:dishId`;
-const URL_GET_BY_NAME = `${API_HOST}/dish/by-name`;
+const URL_GET_BY_NAME = `${API_HOST}/dish/search/by-name`;
 const URL_SAVE = `${API_HOST}/dish/:dishId/save`;
-const URL_DELETE = `${API_HOST}/dish/:dishId/delete`;
+const URL_DELETE = `${API_HOST}/dish/:dishId`;
 
 interface PayloadSave {
     id: number,
@@ -44,7 +44,7 @@ export class DishAPI {
     }
 
     static async delete(dishId: number): Promise<{message: string}>{
-        return axios.post(URL_DELETE.replace(':dishId', dishId.toString()))
+        return axios.delete(URL_DELETE.replace(':dishId', dishId.toString()))
             .then(res => {
                 return res.data
             })
