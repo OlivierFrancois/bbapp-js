@@ -35,13 +35,11 @@ export class RecipeService {
     }
 
     async save(data: CreateRecipeItemDto): Promise<RecipeItem> {
-        const recipeItem = await this.prisma.recipeItem.upsert({
+        return this.prisma.recipeItem.upsert({
             where: { dishId_articleId: { dishId: data.dishId, articleId: data.articleId } },
             create: data,
             update: data,
         });
-
-        return recipeItem;
     }
 
     async delete(dishId: number, articleId: number): Promise<void> {
