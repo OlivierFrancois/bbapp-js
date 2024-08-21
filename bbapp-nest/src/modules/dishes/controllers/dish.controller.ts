@@ -9,9 +9,9 @@ import { ApiTags } from '@nestjs/swagger';
 export class DishController {
     constructor(private readonly dishService: DishService) {}
 
-    @Get()
-    async getAll(): Promise<Dish[]> {
-        return this.dishService.getAll();
+    @Get('search/by-name')
+    async getByName(@Query('name') name: string): Promise<Dish[]> {
+        return this.dishService.getByName(name);
     }
 
     @Get(':id')
@@ -19,9 +19,9 @@ export class DishController {
         return this.dishService.getById(Number(id));
     }
 
-    @Get('search/by-name')
-    async getByName(@Query('name') name: string): Promise<Dish[]> {
-        return this.dishService.getByName(name);
+    @Get()
+    async getAll(): Promise<Dish[]> {
+        return this.dishService.getAll();
     }
 
     @Post()

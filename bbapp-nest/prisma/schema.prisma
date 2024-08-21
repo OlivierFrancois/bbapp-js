@@ -38,8 +38,8 @@ model Article {
   updatedAt   DateTime     @updatedAt
   name        String
   sortOrder   Int?
-  category    Category     @relation(fields: [categoryId], references: [id])
-  categoryId  Int
+  category    Category?    @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  categoryId  Int?
   recipeItems RecipeItem[]
 }
 

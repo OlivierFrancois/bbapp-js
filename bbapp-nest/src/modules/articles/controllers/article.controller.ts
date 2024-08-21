@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { ArticleService } from '../services/article.service';
 import { Article } from '@prisma/client';
 import { ApiTags } from '@nestjs/swagger';
@@ -9,9 +9,19 @@ import { CreateArticleDto } from '../dtos/create-article.dto';
 export class ArticleController {
     constructor(private readonly articleService: ArticleService) {}
 
+    @Get('search/by-name')
+    async getByName(@Query('name') name: string): Promise<Article[]> {
+        return this.articleService.getByName(name);
+    }
+
     @Get(':id')
-    async get(@Param('id') id: string): Promise<Article> {
+    async getById(@Param('id') id: string): Promise<Article> {
         return this.articleService.getById(Number(id));
+    }
+
+    @Get()
+    async getAll(): Promise<Article[]> {
+        return this.articleService.getAll();
     }
 
     @Post()

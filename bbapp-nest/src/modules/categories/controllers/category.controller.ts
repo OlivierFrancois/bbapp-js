@@ -1,5 +1,5 @@
 import { ApiTags } from '@nestjs/swagger';
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { CategoryService } from '../services/category.service';
 import { Category } from '@prisma/client';
 import { CreateCategoryDto } from '../dtos/create-category.dto';
@@ -9,9 +9,19 @@ import { CreateCategoryDto } from '../dtos/create-category.dto';
 export class CategoryController {
     constructor(private readonly categoryService: CategoryService) {}
 
+    @Get('search/by-name')
+    async getByName(@Query('name') name: string): Promise<Category[]> {
+        return this.categoryService.getByName(name);
+    }
+
     @Get(':id')
-    async get(@Param('id') id: string): Promise<Category> {
+    async getById(@Param('id') id: string): Promise<Category> {
         return this.categoryService.getById(Number(id));
+    }
+
+    @Get()
+    async getAll(): Promise<Category[]> {
+        return this.categoryService.getAll();
     }
 
     @Post()
