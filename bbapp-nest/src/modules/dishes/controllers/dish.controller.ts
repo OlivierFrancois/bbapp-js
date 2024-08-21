@@ -2,7 +2,9 @@ import { Controller, Get, Param, Query, Body, Post, Delete, Patch, Put } from '@
 import { DishService } from '../services/dish.service';
 import { Dish } from '@prisma/client';
 import { CreateDishDto } from '../dtos/create-dish.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Dishes')
 @Controller('api/dish')
 export class DishController {
     constructor(private readonly dishService: DishService) {}
