@@ -56,11 +56,12 @@ model RecipeItem {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  date      DateTime
   dishId    Int
-  dish      Dish     @relation(fields: [dishId], references: [id])
+  dish      Dish     @relation(fields: [dishId], references: [id], onDelete: Cascade)
   articleId Int
-  article   Article  @relation(fields: [articleId], references: [id])
+  article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
   quantity  Int
   unit      String
+
+  @@unique([dishId, articleId])
 }

@@ -30,9 +30,20 @@ export class ArticleService {
     async create(createArticleDto: CreateArticleDto): Promise<Article> {
         const { name, categoryId, sortOrder } = createArticleDto;
 
+        let categoryConnect = undefined;
+        if (categoryId) {
+            const categoryExists = await this.prisma.category.findUnique({
+                where: { id: categoryId },
+            });
+
+            if (categoryExists) {
+                categoryConnect = { connect: { id: categoryId } };
+            }
+        }
+
         const data: Prisma.ArticleCreateInput = {
             name,
-            category: { connect: { id: categoryId } },
+            category: categoryConnect,
             sortOrder,
         };
 
@@ -44,9 +55,20 @@ export class ArticleService {
     async update(id: number, updateArticleDto: CreateArticleDto): Promise<Article> {
         const { name, categoryId, sortOrder } = updateArticleDto;
 
+        let categoryConnect = undefined;
+        if (categoryId) {
+            const categoryExists = await this.prisma.category.findUnique({
+                where: { id: categoryId },
+            });
+
+            if (categoryExists) {
+                categoryConnect = { connect: { id: categoryId } };
+            }
+        }
+
         const data: Prisma.ArticleCreateInput = {
             name,
-            category: { connect: { id: categoryId } },
+            category: categoryConnect,
             sortOrder,
         };
 

@@ -5,9 +5,9 @@ export class CreateArticleDto {
     @IsString()
     name: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsNumber()
-    categoryId: number;
+    categoryId?: number;
 
     @IsOptional()
     @IsNumber()
