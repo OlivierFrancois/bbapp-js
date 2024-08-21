@@ -5,7 +5,7 @@ import { CreateDishScheduleDto } from '../dtos/create-dish-schedule.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Dish schedule')
-@Controller('dish-schedule')
+@Controller('api/dish-schedule')
 export class DishScheduleController {
     constructor(private readonly dishScheduleService: DishScheduleService) {}
 

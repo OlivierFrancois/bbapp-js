@@ -5,13 +5,13 @@ import { ApiTags } from '@nestjs/swagger';
 import { CreateArticleDto } from '../dtos/create-article.dto';
 
 @ApiTags('Articles')
-@Controller('article')
+@Controller('api/article')
 export class ArticleController {
     constructor(private readonly articleService: ArticleService) {}
 
     @Get(':id')
-    async get(@Param('id') id: number): Promise<Article> {
-        return this.articleService.getById(id);
+    async get(@Param('id') id: string): Promise<Article> {
+        return this.articleService.getById(Number(id));
     }
 
     @Post()
@@ -20,12 +20,12 @@ export class ArticleController {
     }
 
     @Put(':id')
-    async update(@Param('id') id: number, @Body() data: CreateArticleDto): Promise<Article> {
-        return this.articleService.update(id, data);
+    async update(@Param('id') id: string, @Body() data: CreateArticleDto): Promise<Article> {
+        return this.articleService.update(Number(id), data);
     }
 
     @Delete(':id')
-    async delete(@Param('id') id: number): Promise<void> {
-        return this.articleService.delete(id);
+    async delete(@Param('id') id: string): Promise<void> {
+        return this.articleService.delete(Number(id));
     }
 }
