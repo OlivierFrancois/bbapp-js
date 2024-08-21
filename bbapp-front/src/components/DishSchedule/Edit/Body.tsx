@@ -39,7 +39,7 @@ export default function Body() {
         const dishIds = dishes.map(p => p.id)
         const payload = {
             dishIds: dishIds,
-            date: selectedCell.date,
+            date: new Date(selectedCell.date).toISOString(),
             moment: selectedCell.moment
         }
         DishScheduleAPI.save(payload)

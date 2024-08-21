@@ -34,12 +34,12 @@ export default function Schedule() {
 
         if (swapItem1 && swapItem2) {
             const payload1 = {
-                date: swapItem2.date,
+                date: new Date(swapItem2.date).toISOString(),
                 moment: swapItem2.moment,
                 dishIds: swapItem1.dishScheduleItem?.dishes.map((dish) => dish.id) ?? [],
             };
             const payload2 = {
-                date: swapItem1.date,
+                date: new Date(swapItem1.date).toISOString(),
                 moment: swapItem1.moment,
                 dishIds: swapItem2.dishScheduleItem?.dishes.map((dish) => dish.id) ?? [],
             }
