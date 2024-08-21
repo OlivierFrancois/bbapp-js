@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../../prisma.service';
 import { Article, Prisma } from '@prisma/client';
+import { CreateArticleDto } from '../dtos/create-article.dto';
 
 @Injectable()
 export class ArticleService {
@@ -26,20 +27,29 @@ export class ArticleService {
         });
     }
 
-    async create(data: Prisma.ArticleCreateInput, categoryId: number): Promise<Article> {
+    async create(createArticleDto: CreateArticleDto): Promise<Article> {
+        const { name, categoryId, sortOrder } = createArticleDto;
+
+        const data: Prisma.ArticleCreateInput = {
+            name,
+            category: { connect: { id: categoryId } },
+            sortOrder,
+        };
+
         return this.prisma.article.create({
-            data: {
-                ...data,
-                category: {
-                    connect: {
-                        id: categoryId,
-                    },
-                },
-            },
+            data,
         });
     }
 
-    async update(id: number, data: Prisma.ArticleUpdateInput, categoryId: number): Promise<Article> {
+    async update(id: number, updateArticleDto: CreateArticleDto): Promise<Article> {
+        const { name, categoryId, sortOrder } = updateArticleDto;
+
+        const data: Prisma.ArticleCreateInput = {
+            name,
+            category: { connect: { id: categoryId } },
+            sortOrder,
+        };
+
         return this.prisma.article.update({
             where: { id },
             data: {
