@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query, Body, Post, Delete, Patch, Put } from '@nestjs/common';
+import { Controller, Get, Param, Query, Body, Post, Delete, Put } from '@nestjs/common';
 import { DishService } from '../services/dish.service';
 import { Dish } from '@prisma/client';
 import { CreateDishDto } from '../dtos/create-dish.dto';
