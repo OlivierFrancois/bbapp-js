@@ -1,5 +1,4 @@
 import {Dish} from "../../../types/Dish.tsx";
-import {TrashIcon} from "@heroicons/react/16/solid";
 
 interface Props {
     dish: Dish
@@ -12,9 +11,9 @@ export default function DishItem({dish, handleDishRemove}: Props) {
         <div className="flex items-center justify-between py-1">
             <div className={'first-letter:uppercase'}>{dish.name}</div>
 
-            <div onClick={() => handleDishRemove(dish)}>
-                <TrashIcon className={'size-5'}/>
-            </div>
+            <button className={'btn btn-ghost btn-square btn-sm'} onClick={() => handleDishRemove(dish)}>
+                <i className={'fa fa-trash'}></i>
+            </button>
         </div>
     )
 }

@@ -2,48 +2,51 @@ import axios from 'axios';
 import {Dish} from "../types/Dish.tsx";
 
 const API_HOST = import.meta.env.VITE_API_ENDPOINT;
-const URL_GET_ALL = `${API_HOST}/dish`;
-const URL_GET = `${API_HOST}/dish/:dishId`;
 const URL_GET_BY_NAME = `${API_HOST}/dish/search/by-name`;
-const URL_SAVE = `${API_HOST}/dish/:dishId/save`;
+const URL_GET = `${API_HOST}/dish/:dishId`;
+const URL_UPDATE = `${API_HOST}/dish/:dishId`;
 const URL_DELETE = `${API_HOST}/dish/:dishId`;
-
-interface PayloadSave {
-    id: number,
-    name: string,
-}
+const URL_GET_ALL = `${API_HOST}/dish`;
+const URL_CREATE = `${API_HOST}/dish`;
 
 export class DishAPI {
-    static async get(id: number) : Promise<Dish[]>{
+    static async get(id: number): Promise<Dish[]> {
         return axios.get(URL_GET.replace(':dishId', id.toString()))
             .then(res => {
-            return res.data
-        })
+                return res.data
+            })
     }
 
-    static async getByName(payload : { name: string }) : Promise<Dish[]>{
+    static async getByName(payload: { name: string }): Promise<Dish[]> {
         return axios.get(URL_GET_BY_NAME, {
-            params : payload
+            params: payload
         }).then(res => {
             return res.data
         })
     }
 
-    static async getAll() : Promise<Dish[]>{
+    static async getAll(): Promise<Dish[]> {
         return axios.get(URL_GET_ALL, {})
             .then(res => {
-            return res.data
-        })
+                return res.data
+            })
     }
 
-    static async save(payload: PayloadSave): Promise<Dish|null>{
-        return axios.post(URL_SAVE.replace(':dishId', payload.id.toString()), {...payload})
+    static async create(dish: Omit<Dish, 'id'>): Promise<Dish> {
+        return axios.post(URL_CREATE, {...dish})
             .then(res => {
-            return res.data
-        })
+                return res.data
+            })
     }
 
-    static async delete(dishId: number): Promise<{message: string}>{
+    static async update(dish: Dish): Promise<Dish> {
+        return axios.put(URL_UPDATE.replace(':dishId', dish.id.toString()), {...dish})
+            .then(res => {
+                return res.data
+            })
+    }
+
+    static async delete(dishId: number): Promise<{ message: string }> {
         return axios.delete(URL_DELETE.replace(':dishId', dishId.toString()))
             .then(res => {
                 return res.data

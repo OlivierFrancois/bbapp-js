@@ -1,10 +1,9 @@
 import React, {useState} from "react";
 import {DishAPI} from "../../../api/DishAPI.tsx";
 import {Dish} from "../../../types/Dish.tsx";
-import {XMarkIcon} from "@heroicons/react/16/solid";
 
 interface DishAdderProps {
-    handleDishSave: (dish: Dish|null) => void
+    handleDishSave: (dish: Dish | null) => void
 }
 
 export default function DishAdder({handleDishSave}: DishAdderProps) {
@@ -24,8 +23,8 @@ export default function DishAdder({handleDishSave}: DishAdderProps) {
     }
 
     const handleDishCreate = () => {
-        const payload = {id: 0, name: dishInput}
-        DishAPI.save(payload)
+        const payload = {name: dishInput, url: ''}
+        DishAPI.create(payload)
             .then(dish => {
                 handleDishSave(dish);
             })
@@ -41,15 +40,28 @@ export default function DishAdder({handleDishSave}: DishAdderProps) {
                        value={dishInput}
                        className="input input-sm w-full input-bordered "/>
 
-                {dishes.length > 0
-                    ? <div className={'absolute top-100 w-full border border-t-0 rounded'}>{dishes.map((p, k) => (
-                        <div key={k} className={'first-letter:uppercase text-sm py-3 px-2 border-t hover:bg-gray-50'} onClick={() => handleDishSave(p)}>{ p.name }</div>
-                    ))}</div>
-                    : dishInput.length >= 3 && <div onClick={handleDishCreate} className={'absolute top-100 w-full border border-t-0 rounded text-sm py-1 px-2 hover:bg-gray-50 italic'}>Créer le plat "<span className={'first-letter:uppercase font-medium'}>{dishInput}</span>"</div>
+                {(dishes.length > 0 || dishInput.length >= 3) &&
+                    <div className={'absolute top-100 w-full border border-t-0 rounded'}>
+                        {dishes.map((p, k) =>
+                            <div key={k}
+                                 className={'first-letter:uppercase text-sm py-3 px-2 border-t hover:bg-gray-50'}
+                                 onClick={() => handleDishSave(p)}>{p.name}
+                            </div>
+                        )}
+
+                        {(dishInput.length >= 3) && !dishes.some(dish => dish.name.toLowerCase() === dishInput.toLowerCase()) &&(
+                            <div onClick={handleDishCreate}
+                                 className={'text-sm py-3 px-2 border-t hover:bg-gray-50 italic'}>
+                                Créer le plat "<span className={'first-letter:uppercase font-medium'}>{dishInput}</span>"
+                            </div>
+                        )}
+                    </div>
                 }
             </div>
 
-            <XMarkIcon onClick={() => handleDishSave(null)} className={'size-7'}></XMarkIcon>
+            <button className={'btn btn-ghost btn-square btn-sm'}>
+                <i className={'fa fa-times text-2xl'}></i>
+            </button>
         </div>
     )
 }
