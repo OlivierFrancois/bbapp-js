@@ -5,26 +5,22 @@ const API_HOST = import.meta.env.VITE_API_ENDPOINT;
 const URL_GET_BY_NAME = `${API_HOST}/category/search/by-name`;
 const URL_GET = `${API_HOST}/category/:categoryId`;
 const URL_DELETE = `${API_HOST}/category/:categoryId`;
-const URL_SAVE = `${API_HOST}/category/:categoryId`;
+const URL_CREATE = `${API_HOST}/category`;
+const URL_UPDATE = `${API_HOST}/category/:categoryId`;
 const URL_GET_ALL = `${API_HOST}/category`;
 
-interface PayloadSave {
-    id: number,
-    name: string,
-}
-
 export class CategoryAPI {
-    static async get(id: number) : Promise<Category[]>{
-        return axios.get(URL_GET.replace(':categoryId', id.toString()))
-            .then(res => {
-            return res.data
-        })
-    }
-
     static async getByName(payload : { name: string }) : Promise<Category[]>{
         return axios.get(URL_GET_BY_NAME, {
             params : payload
         }).then(res => {
+            return res.data
+        })
+    }
+
+    static async get(id: number) : Promise<Category[]>{
+        return axios.get(URL_GET.replace(':categoryId', id.toString()))
+            .then(res => {
             return res.data
         })
     }
@@ -36,8 +32,15 @@ export class CategoryAPI {
         })
     }
 
-    static async save(payload: PayloadSave): Promise<Category|null>{
-        return axios.post(URL_SAVE.replace(':categoryId', payload.id.toString()), {...payload})
+    static async create(category: Omit<Category, 'id'>): Promise<Category>{
+        return axios.post(URL_CREATE, {...category})
+            .then(res => {
+            return res.data
+        })
+    }
+
+    static async update(category: Category): Promise<Category>{
+        return axios.put(URL_UPDATE.replace(':categoryId', category.id.toString()), {...category})
             .then(res => {
             return res.data
         })

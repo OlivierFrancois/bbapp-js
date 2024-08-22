@@ -39,14 +39,16 @@ export default function List() {
                             .sort((a, b) => a.sortOrder === b.sortOrder ? a.name.localeCompare(b.name) : a.sortOrder - b.sortOrder)
                             .map((article: Article, key) => (
                                 <tr key={`${key}_${article.id}`}>
-                                <td className={'first-letter:uppercase'}>{article.name}</td>
+                                    <td className={'first-letter:uppercase'}>{article.name}</td>
 
-                                        <td>
+                                    <td>
+                                        <div className="flex items-center justify-center gap-2">
                                             <button className="btn btn-secondary btn-xs btn-outline btn-circle"
                                                     onClick={() => setSelectedArticle(article)}>
                                                 <i className={'fa fa-pen'}></i>
                                             </button>
-                                        </td>
+                                        </div>
+                                    </td>
                                 </tr>
                             ))
                         }

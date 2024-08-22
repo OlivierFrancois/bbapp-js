@@ -20,7 +20,6 @@ export default function ArticleBody() {
 
     const capitalizeFirstLetter = useCallback((string: string) => string ? string.charAt(0).toUpperCase() + string.slice(1) : string, []);
 
-
     if (!selectedArticle || !article) return <div>UNKNOWN</div>
 
     const handleNameChange = ({target}: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,13 +35,19 @@ export default function ArticleBody() {
         setArticle(selectedArticle);
     }
     const handleSaveArticle = () => {
-        ArticleAPI.save(article)
-            .then(returnedArticle => setSelectedArticle(returnedArticle));
+        if (article.id > 0) {
+            ArticleAPI.update(article)
+                .then(returnedArticle => setSelectedArticle(returnedArticle));
+        } else {
+            const { id, ...newArticle } = article;
+            ArticleAPI.create(newArticle)
+                .then(returnedArticle => setSelectedArticle(returnedArticle));
+        }
     }
     const handleDelete = () => {
         ArticleAPI.delete(selectedArticle.id)
-            .then(res => {
-                if (res.message === 'deleted') setSelectedArticle(null);
+            .then(() => {
+                setSelectedArticle(null);
             })
     }
 

@@ -15,7 +15,6 @@ export default function CategoryBody() {
         }
     }, [category, selectedCategory]);
 
-
     if (!selectedCategory || !category) return <div>UNKNOWN</div>
 
     const handleCategoryNameChange = ({target}: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,8 +28,17 @@ export default function CategoryBody() {
         setCategory(selectedCategory);
     }
     const handleSaveCategory = () => {
-        CategoryAPI.save(category)
-            .then(returnedCategory => setSelectedCategory(returnedCategory));
+        if (category.id > 0) {
+            CategoryAPI.update(category)
+                .then(returnedCategory => setSelectedCategory(returnedCategory));
+        } else {
+            const newCategory : Omit<Category, 'id'> = {
+                name: category.name,
+                sortOrder: category.sortOrder,
+            }
+            CategoryAPI.create(newCategory)
+                .then(returnedCategory => setSelectedCategory(returnedCategory));
+        }
     }
     const handleDelete = () => {
         CategoryAPI.delete(selectedCategory.id)

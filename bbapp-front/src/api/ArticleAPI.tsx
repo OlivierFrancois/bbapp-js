@@ -5,13 +5,9 @@ const API_HOST = import.meta.env.VITE_API_ENDPOINT;
 const URL_GET_BY_NAME = `${API_HOST}/article/search/by-name`;
 const URL_GET = `${API_HOST}/article/:articleId`;
 const URL_GET_ALL = `${API_HOST}/article`;
-const URL_SAVE = `${API_HOST}/article/:articleId`;
+const URL_CREATE = `${API_HOST}/article/`;
+const URL_UPDATE = `${API_HOST}/article/:articleId`;
 const URL_DELETE = `${API_HOST}/article/:articleId`;
-
-interface PayloadSave {
-    id: number,
-    name: string,
-}
 
 export class ArticleAPI {
     static async get(id: number) : Promise<Article[]>{
@@ -36,8 +32,15 @@ export class ArticleAPI {
         })
     }
 
-    static async save(payload: PayloadSave): Promise<Article|null>{
-        return axios.post(URL_SAVE.replace(':articleId', payload.id.toString()), {...payload})
+    static async create(article: Omit<Article, 'id'>): Promise<Article>{
+        return axios.post(URL_CREATE, {...article})
+            .then(res => {
+            return res.data
+        })
+    }
+
+    static async update(article: Article): Promise<Article>{
+        return axios.put(URL_UPDATE.replace(':articleId', article.id.toString()), {...article})
             .then(res => {
             return res.data
         })
