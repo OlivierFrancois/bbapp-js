@@ -3,7 +3,7 @@ import {DishScheduleContext} from "../../routes/DishSchedulePage.tsx";
 import dayjs from "dayjs";
 import {MoonIcon, SunIcon} from "@heroicons/react/16/solid";
 import {DishScheduleAPI} from "../../api/DishScheduleAPI.tsx";
-import DishScheduleItem from "../../interfaces/DishScheduleItem.tsx";
+import {DishScheduleItem} from "../../types/DishScheduleItem.tsx";
 import Cell from "./Cell.tsx";
 
 const moments = ['midi', 'soir'];

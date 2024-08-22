@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Category from "../interfaces/Category.tsx";
+import {Category} from "../types/Category.tsx";
 
 const API_HOST = import.meta.env.VITE_API_ENDPOINT;
 const URL_GET_BY_NAME = `${API_HOST}/category/search/by-name`;

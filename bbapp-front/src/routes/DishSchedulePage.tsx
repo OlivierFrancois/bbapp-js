@@ -3,7 +3,7 @@ import Schedule from "../components/DishSchedule/Schedule.tsx";
 import React, {createContext, useState} from "react";
 import dayjs from "dayjs";
 import 'dayjs/locale/fr';
-import DishScheduleItem from "../interfaces/DishScheduleItem.tsx";
+import {DishScheduleItem} from "../types/DishScheduleItem.tsx";
 import SlideUpModal from "../components/SlideUpModal/SlideUpModal.tsx";
 import Header from "../components/DishSchedule/Edit/Header.tsx";
 import Body from "../components/DishSchedule/Edit/Body.tsx";

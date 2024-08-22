@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Article from "../interfaces/Article.tsx";
+import {Article} from "../types/Article.tsx";
 
 const API_HOST = import.meta.env.VITE_API_ENDPOINT;
 const URL_GET_BY_NAME = `${API_HOST}/article/search/by-name`;

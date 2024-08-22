@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {DishAPI} from "../../../api/DishAPI.tsx";
-import Dish from "../../../interfaces/Dish.tsx";
+import {Dish} from "../../../types/Dish.tsx";
 import {XMarkIcon} from "@heroicons/react/16/solid";
 
 interface DishAdderProps {

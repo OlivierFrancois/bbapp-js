@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from "react";
-import Dish from "../../interfaces/Dish.tsx";
+import {Dish} from "../../types/Dish.tsx";
 import {DishAPI} from "../../api/DishAPI.tsx";
 import {DishContext} from "../../routes/DishPage.tsx";
 

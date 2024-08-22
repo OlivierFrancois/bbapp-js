@@ -1,4 +1,4 @@
-import Dish from "../../../interfaces/Dish.tsx";
+import {Dish} from "../../../types/Dish.tsx";
 import {TrashIcon} from "@heroicons/react/16/solid";
 
 interface Props {

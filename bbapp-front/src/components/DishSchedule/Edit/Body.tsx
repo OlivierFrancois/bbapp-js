@@ -1,6 +1,6 @@
 import {useContext, useEffect, useRef, useState} from "react";
 import {DishScheduleContext} from "../../../routes/DishSchedulePage.tsx";
-import Dish from "../../../interfaces/Dish.tsx";
+import {Dish} from "../../../types/Dish.tsx";
 import DishItem from "./DishItem.tsx";
 import DishAdder from "./DishAdder.tsx";
 import {DishScheduleAPI} from "../../../api/DishScheduleAPI.tsx";

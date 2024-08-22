@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Dish from "../interfaces/Dish.tsx";
+import {Dish} from "../types/Dish.tsx";
 
 const API_HOST = import.meta.env.VITE_API_ENDPOINT;
 const URL_GET_ALL = `${API_HOST}/dish`;

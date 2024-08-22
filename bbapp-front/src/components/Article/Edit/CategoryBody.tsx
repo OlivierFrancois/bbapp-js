@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import {ArticleContext} from "../../../routes/ArticlePage.tsx";
-import Category from "../../../interfaces/Category.tsx";
+import {Category} from "../../../types/Category.tsx";
 import {CategoryAPI} from "../../../api/CategoryAPI.tsx";
 
 export default function CategoryBody() {

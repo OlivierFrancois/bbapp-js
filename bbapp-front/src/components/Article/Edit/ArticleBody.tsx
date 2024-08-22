@@ -1,6 +1,6 @@
 import React, {useCallback, useContext, useEffect, useState} from "react";
 import {ArticleContext} from "../../../routes/ArticlePage.tsx";
-import Article from "../../../interfaces/Article.tsx";
+import {Article} from "../../../types/Article.tsx";
 import {ArticleAPI} from "../../../api/ArticleAPI.tsx";
 
 export default function ArticleBody() {

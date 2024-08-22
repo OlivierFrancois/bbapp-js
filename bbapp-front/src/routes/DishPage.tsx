@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import 'dayjs/locale/fr';
 import List from "../components/Dish/List.tsx";
 import React, {createContext, useState} from "react";
-import Dish from "../interfaces/Dish.tsx";
+import {Dish} from "../types/Dish.tsx";
 import SlideUpModal from "../components/SlideUpModal/SlideUpModal.tsx";
 import Header from "../components/Dish/Edit/Header.tsx";
 import Body from "../components/Dish/Edit/Body.tsx";

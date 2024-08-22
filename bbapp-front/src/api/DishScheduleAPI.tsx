@@ -1,5 +1,5 @@
 import axios from 'axios';
-import DishScheduleItem from "../interfaces/DishScheduleItem.tsx";
+import {DishScheduleItem} from "../types/DishScheduleItem.tsx";
 
 const API_HOST = import.meta.env.VITE_API_ENDPOINT;
 //const URL_GET = `${API_HOST}/dish-schedule/:id`;
