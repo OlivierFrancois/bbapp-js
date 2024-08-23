@@ -9,11 +9,6 @@ import { CreateRecipeItemDto } from '../dtos/create-recipe-item.dto';
 export class RecipeController {
     constructor(private readonly recipeService: RecipeService) {}
 
-    @Get(':dishId/:articleId')
-    async get(@Param('dishId') dishId: string, @Param('articleId') articleId: string): Promise<RecipeItem | null> {
-        return this.recipeService.get(Number(dishId), Number(articleId));
-    }
-
     @Get('search/by-dish')
     async getByDish(@Query('dishId') dishId: string): Promise<RecipeItem[]> {
         return this.recipeService.getByDish(Number(dishId));
@@ -22,6 +17,11 @@ export class RecipeController {
     @Get('search/by-article')
     async getByArticle(@Query('dishId') dishId: string): Promise<RecipeItem[]> {
         return this.recipeService.getByDish(Number(dishId));
+    }
+
+    @Get(':dishId/:articleId')
+    async get(@Param('dishId') dishId: string, @Param('articleId') articleId: string): Promise<RecipeItem | null> {
+        return this.recipeService.get(Number(dishId), Number(articleId));
     }
 
     @Post()
