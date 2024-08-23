@@ -13,7 +13,7 @@ export default function List() {
     }, [selectedDish])
 
     const handleClickCreate = () => {
-        const dish: Dish = {id: 0, name: ''};
+        const dish: Dish = {id: 0, name: '', url: ''};
         setSelectedDish(dish);
     }
 
