@@ -30,22 +30,23 @@ export default function List() {
             </thead>
 
             <tbody>
-            {dishes
-                .sort((a, b) => a.name.localeCompare(b.name))
-                .map((dish: Dish, key) => (
-                    <tr key={`${key}_${dish.id}`}>
-                        <td className={' first-letter:uppercase'}>{dish.name}</td>
+                {dishes
+                    .sort((a, b) => a.name.localeCompare(b.name))
+                    .map((dish: Dish, key) => (
+                        <tr key={`${key}_${dish.id}`}>
+                            <td className={' first-letter:uppercase'}>{dish.name}</td>
 
-                        <td>
-                            <div className="flex justify-end">
-                                <div className="btn btn-secondary btn-xs btn-circle"
-                                     onClick={() => setSelectedDish(dish)}>
-                                    <i className={'fa fa-pen'} ></i>
+                            <td>
+                                <div className="flex justify-end">
+                                    <div className="btn btn-secondary btn-xs btn-circle"
+                                         onClick={() => setSelectedDish(dish)}>
+                                        <i className={'fa fa-pen'} ></i>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
-                ))}
+                            </td>
+                        </tr>
+                    ))
+                }
             </tbody>
         </table>
 
