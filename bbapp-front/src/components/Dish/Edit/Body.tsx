@@ -27,13 +27,14 @@ export default function Body() {
     }, [dish, selectedDish, recipeItems]);
 
     useEffect(() => {
-        if (dish) {
-            RecipeAPI.getByDish(dish.id).then(r => {
+        if (selectedDish) {
+            RecipeAPI.getByDish(selectedDish.id).then(r => {
                 setRecipeItems(r);
                 setCleanRecipeItems(r)
             });
+            setDish(selectedDish);
         }
-    }, [dish]);
+    }, [selectedDish]);
 
     if (!dish || !selectedDish) return <div>UNKNOWN</div>;
 
@@ -41,7 +42,14 @@ export default function Body() {
     const handleSaveDish = () => {
         if (dish.id > 0) {
             DishAPI.update(dish)
-                .then(returnedDish => setSelectedDish(returnedDish));
+                .then(returnedDish => {
+                    setSelectedDish(returnedDish)
+                    // Save tous les recipes
+                    recipeItems.forEach(recipeItems => {
+                        RecipeAPI.save(recipeItems);
+                    })
+
+                });
         } else {
             DishAPI.create({ name: dish.name, url: dish.url } as Omit<Dish, 'id'>)
                 .then(returnedDish => setSelectedDish(returnedDish));
@@ -73,7 +81,7 @@ export default function Body() {
             <>
                 <hr />
 
-                <Recipe recipeItems={cleanRecipeItems} setRecipeItems={setRecipeItems}/>
+                <Recipe recipeItems={recipeItems} setRecipeItems={setRecipeItems}/>
 
                 <div className={'flex mt-5'}>
                     <button className={'flex-1 btn btn-error btn-sm'} onClick={handleDelete}>Supprimer</button>

@@ -14,6 +14,7 @@ interface DishContextI {
     selectedDish: Dish | null,
     setSelectedDish: React.Dispatch<React.SetStateAction<Dish|null>>
     articles: Article[],
+    refreshArticles: () => void,
 }
 
 export const DishContext = createContext<DishContextI>({} as DishContextI);
@@ -21,13 +22,14 @@ export const DishContext = createContext<DishContextI>({} as DishContextI);
 export default function DishPage() {
     const [selectedDish, setSelectedDish] = useState<Dish | null>(null);
     const [articles, setArticles] = useState<Article[]>([]);
+    const refreshArticles = () => ArticleAPI.getAll().then(r => setArticles(r));
 
     useEffect(() => {
-        ArticleAPI.getAll().then(r => setArticles(r));
+        refreshArticles();
     }, []);
 
     return (
-        <DishContext.Provider value={{selectedDish, setSelectedDish, articles}}>
+        <DishContext.Provider value={{selectedDish, setSelectedDish, articles, refreshArticles}}>
             <div className={'h-screen flex flex-col gap-2 relative overflow-hidden w-full'}>
                 <div className={'bg-gradient-to-br from-primary to-primary/85 from-10% text-secondary-content font-semibold text-xl px-2 py-1 h-12 flex items-center'}>
                     Liste des plats

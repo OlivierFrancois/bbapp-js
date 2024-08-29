@@ -1,7 +1,9 @@
 import RecipeItemRow from './RecipeItem.tsx';
-import React, { useContext } from 'react';
+import React, {useContext, useState} from 'react';
 import { RecipeItem } from '../../../types/RecipeItem.tsx';
 import { DishContext } from '../../../routes/DishPage.tsx';
+import ArticleAdder from "./ArticleAdder.tsx";
+import {Article} from "../../../types/Article.tsx";
 
 interface RecipeProps {
     recipeItems: RecipeItem[]
@@ -10,24 +12,26 @@ interface RecipeProps {
 
 export default function Recipe({ recipeItems, setRecipeItems }: RecipeProps) {
     const { selectedDish } = useContext(DishContext);
-    const addRecipeItem = () => {
-        if (!selectedDish) return;
+
+    const [displayArticleAdder, setDisplayArticleAdder] = useState<boolean>(false)
+    const addRecipeItem = (article: Article | null) => {
+        if (!selectedDish || !article) return;
 
         const newRecipeItem: RecipeItem = {
             dishId: selectedDish.id,
-            articleId: 0,
+            articleId: article.id,
             quantity: 0,
-            unit: 'Unité',
+            unit: '',
         }
         setRecipeItems([...recipeItems, newRecipeItem]);
-        // TODO : marche pas
+        setDisplayArticleAdder(false);
     }
 
     return <div className={'flex flex-col gap-2'}>
         <div className="flex justify-between items-center">
             <div className="font-semibold">Liste des ingrédients</div>
 
-            <button onClick={addRecipeItem} className={'btn btn-xs btn-primary'}>Ajouter</button>
+            <button onClick={() => setDisplayArticleAdder(!displayArticleAdder)} className={'btn btn-xs btn-primary'}>Ajouter</button>
         </div>
 
         <table className={'table table-sm w-full [&_td]:p-0 [&_td]:py-1'}>
@@ -35,7 +39,10 @@ export default function Recipe({ recipeItems, setRecipeItems }: RecipeProps) {
                 {recipeItems.map((recipeItem, recipeItemKey) => (
                     <RecipeItemRow key={recipeItemKey} recipeItem={recipeItem}/>
                 ))}
+
             </tbody>
         </table>
+
+        {displayArticleAdder && <ArticleAdder handleArticleAdd={addRecipeItem} setDisplayArticleAdder={setDisplayArticleAdder}/>}
     </div>;
 }

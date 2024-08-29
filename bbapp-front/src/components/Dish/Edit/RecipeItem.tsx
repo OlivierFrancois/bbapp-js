@@ -10,7 +10,7 @@ export default function RecipeItemRow({ recipeItem }: RecipeItemProps) {
     const { articles } = useContext(DishContext);
 
     return <tr>
-        <td>{articles.find(a => a.id === recipeItem.articleId)?.name ?? 'undefined'}</td>
+        <td>{articles.find(a => a.id === recipeItem.articleId)?.name ?? ''}</td>
 
         <td>{recipeItem.quantity} {recipeItem.unit}</td>
 
@@ -19,5 +19,5 @@ export default function RecipeItemRow({ recipeItem }: RecipeItemProps) {
                 <i className={'fa fa-trash'}></i>
             </div>
         </td>
-    </tr>;
+    </tr>
 }
