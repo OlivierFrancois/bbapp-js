@@ -74,14 +74,7 @@ export class ArticleService {
 
         return this.prisma.article.update({
             where: { id },
-            data: {
-                ...data,
-                category: {
-                    connect: {
-                        id: categoryId,
-                    },
-                },
-            },
+            data,
         });
     }
 

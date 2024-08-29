@@ -10,7 +10,7 @@ export default function ArticleBody() {
     const [article, setArticle] = useState<Article|null>(selectedArticle)
 
     useEffect(() => {
-        if (article && selectedArticle && article.categoryId > 0) {
+        if (article && selectedArticle) {
             setHasChanged((article.name !== selectedArticle.name) ||
                 (article.categoryId !== selectedArticle.categoryId) ||
                 (article.sortOrder !== selectedArticle.sortOrder)
@@ -80,9 +80,9 @@ export default function ArticleBody() {
 
                 <select id="category"
                         className={'select select-primary select-sm flex-1 first-letter:uppercase'}
-                        defaultValue={article.categoryId}
+                        defaultValue={article.categoryId ?? 0}
                         onChange={handleCategoryChange}>
-                    <option value={0} disabled={true}></option>
+                    <option value={0}></option>
                     {categories
                         .sort((a, b) => a.sortOrder - b.sortOrder)
                         .map((category, keyCategory) => <option key={keyCategory} className={'first-letter:capitalize'}
