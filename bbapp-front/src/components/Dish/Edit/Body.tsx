@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import {useCallback, useContext, useEffect, useState} from 'react';
 import { DishContext } from '../../../routes/DishPage.tsx';
 import { DishAPI } from '../../../api/DishAPI.tsx';
 import Recipe from './Recipe.tsx';
@@ -16,14 +16,38 @@ export default function Body() {
 
     const [hasChanged, setHasChanged] = useState<boolean>(false);
 
+    const recipeHasChanged = useCallback(
+        (): boolean => {
+            if (cleanRecipeItems.length !== recipeItems.length) {
+                return true;
+            }
+
+            const createKey = (item: RecipeItem) => `${item.dishId}-${item.articleId}`;
+
+            const cleanMap = new Map(cleanRecipeItems.map(item => [createKey(item), item]));
+            const recipeMap = new Map(recipeItems.map(item => [createKey(item), item]));
+
+            for (const [key, cleanItem] of cleanMap.entries()) {
+                const recipeItem = recipeMap.get(key);
+
+                if (
+                    !recipeItem ||
+                    cleanItem.quantity !== recipeItem.quantity ||
+                    cleanItem.unit !== recipeItem.unit
+                ) {
+                    return true;
+                }
+            }
+            return false;
+        },
+        [cleanRecipeItems, recipeItems] // Ajoute les tableaux comme dépendances
+    );
+
     useEffect(() => {
         // Relative to dish information
         if (dish && selectedDish) {
-            setHasChanged(dish.name !== selectedDish.name);
+            setHasChanged(dish.name !== selectedDish.name || recipeHasChanged());
         }
-
-        // Relative to recipe
-        //Todo
     }, [dish, selectedDish, recipeItems]);
 
     useEffect(() => {
@@ -43,11 +67,14 @@ export default function Body() {
         if (dish.id > 0) {
             DishAPI.update(dish)
                 .then(returnedDish => {
-                    setSelectedDish(returnedDish)
-                    // Save tous les recipes
-                    recipeItems.forEach(recipeItems => {
-                        RecipeAPI.save(recipeItems);
-                    })
+                    if (recipeItems.length > 0) {
+                        recipeItems.forEach(recipeItems => {
+                            RecipeAPI.save(recipeItems)
+                                .then(() => setSelectedDish(returnedDish));
+                        })
+                    } else {
+                        setSelectedDish(returnedDish)
+                    }
 
                 });
         } else {
@@ -61,9 +88,7 @@ export default function Body() {
     };
     const handleDelete = () => {
         DishAPI.delete(selectedDish.id)
-            .then(res => {
-                if (res.message === 'deleted') setSelectedDish(null);
-            });
+            .then(() => setSelectedDish(null));
     };
 
     return <div className={'p-2 flex flex-col gap-3'}>
