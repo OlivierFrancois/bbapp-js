@@ -65,18 +65,10 @@ export default function Body() {
 
     const handleSaveDish = () => {
         if (dish.id > 0) {
-            DishAPI.update(dish)
-                .then(returnedDish => {
-                    if (recipeItems.length > 0) {
-                        recipeItems.forEach(recipeItems => {
-                            RecipeAPI.save(recipeItems)
-                                .then(() => setSelectedDish(returnedDish));
-                        })
-                    } else {
-                        setSelectedDish(returnedDish)
-                    }
-
-                });
+            DishAPI.saveWithRecipe(dish, recipeItems)
+                .then(response => {
+                    setSelectedDish(response.dish);
+                })
         } else {
             DishAPI.create({ name: dish.name, url: dish.url } as Omit<Dish, 'id'>)
                 .then(returnedDish => setSelectedDish(returnedDish));
