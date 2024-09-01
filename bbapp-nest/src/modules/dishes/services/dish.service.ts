@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { Dish, Prisma } from '@prisma/client';
+import { Dish, Prisma, RecipeItem } from '@prisma/client';
 import { PrismaService } from '../../../prisma.service';
+import { UpdateDishWithRecipeDto } from '../dtos/update-dish-with-recipe.dto';
 
 @Injectable()
 export class DishService {
@@ -37,6 +38,24 @@ export class DishService {
             where: { id },
             data,
         });
+    }
+
+    async updateWithRecipe(id: number, data: UpdateDishWithRecipeDto): Promise<{ dish: Dish; recipeItems: RecipeItem[] }> {
+        const { recipeItems, ...dishData } = data;
+
+        // Mettre à jour le dish
+        const dish = await this.update(id, dishData);
+
+        // Vider les recipeItems
+        await this.prisma.recipeItem.deleteMany({ where: { dishId: id } });
+
+        // Créer les recipeItems
+        await this.prisma.recipeItem.createMany({ data: recipeItems.filter((r) => r.dishId === id) });
+
+        return {
+            dish: dish,
+            recipeItems: await this.prisma.recipeItem.findMany({ where: { dishId: id } }),
+        };
     }
 
     async delete(id: number): Promise<void> {

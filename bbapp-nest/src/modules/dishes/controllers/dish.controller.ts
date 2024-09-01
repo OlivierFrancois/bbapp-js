@@ -1,8 +1,9 @@
 import { Controller, Get, Param, Query, Body, Post, Delete, Put } from '@nestjs/common';
 import { DishService } from '../services/dish.service';
-import { Dish } from '@prisma/client';
+import { Dish, RecipeItem } from '@prisma/client';
 import { CreateDishDto } from '../dtos/create-dish.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { UpdateDishWithRecipeDto } from '../dtos/update-dish-with-recipe.dto';
 
 @ApiTags('Dishes')
 @Controller('api/dish')
@@ -22,6 +23,14 @@ export class DishController {
     @Get()
     async getAll(): Promise<Dish[]> {
         return this.dishService.getAll();
+    }
+
+    @Post(':id/with-recipe')
+    async updateWithRecipe(
+        @Param('id') id: string,
+        @Body() updateDishRecipeDto: UpdateDishWithRecipeDto
+    ): Promise<{ dish: Dish; recipeItems: RecipeItem[] }> {
+        return this.dishService.updateWithRecipe(Number(id), updateDishRecipeDto);
     }
 
     @Post()

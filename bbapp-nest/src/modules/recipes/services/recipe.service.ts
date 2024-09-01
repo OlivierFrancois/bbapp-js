@@ -42,6 +42,10 @@ export class RecipeService {
         });
     }
 
+    async deleteByDish(dishId: number): Promise<void> {
+        await this.prisma.recipeItem.deleteMany({ where: { dishId: dishId } });
+    }
+
     async delete(dishId: number, articleId: number): Promise<void> {
         await this.prisma.recipeItem.delete({
             where: {
