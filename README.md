@@ -1,5 +1,8 @@
 TODO :
-* Edit du nom d'un plat
-* Probleme de zoom sur mobile quand on saisie un plat
-* Full height marche pas sur mobile
+* [FRONT + BACK] Endpoint pour enregistrement d'un dish avec ses recipeItems + intégration front
+* [FRONT + BACK] Permettre l'ajout de tag sur un dish + dans la liste des dishes, filtrer/trier par tags
+* [FRONT] Dans le dishSchedule, bouton pour vider des cases
+* [FRONT] Dans le dishSchedule, bouton pour dupliquer des cases
+* [FRONT] Refactoriser les dishes
+* [FRONT] Nouveau design de l'app + version desktop
 
