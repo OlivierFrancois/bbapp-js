@@ -4,7 +4,6 @@ import { RecipeItem } from '../../../types/RecipeItem.tsx';
 import { DishContext } from '../../../routes/DishPage.tsx';
 import ArticleAdder from "./ArticleAdder.tsx";
 import {Article} from "../../../types/Article.tsx";
-import {RecipeAPI} from "../../../api/RecipeAPI.tsx";
 
 interface RecipeProps {
     recipeItems: RecipeItem[]
@@ -27,13 +26,19 @@ export default function Recipe({ recipeItems, setRecipeItems }: RecipeProps) {
         setRecipeItems([...recipeItems, newRecipeItem]);
         setDisplayArticleAdder(false);
     }
+    const updateRecipeItem = (updatedRecipeItem: RecipeItem) => {
+        setRecipeItems((prevRecipeItems) =>
+            prevRecipeItems.map((prevRecipeItem) =>
+                prevRecipeItem.dishId === updatedRecipeItem.dishId && prevRecipeItem.articleId === updatedRecipeItem.articleId
+                    ? { ...prevRecipeItem, ...updatedRecipeItem }
+                    : prevRecipeItem
+            )
+        );
+    }
     const removeRecipeItem = (recipeItem: RecipeItem) => {
-        RecipeAPI.delete(recipeItem.dishId, recipeItem.articleId)
-            .then(() => {
-                setRecipeItems((prevRecipeItems) =>
-                    prevRecipeItems.filter(r => r.dishId === recipeItem.dishId && r.articleId !== recipeItem.articleId)
-                );
-            })
+        setRecipeItems((prevRecipeItems) =>
+            prevRecipeItems.filter(r => r.dishId === recipeItem.dishId && r.articleId !== recipeItem.articleId)
+        );
     }
 
     return <div className={'flex flex-col gap-2'}>
@@ -46,7 +51,7 @@ export default function Recipe({ recipeItems, setRecipeItems }: RecipeProps) {
         <table className={'table table-sm w-full [&_td]:p-0 [&_td]:py-1'}>
             <tbody>
                 {recipeItems.map((recipeItem, recipeItemKey) => (
-                    <RecipeItemRow key={recipeItemKey} recipeItem={recipeItem} handleRemoveRecipeItem={removeRecipeItem}/>
+                    <RecipeItemRow key={recipeItemKey} recipeItem={recipeItem} handleRemoveRecipeItem={removeRecipeItem} handleUpdate={updateRecipeItem}/>
                 ))}
 
             </tbody>
