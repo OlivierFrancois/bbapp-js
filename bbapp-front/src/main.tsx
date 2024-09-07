@@ -6,13 +6,13 @@ import {
 } from "react-router-dom";
 import './index.css'
 import ErrorPage from "./error-page";
-import DishSchedulePage from "./routes/DishSchedulePage.tsx";
-import Root from "./routes/Root.tsx";
-import HomePage from "./routes/HomePage.tsx";
+import DishSchedulePage from "./pages/DishSchedule/dish-schedule.page.tsx";
+import Root from "./root.tsx";
+import HomePage from "./pages/home/home.page.tsx";
 import dayjs from "dayjs";
 import weekOfYear from 'dayjs/plugin/weekOfYear';
-import DishPage from "./routes/DishPage.tsx";
-import ArticlePage from "./routes/ArticlePage.tsx";
+import DishPage from "./pages/Dish/dish.page.tsx";
+import ArticlePage from "./pages/Article/article.page.tsx";
 
 dayjs.locale('fr');
 dayjs.extend(weekOfYear);
