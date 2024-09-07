@@ -4,12 +4,12 @@ import dayjs from "dayjs";
 import {MoonIcon, SunIcon} from "@heroicons/react/16/solid";
 import {DishScheduleAPI} from "../../../api/DishScheduleAPI.tsx";
 import {DishScheduleItem} from "../../../types/DishScheduleItem.tsx";
-import CelleComponent from "./celle.component.tsx";
+import Cell from "./cell.component.tsx";
 
 const moments = ['midi', 'soir'];
 const cellHeight = 'h-[5.5rem]';
 
-export default function ScheduleComponent() {
+export default function Schedule() {
     const {date, selectedCell, swapMod, setSwapMod, swapItem1, swapItem2, setSwapItem1, setSwapItem2} = useContext(DishScheduleContext);
 
     const [dishScheduleItems, setDishScheduleItems] = useState<DishScheduleItem[]>([]);
@@ -111,7 +111,7 @@ export default function ScheduleComponent() {
 
                             {moments.map((moment, key) => (
                                 <td key={key} className={`border-l !p-0 ${cellHeight}`}>
-                                    <CelleComponent
+                                    <Cell
                                         key={d.format('YYYY-MM-DD') + key}
                                         date={d.format('YYYY-MM-DD')}
                                         moment={moment}

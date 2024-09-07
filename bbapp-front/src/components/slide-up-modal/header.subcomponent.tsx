@@ -6,7 +6,7 @@ interface HeaderProps {
     headerContent: ReactNode,
 }
 
-export default function Header({handleClose, headerContent}: HeaderProps) {
+export default function HeaderSubcomponent({handleClose, headerContent}: HeaderProps) {
     return (
         <div className={'h-12 p-2 bg-stone-50 flex justify-between items-center'}>
             <div className="flex flex-col">

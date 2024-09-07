@@ -2,7 +2,7 @@ import {useContext, useMemo} from "react";
 import {DishScheduleContext} from "../dish-schedule.page.tsx";
 import dayjs from "dayjs";
 
-export default function DateSelectComponent() {
+export default function DateSelect() {
     const {date, setDate} = useContext(DishScheduleContext);
 
     const handleDateChange = (ymd: string) => {

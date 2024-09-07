@@ -1,12 +1,12 @@
-import DateSelectComponent from "./components/date-select.component.tsx";
-import ScheduleComponent from "./components/schedule.component.tsx";
+import DateSelect from "./components/date.select.component.tsx";
+import Schedule from "./components/schedule.component.tsx";
 import React, {createContext, useState} from "react";
 import dayjs from "dayjs";
 import 'dayjs/locale/fr';
 import {DishScheduleItem} from "../../types/DishScheduleItem.tsx";
-import SlideUpModal from "../../components/SlideUpModal/SlideUpModal.tsx";
-import HeaderComponent from "./components/edit/header.component.tsx";
-import BodyComponent from "./components/edit/body.component.tsx";
+import Header from "./components/edit/header.component.tsx";
+import Body from "./components/edit/body.component.tsx";
+import SlideUpModal from "../../components/slide-up-modal/slide-up-modal.component.tsx";
 dayjs.locale('fr');
 
 interface SelectedCell {
@@ -53,15 +53,15 @@ export default function DishSchedulePage() {
     return (
         <DishScheduleContext.Provider value={mainContext}>
             <div className={'min-h-screen flex flex-col relative overflow-hidden'}>
-                <DateSelectComponent/>
+                <DateSelect/>
 
-                <ScheduleComponent/>
+                <Schedule/>
 
                 <SlideUpModal
                     displayCondition={selectedCell !== null}
                     handleClose={() => {setSelectedCell(null)}}
-                    headerContent={<HeaderComponent/>}
-                    bodyContent={<BodyComponent />}
+                    headerContent={<Header/>}
+                    bodyContent={<Body />}
                 />
                 <div className={'h-[4.5rem]'}></div>
             </div>

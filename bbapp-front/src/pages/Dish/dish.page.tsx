@@ -3,11 +3,11 @@ import 'dayjs/locale/fr';
 import ListComponent from "./components/list.component.tsx";
 import React, { createContext, useEffect, useState } from 'react';
 import {Dish} from "../../types/Dish.tsx";
-import SlideUpModal from "../../components/SlideUpModal/SlideUpModal.tsx";
-import DishHeaderComponent from "./components/edit/dish-header.component.tsx";
-import BodyComponent from "./components/edit/body.component.tsx";
+import DishHeader from "./components/edit/dish-header.component.tsx";
+import Body from "./components/edit/body.component.tsx";
 import { Article } from '../../types/Article.tsx';
 import { ArticleAPI } from '../../api/ArticleAPI.tsx';
+import SlideUpModal from "../../components/slide-up-modal/slide-up-modal.component.tsx";
 dayjs.locale('fr');
 
 interface DishContextI {
@@ -42,8 +42,8 @@ export default function DishPage() {
                     handleClose={() => {
                         setSelectedDish(null)
                     }}
-                    headerContent={<DishHeaderComponent/>}
-                    bodyContent={<BodyComponent/>}
+                    headerContent={<DishHeader/>}
+                    bodyContent={<Body/>}
                 />
             </div>
         </DishContext.Provider>

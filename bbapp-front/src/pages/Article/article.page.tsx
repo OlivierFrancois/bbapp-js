@@ -1,16 +1,16 @@
 import dayjs from "dayjs";
 import 'dayjs/locale/fr';
-import ListComponent from "./components/list.component.tsx";
+import List from "./components/list.component.tsx";
 import React, {createContext, useEffect, useState} from "react";
-import SlideUpModal from "../../components/SlideUpModal/SlideUpModal.tsx";
 import {Article} from "../../types/Article.tsx";
-import ArticleHeaderComponent from "./components/edit/article-header.component.tsx";
-import ArticleBodyComponent from "./components/edit/article-body.component.tsx";
+import ArticleHeader from "./components/edit/article-header.component.tsx";
+import ArticleBody from "./components/edit/article-body.component.tsx";
 import {ArticleCategory} from "../../types/ArticleCategory.tsx";
 import {ArticleAPI} from "../../api/ArticleAPI.tsx";
 import {ArticleCategoryAPI} from "../../api/ArticleCategoryAPI.tsx";
-import CategoryBodyComponent from "./components/edit/category-body.component.tsx";
-import CategoryHeaderComponent from "./components/edit/category-header.component.tsx";
+import CategoryBody from "./components/edit/category-body.component.tsx";
+import CategoryHeader from "./components/edit/category-header.component.tsx";
+import SlideUpModal from "../../components/slide-up-modal/slide-up-modal.component.tsx";
 dayjs.locale('fr');
 
 interface ArticleContextI {
@@ -61,15 +61,15 @@ export default function ArticlePage() {
                     <button className={'btn btn-primary btn-sm'} onClick={handleArticleCreate}>Nouvel article</button>
                 </div>
 
-                <ListComponent/>
+                <List/>
 
                 <SlideUpModal
                     displayCondition={selectedArticle !== null}
                     handleClose={() => {
                         setSelectedArticle(null)
                     }}
-                    headerContent={<ArticleHeaderComponent/>}
-                    bodyContent={<ArticleBodyComponent/>}
+                    headerContent={<ArticleHeader/>}
+                    bodyContent={<ArticleBody/>}
                 />
 
                 <SlideUpModal
@@ -77,8 +77,8 @@ export default function ArticlePage() {
                     handleClose={() => {
                         setSelectedCategory(null)
                     }}
-                    headerContent={<CategoryHeaderComponent/>}
-                    bodyContent={<CategoryBodyComponent/>}
+                    headerContent={<CategoryHeader/>}
+                    bodyContent={<CategoryBody/>}
                 />
             </div>
         </ArticleContext.Provider>

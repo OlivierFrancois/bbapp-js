@@ -7,7 +7,7 @@ interface DishInformationsProps {
     setDish: React.Dispatch<React.SetStateAction<Dish | null>>
 }
 
-export default function DishInformationComponent({dish, setDish} : DishInformationsProps) {
+export default function DishInformation({dish, setDish} : DishInformationsProps) {
     const { selectedDish } = useContext(DishContext);
 
     if (!selectedDish || !dish) return <div>UNKNOWN</div>;

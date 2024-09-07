@@ -8,7 +8,7 @@ interface CellProps {
     dishScheduleItem?: DishScheduleItem,
 }
 
-export default function CelleComponent({date, moment, dishScheduleItem}: CellProps) {
+export default function Cell({date, moment, dishScheduleItem}: CellProps) {
     const {setSelectedCell, swapMod, swapItem1, setSwapItem1, swapItem2, setSwapItem2} = useContext(DishScheduleContext)
     const [isSwapping, setIsSwapping] = useState<boolean>(false)
 

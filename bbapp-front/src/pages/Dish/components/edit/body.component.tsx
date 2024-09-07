@@ -1,13 +1,13 @@
 import {useCallback, useContext, useEffect, useState} from 'react';
 import { DishContext } from '../../dish.page.tsx';
 import { DishAPI } from '../../../../api/DishAPI.tsx';
-import RecipeComponent from './recipe.component.tsx';
-import DishInformationComponent from './dish-information.component.tsx';
+import Recipe from './recipe.component.tsx';
+import DishInformation from './dish-information.component.tsx';
 import { Dish } from '../../../../types/Dish.tsx';
 import { RecipeItem } from '../../../../types/RecipeItem.tsx';
 import { RecipeAPI } from '../../../../api/RecipeAPI.tsx';
 
-export default function BodyComponent() {
+export default function Body() {
     const { selectedDish, setSelectedDish } = useContext(DishContext);
     const [cleanRecipeItems, setCleanRecipeItems] = useState<(RecipeItem)[]>([]);
 
@@ -92,13 +92,13 @@ export default function BodyComponent() {
             </button>
         </div>
 
-        <DishInformationComponent dish={dish} setDish={setDish} />
+        <DishInformation dish={dish} setDish={setDish} />
 
         {selectedDish.id > 0 &&
             <>
                 <hr />
 
-                <RecipeComponent recipeItems={recipeItems} setRecipeItems={setRecipeItems}/>
+                <Recipe recipeItems={recipeItems} setRecipeItems={setRecipeItems}/>
 
                 <div className={'flex mt-5'}>
                     <button className={'flex-1 btn btn-error btn-sm'} onClick={handleDelete}>Supprimer</button>

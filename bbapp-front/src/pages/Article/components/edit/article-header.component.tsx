@@ -1,7 +1,7 @@
 import {useContext} from "react";
 import {ArticleContext} from "../../article.page.tsx";
 
-export default function ArticleHeaderComponent() {
+export default function ArticleHeader() {
     const {selectedArticle} = useContext(ArticleContext);
 
     if (!selectedArticle) return <div>UNKNOWN</div>

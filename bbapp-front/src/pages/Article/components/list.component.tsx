@@ -2,7 +2,7 @@ import {useContext} from "react";
 import {Article} from "../../../types/Article.tsx";
 import {ArticleContext} from "../article.page.tsx";
 
-export default function ListComponent() {
+export default function List() {
     const {setSelectedArticle, setSelectedCategory,categories, articles} = useContext(ArticleContext);
 
     const handleArticleCreate = (categoryId: number) => {

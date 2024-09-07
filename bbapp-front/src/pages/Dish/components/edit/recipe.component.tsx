@@ -2,7 +2,7 @@ import RecipeItemRow from './recipe-item.component.tsx';
 import React, {useContext, useState} from 'react';
 import { RecipeItem } from '../../../../types/RecipeItem.tsx';
 import { DishContext } from '../../dish.page.tsx';
-import DishAdderComponent from "./dish-adder.component.tsx";
+import DishAdder from "./dish-adder.component.tsx";
 import {Article} from "../../../../types/Article.tsx";
 
 interface RecipeProps {
@@ -10,7 +10,7 @@ interface RecipeProps {
     setRecipeItems: React.Dispatch<React.SetStateAction<RecipeItem[]>>
 }
 
-export default function RecipeComponent({ recipeItems, setRecipeItems }: RecipeProps) {
+export default function Recipe({ recipeItems, setRecipeItems }: RecipeProps) {
     const { selectedDish } = useContext(DishContext);
 
     const [displayArticleAdder, setDisplayArticleAdder] = useState<boolean>(false)
@@ -57,6 +57,6 @@ export default function RecipeComponent({ recipeItems, setRecipeItems }: RecipeP
             </tbody>
         </table>
 
-        {displayArticleAdder && <DishAdderComponent handleArticleAdd={addRecipeItem} setDisplayArticleAdder={setDisplayArticleAdder}/>}
+        {displayArticleAdder && <DishAdder handleArticleAdd={addRecipeItem} setDisplayArticleAdder={setDisplayArticleAdder}/>}
     </div>;
 }

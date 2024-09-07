@@ -6,7 +6,7 @@ interface DishAdderProps {
     handleDishSave: (dish: Dish | null) => void
 }
 
-export default function DishAdderComponent({handleDishSave}: DishAdderProps) {
+export default function DishAdder({handleDishSave}: DishAdderProps) {
     const [dishInput, setDishInput] = useState<string>('')
     const [dishes, setDishes] = useState<Dish[]>([])
 

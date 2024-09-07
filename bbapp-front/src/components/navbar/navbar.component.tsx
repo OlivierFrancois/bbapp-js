@@ -26,7 +26,7 @@ const NavbarItems = [
     },
 ];
 
-export default function Navbar() {
+export default function NavbarComponent() {
 
     return <React.Fragment>
         <nav className={`navbar-custom navbar-custom-mobile`}>

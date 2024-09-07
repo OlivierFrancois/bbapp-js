@@ -1,4 +1,4 @@
-import Navbar from "./components/Navbar/Navbar.tsx";
+import NavbarComponent from "./components/navbar/navbar.component.tsx";
 import {Outlet} from "react-router-dom";
 import React, {createContext, useState} from "react";
 
@@ -19,7 +19,7 @@ export default function Root() {
                 <Outlet />
             </div>
 
-            <Navbar />
+            <NavbarComponent />
         </AppContext.Provider>
     );
 }

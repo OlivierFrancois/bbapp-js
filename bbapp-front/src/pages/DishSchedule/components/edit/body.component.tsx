@@ -1,11 +1,11 @@
 import {useContext, useEffect, useRef, useState} from "react";
 import {DishScheduleContext} from "../../dish-schedule.page.tsx";
 import {Dish} from "../../../../types/Dish.tsx";
-import DishItemComponent from "./dish-item.component.tsx";
-import DishAdderComponent from "./dish-adder.component.tsx";
+import DishItem from "./dish.item.component.tsx";
+import DishAdder from "./dish.adder.component.tsx";
 import {DishScheduleAPI} from "../../../../api/DishScheduleAPI.tsx";
 
-export default function BodyComponent() {
+export default function Body() {
     const {selectedCell} = useContext(DishScheduleContext)
 
     const [dishes, setDishes] = useState<Dish[]>(selectedCell?.dishScheduleItem?.dishes ?? [])
@@ -60,9 +60,9 @@ export default function BodyComponent() {
                 </div>
 
                 <div className={'flex flex-col divide-y'}>
-                    {dishes.map((dish, k) => <DishItemComponent key={k} handleDishRemove={handleDishRemove} dish={dish}/>)}
+                    {dishes.map((dish, k) => <DishItem key={k} handleDishRemove={handleDishRemove} dish={dish}/>)}
 
-                    {dishAdder && <DishAdderComponent handleDishSave={handleDishSave}/>}
+                    {dishAdder && <DishAdder handleDishSave={handleDishSave}/>}
                 </div>
             </div>
         </div>

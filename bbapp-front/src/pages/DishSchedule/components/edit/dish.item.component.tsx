@@ -5,7 +5,7 @@ interface Props {
     handleDishRemove: (dish: Dish) => void
 }
 
-export default function DishItemComponent({dish, handleDishRemove}: Props) {
+export default function DishItem({dish, handleDishRemove}: Props) {
 
     return (
         <div className="flex items-center justify-between py-1">

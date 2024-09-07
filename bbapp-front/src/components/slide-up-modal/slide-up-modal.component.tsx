@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "./Header.tsx";
+import HeaderSubcomponent from "./header.subcomponent.tsx";
 import {ReactNode} from "react";
 
 const AREA_HEIGHT = '80%';
@@ -28,7 +28,7 @@ export default function SlideUpModal({displayCondition, handleClose, headerConte
                  }}>
                 {displayCondition &&
                     <React.Fragment>
-                        <Header handleClose={handleClose} headerContent={headerContent}/>
+                        <HeaderSubcomponent handleClose={handleClose} headerContent={headerContent}/>
 
                         <hr/>
 

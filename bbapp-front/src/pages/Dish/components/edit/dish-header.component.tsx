@@ -1,7 +1,7 @@
 import {useContext} from "react";
 import {DishContext} from "../../dish.page.tsx";
 
-export default function DishHeaderComponent() {
+export default function DishHeader() {
     const {selectedDish} = useContext(DishContext);
 
     if (!selectedDish) return <div>UNKNOWN</div>
