@@ -1,13 +1,13 @@
 import React, {useContext, useEffect, useState} from "react";
 import {ArticleContext} from "../../../routes/ArticlePage.tsx";
-import {Category} from "../../../types/Category.tsx";
-import {CategoryAPI} from "../../../api/CategoryAPI.tsx";
+import {ArticleCategory} from "../../../types/ArticleCategory.tsx";
+import {ArticleCategoryAPI} from "../../../api/ArticleCategoryAPI.tsx";
 
 export default function CategoryBody() {
     const { selectedCategory, setSelectedCategory } = useContext(ArticleContext);
 
     const [hasChanged, setHasChanged] = useState<boolean>(false)
-    const [category, setCategory] = useState<Category|null>(selectedCategory)
+    const [category, setCategory] = useState<ArticleCategory|null>(selectedCategory)
 
     useEffect(() => {
         if (category && selectedCategory) {
@@ -29,19 +29,19 @@ export default function CategoryBody() {
     }
     const handleSaveCategory = () => {
         if (category.id > 0) {
-            CategoryAPI.update(category)
+            ArticleCategoryAPI.update(category)
                 .then(returnedCategory => setSelectedCategory(returnedCategory));
         } else {
-            const newCategory : Omit<Category, 'id'> = {
+            const newCategory : Omit<ArticleCategory, 'id'> = {
                 name: category.name,
                 sortOrder: category.sortOrder,
             }
-            CategoryAPI.create(newCategory)
+            ArticleCategoryAPI.create(newCategory)
                 .then(returnedCategory => setSelectedCategory(returnedCategory));
         }
     }
     const handleDelete = () => {
-        CategoryAPI.delete(selectedCategory.id)
+        ArticleCategoryAPI.delete(selectedCategory.id)
             .then(res => {
                 if (res.message === 'deleted') setSelectedCategory(null);
             })
