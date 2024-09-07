@@ -5,63 +5,75 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+    provider = "mysql"
+    url      = env("DATABASE_URL")
 }
 
 model Dish {
-  id                Int                @id @default(autoincrement())
-  createdAt         DateTime           @default(now())
-  updatedAt         DateTime           @updatedAt
-  name              String
-  url               String
-  dishScheduleItems DishScheduleItem[]
-  recipeItems       RecipeItem[]
+    id             Int      @id @default(autoincrement())
+    createdAt      DateTime @default(now())
+    updatedAt      DateTime @updatedAt
+    name           String
+    url            String
+    dishCategoryId Int?
+
+    dishCategory      DishCategory?      @relation(fields: [dishCategoryId], references: [id])
+    dishScheduleItems DishScheduleItem[]
+    recipeItems       RecipeItem[]
+}
+
+model DishCategory {
+    id        Int      @id @default(autoincrement())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    name      String
+    sortOrder Int?
+    dishes    Dish[]
 }
 
 model DishScheduleItem {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  date      DateTime
-  moment    String
-  dishes    Dish[]
+    id        Int      @id @default(autoincrement())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    date      DateTime
+    moment    String
+    dishes    Dish[]
 }
 
 model Article {
-  id          Int          @id @default(autoincrement())
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  name        String
-  sortOrder   Int?
-  category    Category?    @relation(fields: [categoryId], references: [id], onDelete: SetNull)
-  categoryId  Int?
-  recipeItems RecipeItem[]
+    id          Int              @id @default(autoincrement())
+    createdAt   DateTime         @default(now())
+    updatedAt   DateTime         @updatedAt
+    name        String
+    sortOrder   Int?
+    category    ArticleCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+    categoryId  Int?
+    recipeItems RecipeItem[]
 }
 
-model Category {
-  id        Int       @id @default(autoincrement())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  name      String
-  sortOrder Int?
-  articles  Article[]
+model ArticleCategory {
+    id        Int       @id @default(autoincrement())
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    name      String
+    sortOrder Int?
+    articles  Article[]
 }
 
 model RecipeItem {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  dishId    Int
-  dish      Dish     @relation(fields: [dishId], references: [id], onDelete: Cascade)
-  articleId Int
-  article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
-  quantity  Int
-  unit      String
+    id        Int      @id @default(autoincrement())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    dishId    Int
+    dish      Dish     @relation(fields: [dishId], references: [id], onDelete: Cascade)
+    articleId Int
+    article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+    quantity  Int
+    unit      String
 
-  @@unique([dishId, articleId])
+    @@unique([dishId, articleId])
 }

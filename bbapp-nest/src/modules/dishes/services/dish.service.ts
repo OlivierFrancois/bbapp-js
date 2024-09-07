@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Dish, Prisma, RecipeItem } from '@prisma/client';
 import { PrismaService } from '../../../prisma.service';
 import { UpdateDishWithRecipeDto } from '../dtos/update-dish-with-recipe.dto';
+import { CreateDishDto } from '../dtos/create-dish.dto';
 
 @Injectable()
 export class DishService {
@@ -27,10 +28,8 @@ export class DishService {
         });
     }
 
-    async create(data: Prisma.DishCreateInput): Promise<Dish> {
-        return this.prisma.dish.create({
-            data,
-        });
+    async create(createDishDto: CreateDishDto): Promise<Dish> {
+        return this.prisma.dish.create({ data: createDishDto });
     }
 
     async update(id: number, data: Prisma.DishUpdateInput): Promise<Dish> {

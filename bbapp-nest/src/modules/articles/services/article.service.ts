@@ -32,7 +32,7 @@ export class ArticleService {
 
         let categoryConnect = undefined;
         if (categoryId) {
-            const categoryExists = await this.prisma.category.findUnique({
+            const categoryExists = await this.prisma.articleCategory.findUnique({
                 where: { id: categoryId },
             });
 
@@ -57,7 +57,7 @@ export class ArticleService {
 
         let categoryConnect = undefined;
         if (categoryId) {
-            const categoryExists = await this.prisma.category.findUnique({
+            const categoryExists = await this.prisma.articleCategory.findUnique({
                 where: { id: categoryId },
             });
 

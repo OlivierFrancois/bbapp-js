@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateDishDto {
     @IsNotEmpty()
@@ -8,4 +8,7 @@ export class CreateDishDto {
     @IsNotEmpty()
     @IsString()
     url: string;
+
+    @IsNumber()
+    dishCategoryId?: number;
 }
