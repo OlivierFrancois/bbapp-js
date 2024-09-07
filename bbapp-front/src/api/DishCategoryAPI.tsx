@@ -46,7 +46,7 @@ export class DishCategoryAPI {
         })
     }
 
-    static async delete(categoryId: number): Promise<{message: string}>{
+    static async delete(categoryId: number): Promise<void>{
         return axios.delete(URL_DELETE.replace(':categoryId', categoryId.toString()))
             .then(res => {
                 return res.data

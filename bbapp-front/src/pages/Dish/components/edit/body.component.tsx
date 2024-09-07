@@ -44,9 +44,8 @@ export default function Body() {
     );
 
     useEffect(() => {
-        // Relative to dish information
         if (dish && selectedDish) {
-            setHasChanged(dish.name !== selectedDish.name || recipeHasChanged());
+            setHasChanged(dish.name !== selectedDish.name || dish.url !== selectedDish.url || dish.dishCategoryId !== selectedDish.dishCategoryId || recipeHasChanged());
         }
     }, [dish, selectedDish, recipeItems]);
 
@@ -62,7 +61,6 @@ export default function Body() {
 
     if (!dish || !selectedDish) return <div>UNKNOWN</div>;
 
-
     const handleSaveDish = () => {
         if (dish.id > 0) {
             DishAPI.saveWithRecipe(dish, recipeItems)
@@ -70,7 +68,8 @@ export default function Body() {
                     setSelectedDish(response.dish);
                 })
         } else {
-            DishAPI.create({ name: dish.name, url: dish.url } as Omit<Dish, 'id'>)
+            const {id, ...payload} = dish;
+            DishAPI.create(payload as Omit<Dish, 'id'>)
                 .then(returnedDish => setSelectedDish(returnedDish));
         }
     };
