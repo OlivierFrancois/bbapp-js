@@ -3,7 +3,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/
 import { DishCategoryService } from '../services/dish-category.service';
 import { CreateDishCategoryDto } from '../dtos/create-dish-category.dto';
 
-@ApiTags('Dish Categories')
+@ApiTags('Dish categories')
 @Controller('api/dish-category')
 export class DishCategoryController {
     constructor(private readonly categoryService: DishCategoryService) {}

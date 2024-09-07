@@ -3,8 +3,8 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/
 import { ArticleCategoryService } from '../services/article-category.service';
 import { CreateArticleCategoryDto } from '../dtos/create-article-category.dto';
 
-@ApiTags('Categories')
-@Controller('api/category')
+@ApiTags('Article categories')
+@Controller('api/article-category')
 export class ArticleCategoryController {
     constructor(private readonly categoryService: ArticleCategoryService) {}
 
