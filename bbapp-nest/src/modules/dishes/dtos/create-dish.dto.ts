@@ -5,9 +5,8 @@ export class CreateDishDto {
     @IsString()
     name: string;
 
-    @IsNotEmpty()
     @IsString()
-    url: string;
+    url?: string;
 
     @IsNumber()
     dishCategoryId?: number;

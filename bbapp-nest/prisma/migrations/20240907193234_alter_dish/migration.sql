@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `Dish` MODIFY `url` VARCHAR(191) NULL;

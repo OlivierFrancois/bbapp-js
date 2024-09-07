@@ -18,7 +18,7 @@ model Dish {
     createdAt      DateTime @default(now())
     updatedAt      DateTime @updatedAt
     name           String
-    url            String
+    url            String?
     dishCategoryId Int?
 
     dishCategory      DishCategory?      @relation(fields: [dishCategoryId], references: [id])
