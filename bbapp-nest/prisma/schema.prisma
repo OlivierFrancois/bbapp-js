@@ -31,6 +31,7 @@ model DishTag {
     updatedAt DateTime @updatedAt
     name      String
     sortOrder Int?
+    color     String?
 
     dishes Dish[]
 }

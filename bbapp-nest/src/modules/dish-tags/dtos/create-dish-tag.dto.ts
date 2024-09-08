@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class CreateDishCategoryDto {
+export class CreateDishTagDto {
     @IsNotEmpty()
     @IsString()
     name: string;
@@ -8,4 +8,8 @@ export class CreateDishCategoryDto {
     @IsOptional()
     @IsNumber()
     sortOrder?: number;
+
+    @IsOptional()
+    @IsNumber()
+    color?: string;
 }

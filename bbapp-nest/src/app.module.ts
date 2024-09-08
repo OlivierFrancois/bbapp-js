@@ -6,10 +6,10 @@ import { DishScheduleModule } from './modules/dish-schedule/dish-schedule.module
 import { ArticleModule } from './modules/articles/article.module';
 import { RecipeModule } from './modules/recipes/recipe.module';
 import { ArticleCategoryModule } from './modules/article-categories/article-category.module';
-import { DishCategoryModule } from './modules/dish-category/dish-category.module';
+import { DishTagModule } from './modules/dish-tags/dish-tag.module';
 
 @Module({
-    imports: [DishModule, DishCategoryModule, DishScheduleModule, ArticleModule, ArticleCategoryModule, RecipeModule],
+    imports: [DishModule, DishTagModule, DishScheduleModule, ArticleModule, ArticleCategoryModule, RecipeModule],
     controllers: [AppController],
     providers: [AppService],
 })

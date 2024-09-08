@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsArray, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateDishDto {
     @IsNotEmpty()
@@ -8,6 +8,6 @@ export class CreateDishDto {
     @IsString()
     url?: string;
 
-    @IsNumber()
-    dishCategoryId?: number;
+    @IsArray()
+    dishTagIds?: number[];
 }

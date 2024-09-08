@@ -1,12 +1,12 @@
 import { ApiTags } from '@nestjs/swagger';
 import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
-import { DishCategoryService } from '../services/dish-category.service';
-import { CreateDishCategoryDto } from '../dtos/create-dish-category.dto';
+import { DishTagService } from '../services/dish-tag.service';
+import { CreateDishTagDto } from '../dtos/create-dish-tag.dto';
 
-@ApiTags('Dish categories')
-@Controller('api/dish-category')
-export class DishCategoryController {
-    constructor(private readonly categoryService: DishCategoryService) {}
+@ApiTags('Dish tags')
+@Controller('api/dish-tag')
+export class DishTagController {
+    constructor(private readonly categoryService: DishTagService) {}
 
     @Get('search/by-name')
     async getByName(@Query('name') name: string) {
@@ -24,12 +24,12 @@ export class DishCategoryController {
     }
 
     @Post()
-    async create(@Body() data: CreateDishCategoryDto) {
+    async create(@Body() data: CreateDishTagDto) {
         return this.categoryService.create(data);
     }
 
     @Put(':id')
-    async update(@Param('id') id: string, @Body() data: CreateDishCategoryDto) {
+    async update(@Param('id') id: string, @Body() data: CreateDishTagDto) {
         return this.categoryService.update(Number(id), data);
     }
 
