@@ -14,25 +14,25 @@ datasource db {
 }
 
 model Dish {
-    id             Int      @id @default(autoincrement())
-    createdAt      DateTime @default(now())
-    updatedAt      DateTime @updatedAt
-    name           String
-    url            String?
-    dishCategoryId Int?
+    id        Int      @id @default(autoincrement())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    name      String
+    url       String?
 
-    dishCategory      DishCategory?      @relation(fields: [dishCategoryId], references: [id])
+    dishTags          DishTag[]
     dishScheduleItems DishScheduleItem[]
     recipeItems       RecipeItem[]
 }
 
-model DishCategory {
+model DishTag {
     id        Int      @id @default(autoincrement())
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     name      String
     sortOrder Int?
-    dishes    Dish[]
+
+    dishes Dish[]
 }
 
 model DishScheduleItem {
