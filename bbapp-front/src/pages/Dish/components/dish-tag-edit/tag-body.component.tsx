@@ -1,49 +1,53 @@
 import React, {useContext, useEffect, useState} from "react";
 import {DishContext} from "../../dish.page.tsx";
-import {DishCategory} from "../../../../types/DishCategory.tsx";
-import {DishCategoryAPI} from "../../../../api/DishCategoryAPI.tsx";
+import {DishTag} from "../../../../types/DishTag.tsx";
+import {DishTagAPI} from "../../../../api/DishTagAPI.tsx";
 
-export default function CategoryBody() {
-    const { selectedCategory, setSelectedCategory } = useContext(DishContext);
+export default function TagBody() {
+    const { selectedTag, setSelectedTag } = useContext(DishContext);
 
     const [hasChanged, setHasChanged] = useState<boolean>(false)
-    const [dishCategory, setDishCategory] = useState<DishCategory|null>(selectedCategory)
+    const [dishTag, setDishTag] = useState<DishTag|null>(selectedTag)
 
     useEffect(() => {
-        if (dishCategory && selectedCategory) {
-            setHasChanged(dishCategory.name !== selectedCategory.name || dishCategory.sortOrder !== selectedCategory.sortOrder)
+        if (dishTag && selectedTag) {
+            setHasChanged(dishTag.name !== selectedTag.name || dishTag.sortOrder !== selectedTag.sortOrder || dishTag.color !== selectedTag.color)
         }
-    }, [dishCategory, selectedCategory]);
+    }, [dishTag, selectedTag]);
 
-    if (!selectedCategory || !dishCategory) return <div>UNKNOWN</div>
+    if (!selectedTag || !dishTag) return <div>UNKNOWN</div>
 
     const handleCategoryNameChange = ({target}: React.ChangeEvent<HTMLInputElement>) => {
-        setDishCategory({...dishCategory, name: target.value});
+        setDishTag({...dishTag, name: target.value});
     }
     const handleSortOrderChange = ({target}: React.ChangeEvent<HTMLInputElement>) => {
-        setDishCategory({...dishCategory, sortOrder: parseInt(target.value)});
+        setDishTag({...dishTag, sortOrder: parseInt(target.value)});
+    }
+    const handleColorChange = ({target}: React.ChangeEvent<HTMLInputElement>) => {
+        setDishTag({...dishTag, color: target.value});
     }
 
     const handleCancelModification = () => {
-        setDishCategory(selectedCategory);
+        setDishTag(selectedTag);
     }
     const handleSaveCategory = () => {
-        if (dishCategory.id > 0) {
-            DishCategoryAPI.update(dishCategory)
-                .then(returnedCategory => setSelectedCategory(returnedCategory));
+        if (dishTag.id > 0) {
+            DishTagAPI.update(dishTag)
+                .then(returnedCategory => setSelectedTag(returnedCategory));
         } else {
-            const newCategory : Omit<DishCategory, 'id'> = {
-                name: dishCategory.name,
-                sortOrder: dishCategory.sortOrder,
+            const newCategory : Omit<DishTag, 'id'> = {
+                name: dishTag.name,
+                sortOrder: dishTag.sortOrder,
+                color: dishTag.color,
             }
-            DishCategoryAPI.create(newCategory)
-                .then(returnedCategory => setSelectedCategory(returnedCategory));
+            DishTagAPI.create(newCategory)
+                .then(returnedCategory => setSelectedTag(returnedCategory));
         }
     }
     const handleDelete = () => {
-        DishCategoryAPI.delete(selectedCategory.id)
+        DishTagAPI.delete(selectedTag.id)
             .then(() => {
-                setSelectedCategory(null);
+                setSelectedTag(null);
             })
     }
 
@@ -60,17 +64,24 @@ export default function CategoryBody() {
                 <div className="font-medium w-32">Nom</div>
                 <input onInput={handleCategoryNameChange} type="text"
                        className={'input input-primary input-sm input-bordered flex-1'}
-                       value={dishCategory.name}/>
+                       value={dishTag.name}/>
+            </div>
+
+            <div className={'flex items-center'}>
+                <div className="font-medium w-32">Couleur</div>
+                <input onInput={handleColorChange} type="color"
+                       className={'input input-primary input-sm input-bordered flex-1'}
+                       value={dishTag.color}/>
             </div>
 
             <div className={'flex items-center'}>
                 <div className="font-medium w-32">Ordre</div>
                 <input onInput={handleSortOrderChange} type="number"
                        className={'input input-primary input-sm input-bordered flex-1'}
-                       value={dishCategory.sortOrder}/>
+                       value={dishTag.sortOrder}/>
             </div>
 
-            {dishCategory.id > 0 &&
+            {dishTag.id > 0 &&
                 <div className={'flex mt-5'}>
                     <button className={'flex-1 btn btn-error btn-sm'} onClick={handleDelete}>Supprimer</button>
                 </div>

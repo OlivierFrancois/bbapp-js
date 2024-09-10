@@ -45,7 +45,7 @@ export default function Body() {
 
     useEffect(() => {
         if (dish && selectedDish) {
-            setHasChanged(dish.name !== selectedDish.name || dish.url !== selectedDish.url || dish.dishCategoryId !== selectedDish.dishCategoryId || recipeHasChanged());
+            setHasChanged(dish.name !== selectedDish.name || dish.url !== selectedDish.url || recipeHasChanged());
         }
     }, [dish, selectedDish, recipeItems]);
 

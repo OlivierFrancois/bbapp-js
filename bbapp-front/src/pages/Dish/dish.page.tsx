@@ -1,26 +1,27 @@
 import dayjs from "dayjs";
 import 'dayjs/locale/fr';
-import List from "./components/list.component.tsx";
 import React, { createContext, useEffect, useState } from 'react';
 import {Dish} from "../../types/Dish.tsx";
-import DishHeader from "./components/edit/dish-header.component.tsx";
-import Body from "./components/edit/body.component.tsx";
 import { Article } from '../../types/Article.tsx';
 import { ArticleAPI } from '../../api/ArticleAPI.tsx';
 import SlideUpModal from "../../components/slide-up-modal/slide-up-modal.component.tsx";
-import {DishCategory} from "../../types/DishCategory.tsx";
+import {DishTag} from "../../types/DishTag.tsx";
 import {DishAPI} from "../../api/DishAPI.tsx";
-import {DishCategoryAPI} from "../../api/DishCategoryAPI.tsx";
-import CategoryHeader from "./components/edit/category-header.component.tsx";
-import CategoryBody from "./components/edit/category-body.component.tsx";
+import {DishTagAPI} from "../../api/DishTagAPI.tsx";
+import Header from "./components/dish-edit/header.component.tsx";
+import Body from "./components/dish-edit/body.component.tsx";
+import TagHeader from "./components/dish-tag-edit/tag-header.component.tsx";
+import TagBody from "./components/dish-tag-edit/tag-body.component.tsx";
+import DishList from "./components/dish-list.component.tsx";
+import DishTagList from "./components/dish-tag-list.component.tsx";
 dayjs.locale('fr');
 
 interface DishContextI {
     selectedDish: Dish | null,
     setSelectedDish: React.Dispatch<React.SetStateAction<Dish|null>>
-    selectedCategory: DishCategory | null,
-    setSelectedCategory: React.Dispatch<React.SetStateAction<DishCategory|null>>
-    dishCategories: DishCategory[],
+    selectedTag: DishTag | null,
+    setSelectedTag: React.Dispatch<React.SetStateAction<DishTag|null>>
+    dishTags: DishTag[],
     dishes: Dish[],
     articles: Article[],
     refreshArticles: () => void,
@@ -32,8 +33,8 @@ export default function DishPage() {
     const [dishes, setDishes] = useState<Dish[]>([]);
     const [selectedDish, setSelectedDish] = useState<Dish | null>(null);
 
-    const [dishCategories, setDishCategories] = useState<DishCategory[]>([]);
-    const [selectedCategory, setSelectedCategory] = useState<DishCategory | null>(null);
+    const [dishTags, setDishTags] = useState<DishTag[]>([]);
+    const [selectedTag, setSelectedTag] = useState<DishTag | null>(null);
 
     const [articles, setArticles] = useState<Article[]>([]);
     const refreshArticles = () => ArticleAPI.getAll().then(r => setArticles(r));
@@ -45,29 +46,19 @@ export default function DishPage() {
         DishAPI.getAll().then(r => setDishes(r));
     }, [selectedDish]);
     useEffect(() => {
-        DishCategoryAPI.getAll().then(r => setDishCategories(r));
-    }, [selectedCategory]);
+        DishTagAPI.getAll().then(r => setDishTags(r));
+    }, [selectedTag]);
 
     const dishContextProvider = {
         selectedDish,
         setSelectedDish,
-        selectedCategory,
-        setSelectedCategory,
-        dishCategories,
+        selectedTag,
+        setSelectedTag,
+        dishTags,
         dishes,
         articles,
         refreshArticles,
     };
-
-    const handleDishCreate = (dishCategoryId?: number) => {
-        const dish: Dish = {id: 0, name: '', dishCategoryId};
-        setSelectedDish(dish);
-    }
-
-    const handleCategoryCreate = () => {
-        const category: DishCategory = {id: 0, name: '', sortOrder: 0};
-        setSelectedCategory(category);
-    }
 
     return (
         <DishContext.Provider value={dishContextProvider}>
@@ -77,34 +68,26 @@ export default function DishPage() {
                     <div>Liste des plats</div>
                 </div>
 
-                <div className="flex justify-center items-center gap-4">
-                    <button className={'btn btn-primary btn-sm'} onClick={handleCategoryCreate}>
-                        Nouvelle catégorie
-                    </button>
+                <DishTagList/>
 
-                    <button className={'btn btn-primary btn-sm'} onClick={() => handleDishCreate}>
-                        Nouveau plat
-                    </button>
-                </div>
-
-                <List handleDishCreate={handleDishCreate}/>
+                <DishList/>
 
                 <SlideUpModal
                     displayCondition={selectedDish !== null}
                     handleClose={() => {
                         setSelectedDish(null)
                     }}
-                    headerContent={<DishHeader/>}
+                    headerContent={<Header/>}
                     bodyContent={<Body/>}
                 />
 
                 <SlideUpModal
-                    displayCondition={selectedCategory !== null}
+                    displayCondition={selectedTag !== null}
                     handleClose={() => {
-                        setSelectedCategory(null)
+                        setSelectedTag(null)
                     }}
-                    headerContent={<CategoryHeader/>}
-                    bodyContent={<CategoryBody/>}
+                    headerContent={<TagHeader/>}
+                    bodyContent={<TagBody/>}
                 />
             </div>
         </DishContext.Provider>
