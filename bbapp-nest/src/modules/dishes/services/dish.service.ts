@@ -40,7 +40,7 @@ export class DishService {
             data: {
                 ...dishData,
                 dishTags: {
-                    set: dishTagIds.map((dishTagId) => ({ id: dishTagId })),
+                    set: dishTagIds?.map((dishTagId) => ({ id: dishTagId })),
                 },
             },
         });
