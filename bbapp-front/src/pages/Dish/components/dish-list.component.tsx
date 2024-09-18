@@ -7,36 +7,32 @@ export default function DishList() {
 
 
     const handleDishCreate = () => {
-        const dish: Dish = {id: 0, name: ''};
+        const dish: Dish = {id: 0, name: '', dishTagIds: []};
         setSelectedDish(dish);
     }
 
 
     return <div className={'overflow-auto'}>
-        <table className={'table table-sm table-pin-rows'}>
-            <thead>
-                <tr>
-                    <th className={'text-base text-neutral'}>Plats</th>
-                    <th className={'w-28'}>
-                        <button onClick={handleDishCreate} className={'btn btn-xs btn-primary'}>Nouveau plat</button>
-                    </th>
-                </tr>
-            </thead>
+        <div className={'px-2 flex justify-between'}>
+            <h2 className={'font-bold text-base text-neutral'}>Plats</h2>
 
+            <button onClick={handleDishCreate} className={'btn btn-square btn-primary btn-sm btn-ghost'}>
+                <i className={'fa fa-plus text-lg'}></i>
+            </button>
+        </div>
+
+        <table className={'table table-sm table-pin-rows table-zebra'}>
             <tbody>
                 {dishes
                     .sort((a, b) => a.name.localeCompare(b.name))
                     .map((dish, key) => (
-                        <tr key={`${key}_${dish.id}`}>
-                            <td className={'first-letter:uppercase'}>{dish.name}</td>
+                        <tr key={`${key}_${dish.id}`} className={'hover border-t'}>
+                            <td className={'w-10'}>{key + 1}</td>
 
-                            <td>
-                                <div className="flex items-center justify-center gap-2">
-                                    <button className="btn btn-secondary btn-xs btn-outline btn-circle"
-                                            onClick={() => setSelectedDish(dish)}>
-                                        <i className={'fa fa-pen'}></i>
-                                    </button>
-                                </div>
+                            <td className={'first-letter:uppercase cursor-pointer'}
+                                onClick={() => setSelectedDish(dish)}
+                            >
+                                {dish.name}
                             </td>
                         </tr>
                     ))

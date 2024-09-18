@@ -1,7 +1,7 @@
 import {useCallback, useContext, useEffect, useState} from 'react';
 import { DishContext } from '../../dish.page.tsx';
 import { DishAPI } from '../../../../api/DishAPI.tsx';
-import Recipe from './recipe.component.tsx';
+import Recipe from './recipe/recipe.component.tsx';
 import DishInformation from './dish-information.component.tsx';
 import { Dish } from '../../../../types/Dish.tsx';
 import { RecipeItem } from '../../../../types/RecipeItem.tsx';
@@ -40,12 +40,27 @@ export default function Body() {
             }
             return false;
         },
-        [cleanRecipeItems, recipeItems] // Ajoute les tableaux comme dépendances
+        [cleanRecipeItems, recipeItems]
+    );
+    const dishTagsHaveChanged = useCallback(
+        (): boolean => {
+            if (!dish || !selectedDish) return true
+            const dishHasExtraTag = dish.dishTagIds?.some(tagId => !selectedDish.dishTagIds?.includes(tagId)) ?? true;
+            const selectedDishHasExtraTag = selectedDish.dishTagIds?.some(tagId => !dish.dishTagIds?.includes(tagId)) ?? true;
+            return dishHasExtraTag || selectedDishHasExtraTag;
+        },
+        [dish, selectedDish]
     );
 
     useEffect(() => {
         if (dish && selectedDish) {
-            setHasChanged(dish.name !== selectedDish.name || dish.url !== selectedDish.url || recipeHasChanged());
+            console.log(dish.dishTagIds, selectedDish.dishTagIds);
+            setHasChanged(
+                dish.name !== selectedDish.name ||
+                dish.url !== selectedDish.url ||
+                dishTagsHaveChanged() ||
+                recipeHasChanged()
+            );
         }
     }, [dish, selectedDish, recipeItems]);
 

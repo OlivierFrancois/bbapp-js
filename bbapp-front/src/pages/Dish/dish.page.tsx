@@ -62,7 +62,7 @@ export default function DishPage() {
 
     return (
         <DishContext.Provider value={dishContextProvider}>
-            <div className={'h-screen flex flex-col gap-2 relative overflow-hidden w-full'}>
+            <div className={'h-screen flex flex-col gap-5 relative overflow-hidden w-full'}>
                 <div
                     className={'bg-gradient-to-br from-primary to-primary/85 from-10% text-secondary-content font-semibold text-xl px-2 py-1 h-12 flex justify-between items-center'}>
                     <div>Liste des plats</div>

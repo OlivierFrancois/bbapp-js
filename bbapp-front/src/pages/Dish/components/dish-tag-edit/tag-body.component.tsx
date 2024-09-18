@@ -58,7 +58,7 @@ export default function TagBody() {
         </div>
 
         <div className={'flex flex-col gap-2'}>
-            <div className="font-semibold">Informations de l'article</div>
+            <div className="font-semibold">Informations du tag</div>
 
             <div className={'flex items-center'}>
                 <div className="font-medium w-32">Nom</div>

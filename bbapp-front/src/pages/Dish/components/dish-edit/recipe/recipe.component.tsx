@@ -1,9 +1,9 @@
 import RecipeItemRow from './recipe-item.component.tsx';
 import React, {useContext, useState} from 'react';
-import { RecipeItem } from '../../../../types/RecipeItem.tsx';
-import { DishContext } from '../../dish.page.tsx';
-import DishAdder from "./dish-adder.component.tsx";
-import {Article} from "../../../../types/Article.tsx";
+import { RecipeItem } from '../../../../../types/RecipeItem.tsx';
+import { DishContext } from '../../../dish.page.tsx';
+import ArticleAdder from "../article-adder.component.tsx";
+import {Article} from "../../../../../types/Article.tsx";
 
 interface RecipeProps {
     recipeItems: RecipeItem[]
@@ -57,6 +57,6 @@ export default function Recipe({ recipeItems, setRecipeItems }: RecipeProps) {
             </tbody>
         </table>
 
-        {displayArticleAdder && <DishAdder handleArticleAdd={addRecipeItem} setDisplayArticleAdder={setDisplayArticleAdder}/>}
+        {displayArticleAdder && <ArticleAdder handleArticleAdd={addRecipeItem} setDisplayArticleAdder={setDisplayArticleAdder}/>}
     </div>;
 }

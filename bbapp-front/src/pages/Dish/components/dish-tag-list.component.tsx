@@ -13,10 +13,12 @@ export default function DishTagList() {
         <div className={'flex justify-between'}>
             <h2 className={'font-bold text-base text-neutral'}>Tags</h2>
 
-            <button onClick={handleTagCreate} className={'btn btn-xs btn-primary'}>Nouveau tag</button>
+            <button onClick={handleTagCreate} className={'btn btn-square btn-primary btn-sm btn-ghost'}>
+                <i className={'fa fa-plus text-lg'}></i>
+            </button>
         </div>
 
-        <div className={'flex gap-x-3 gap-y-1 flex-wrap'}>
+        <div className={'flex gap-x-3 gap-y-2 flex-wrap justify-stretch'}>
             {dishTags
                 .sort((a, b) => a.name.localeCompare(b.name))
                 .map((dishTag, key) => (

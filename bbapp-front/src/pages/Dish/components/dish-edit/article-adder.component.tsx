@@ -8,7 +8,7 @@ interface Props {
     setDisplayArticleAdder: (value: (((prevState: boolean) => boolean) | boolean)) => void
 }
 
-export default function DishAdder({handleArticleAdd, setDisplayArticleAdder}: Props) {
+export default function ArticleAdder({handleArticleAdd, setDisplayArticleAdder}: Props) {
     const [articleInput, setArticleInput] = useState<string>('')
     const [articles, setArticles] = useState<Article[]>([])
     const {refreshArticles} = useContext(DishContext);

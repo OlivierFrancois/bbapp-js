@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Dish, Prisma, RecipeItem } from '@prisma/client';
+import { Dish, DishTag, Prisma, RecipeItem } from '@prisma/client';
 import { PrismaService } from '../../../prisma.service';
 import { UpdateDishWithRecipeDto } from '../dtos/update-dish-with-recipe.dto';
 import { CreateDishDto } from '../dtos/create-dish.dto';
@@ -10,6 +10,23 @@ export class DishService {
 
     async getAll(): Promise<Dish[]> {
         return this.prisma.dish.findMany();
+    }
+
+    async getAllWithDishTagIds() {
+        const dishes = await this.prisma.dish.findMany({ include: { dishTags: true } });
+        return dishes.map((dish) => ({
+            ...dish,
+            dishTags: undefined,
+            dishTagIds: dish.dishTags.map((dt) => dt.id),
+        }));
+    }
+
+    async parseWithDishTagIds(dish: Dish & { dishTags: DishTag[] }) {
+        return {
+            ...dish,
+            dishTags: undefined,
+            dishTagIds: dish.dishTags.map((dt) => dt.id),
+        };
     }
 
     async getById(id: number): Promise<Dish | null> {
@@ -28,14 +45,30 @@ export class DishService {
         });
     }
 
-    async create(createDishDto: CreateDishDto): Promise<Dish> {
-        return this.prisma.dish.create({ data: createDishDto });
+    async create(createDishDto: CreateDishDto) {
+        const { dishTagIds, ...data } = createDishDto;
+
+        const dish = await this.prisma.dish.create({
+            data: {
+                ...data,
+                dishTags: {
+                    connect: dishTagIds.map((id) => ({ id: id })),
+                },
+            },
+            include: { dishTags: true },
+        });
+
+        return {
+            ...dish,
+            dishTags: undefined,
+            dishTagIds: dish.dishTags.map((dt) => dt.id),
+        };
     }
 
-    async update(id: number, data: CreateDishDto): Promise<Dish> {
+    async update(id: number, data: CreateDishDto) {
         const { dishTagIds, ...dishData } = data;
 
-        return this.prisma.dish.update({
+        const dish = await this.prisma.dish.update({
             where: { id },
             data: {
                 ...dishData,
@@ -43,7 +76,14 @@ export class DishService {
                     set: dishTagIds?.map((dishTagId) => ({ id: dishTagId })),
                 },
             },
+            include: { dishTags: true },
         });
+
+        return {
+            ...dish,
+            dishTags: undefined,
+            dishTagIds: dish.dishTags.map((dt) => dt.id),
+        };
     }
 
     async updateWithRecipe(id: number, data: UpdateDishWithRecipeDto) {

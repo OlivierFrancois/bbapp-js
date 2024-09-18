@@ -37,12 +37,6 @@ export default function ArticlePage() {
             .then(fetchedCategories => setCategories(fetchedCategories));
     }, [selectedArticle, selectedCategory]);
 
-
-    const handleArticleCreate = () => {
-        const article: Article = {id: 0, name: '', sortOrder: 0, categoryId: 0};
-        setSelectedArticle(article);
-    }
-
     const handleCategoryCreate = () => {
         const category: ArticleCategory = {id: 0, name: '', sortOrder: 0};
         setSelectedCategory(category);
@@ -56,9 +50,8 @@ export default function ArticlePage() {
                     <div>Liste des articles</div>
                 </div>
 
-                <div className="flex justify-center items-center gap-4">
+                <div className="px-2 flex justify-end items-center gap-4">
                     <button className={'btn btn-primary btn-sm'} onClick={handleCategoryCreate}>Nouvelle catégorie</button>
-                    <button className={'btn btn-primary btn-sm'} onClick={handleArticleCreate}>Nouvel article</button>
                 </div>
 
                 <List/>

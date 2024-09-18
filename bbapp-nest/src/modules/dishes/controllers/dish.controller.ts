@@ -22,7 +22,7 @@ export class DishController {
 
     @Get()
     async getAll(): Promise<Dish[]> {
-        return this.dishService.getAll();
+        return this.dishService.getAllWithDishTagIds();
     }
 
     @Post(':id/with-recipe')
