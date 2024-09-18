@@ -54,7 +54,6 @@ export default function Body() {
 
     useEffect(() => {
         if (dish && selectedDish) {
-            console.log(dish.dishTagIds, selectedDish.dishTagIds);
             setHasChanged(
                 dish.name !== selectedDish.name ||
                 dish.url !== selectedDish.url ||
