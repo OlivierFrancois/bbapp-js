@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Dish, DishTag, Prisma, RecipeItem } from '@prisma/client';
+import { Dish, DishTag } from '@prisma/client';
 import { PrismaService } from '../../../prisma.service';
 import { UpdateDishWithRecipeDto } from '../dtos/update-dish-with-recipe.dto';
 import { CreateDishDto } from '../dtos/create-dish.dto';

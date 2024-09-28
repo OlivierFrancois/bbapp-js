@@ -1,6 +1,5 @@
 import { Controller, Get, Param, Query, Body, Post, Delete, Put } from '@nestjs/common';
 import { DishService } from '../services/dish.service';
-import { Dish, RecipeItem } from '@prisma/client';
 import { CreateDishDto } from '../dtos/create-dish.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { UpdateDishWithRecipeDto } from '../dtos/update-dish-with-recipe.dto';
