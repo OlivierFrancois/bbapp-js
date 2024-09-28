@@ -87,7 +87,10 @@ export class DishService {
             await this.prisma.recipeItem.createMany({ data: recipeItems.filter((r) => r.dishId === id) });
         }
 
-        return { dish, recipeItems: dish.recipeItems };
+        return {
+            dish: { ...dish, dishTags: undefined, dishTagIds: dish.dishTags.map((dt) => dt.id) },
+            recipeItems: dish.recipeItems,
+        };
     }
 
     async delete(id: number): Promise<void> {
