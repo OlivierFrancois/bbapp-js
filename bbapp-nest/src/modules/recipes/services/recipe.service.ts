@@ -7,7 +7,7 @@ import { CreateRecipeItemDto } from '../dtos/create-recipe-item.dto';
 export class RecipeService {
     constructor(private readonly prisma: PrismaService) {}
 
-    async get(dishId: number, articleId: number): Promise<RecipeItem | null> {
+    async get(dishId: number, articleId: number) {
         return this.prisma.recipeItem.findUnique({
             where: {
                 dishId_articleId: {
@@ -18,10 +18,10 @@ export class RecipeService {
         });
     }
 
-    async getByDish(dishId: number): Promise<RecipeItem[]> {
+    async getByDish(dishId: number) {
         return this.prisma.recipeItem.findMany({
             where: {
-                dishId: { equals: dishId },
+                dishId: dishId,
             },
         });
     }

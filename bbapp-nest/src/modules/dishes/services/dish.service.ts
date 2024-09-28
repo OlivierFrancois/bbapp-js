@@ -65,8 +65,8 @@ export class DishService {
         };
     }
 
-    async update(id: number, data: CreateDishDto) {
-        const { dishTagIds, ...dishData } = data;
+    async update(id: number, data: UpdateDishWithRecipeDto) {
+        const { recipeItems, dishTagIds, ...dishData } = data;
 
         const dish = await this.prisma.dish.update({
             where: { id },
@@ -76,21 +76,8 @@ export class DishService {
                     set: dishTagIds?.map((dishTagId) => ({ id: dishTagId })),
                 },
             },
-            include: { dishTags: true },
+            include: { dishTags: true, recipeItems: true },
         });
-
-        return {
-            ...dish,
-            dishTags: undefined,
-            dishTagIds: dish.dishTags.map((dt) => dt.id),
-        };
-    }
-
-    async updateWithRecipe(id: number, data: UpdateDishWithRecipeDto) {
-        const { recipeItems, ...dishData } = data;
-
-        // Mettre à jour le dish
-        const dish = await this.update(id, dishData);
 
         // Vider les recipeItems
         await this.prisma.recipeItem.deleteMany({ where: { dishId: id } });
@@ -100,11 +87,7 @@ export class DishService {
             await this.prisma.recipeItem.createMany({ data: recipeItems.filter((r) => r.dishId === id) });
         }
 
-        return {
-            dish: dish,
-            recipeItems: await this.prisma.recipeItem.findMany({ where: { dishId: id } }),
-            tags: await this.prisma.dishTag.findMany({ where: { dishes: { some: { id } } } }),
-        };
+        return { dish, recipeItems: dish.recipeItems };
     }
 
     async delete(id: number): Promise<void> {

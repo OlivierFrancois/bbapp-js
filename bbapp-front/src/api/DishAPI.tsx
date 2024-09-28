@@ -9,7 +9,6 @@ const URL_UPDATE = `${API_HOST}/dish/:dishId`;
 const URL_DELETE = `${API_HOST}/dish/:dishId`;
 const URL_GET_ALL = `${API_HOST}/dish`;
 const URL_CREATE = `${API_HOST}/dish`;
-const URL_SAVE_WITH_RECIPE = `${API_HOST}/dish/:dishId/with-recipe`;
 
 export class DishAPI {
     static async get(id: number): Promise<Dish[]> {
@@ -41,15 +40,8 @@ export class DishAPI {
             })
     }
 
-    static async saveWithRecipe(dish: Dish, recipeItems: RecipeItem[]): Promise<{ dish: Dish, recipeItems: RecipeItem[] }> {
-        return axios.post(URL_SAVE_WITH_RECIPE.replace(':dishId', dish.id.toString()), {...dish, recipeItems})
-            .then(res => {
-                return res.data
-            })
-    }
-
-    static async update(dish: Dish): Promise<Dish> {
-        return axios.put(URL_UPDATE.replace(':dishId', dish.id.toString()), {...dish})
+    static async update(dish: Dish, recipeItems: RecipeItem[]): Promise<{ dish: Dish, recipeItems: RecipeItem[] }> {
+        return axios.put(URL_UPDATE.replace(':dishId', dish.id.toString()), {...dish, recipeItems})
             .then(res => {
                 return res.data
             })

@@ -77,7 +77,7 @@ export default function Body() {
 
     const handleSaveDish = () => {
         if (dish.id > 0) {
-            DishAPI.saveWithRecipe(dish, recipeItems)
+            DishAPI.update(dish, recipeItems)
                 .then(response => {
                     setSelectedDish(response.dish);
                 })
