@@ -1,4 +1,4 @@
-import {DishScheduleItem} from "../../../types/DishScheduleItem.tsx";
+import {DishScheduleItem} from "../../../../types/DishScheduleItem.tsx";
 import {useContext, useEffect, useState} from "react";
 import {DishScheduleContext} from "../dish-schedule.page.tsx";
 

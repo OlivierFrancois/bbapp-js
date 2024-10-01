@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import {DishContext} from "../../dish.page.tsx";
-import {DishTag} from "../../../../types/DishTag.tsx";
-import {DishTagAPI} from "../../../../api/DishTagAPI.tsx";
+import {DishTag} from "../../../../../types/DishTag.tsx";
+import {DishTagAPI} from "../../../../../api/DishTagAPI.tsx";
 
 export default function TagBody() {
     const { selectedTag, setSelectedTag } = useContext(DishContext);

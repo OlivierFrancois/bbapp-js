@@ -1,11 +1,11 @@
 import {useCallback, useContext, useEffect, useState} from 'react';
 import { DishContext } from '../../dish.page.tsx';
-import { DishAPI } from '../../../../api/DishAPI.tsx';
+import { DishAPI } from '../../../../../api/DishAPI.tsx';
 import Recipe from './recipe/recipe.component.tsx';
 import DishInformation from './dish-information.component.tsx';
-import { Dish } from '../../../../types/Dish.tsx';
-import { RecipeItem } from '../../../../types/RecipeItem.tsx';
-import { RecipeAPI } from '../../../../api/RecipeAPI.tsx';
+import { Dish } from '../../../../../types/Dish.tsx';
+import { RecipeItem } from '../../../../../types/RecipeItem.tsx';
+import { RecipeAPI } from '../../../../../api/RecipeAPI.tsx';
 
 export default function Body() {
     const { selectedDish, setSelectedDish } = useContext(DishContext);

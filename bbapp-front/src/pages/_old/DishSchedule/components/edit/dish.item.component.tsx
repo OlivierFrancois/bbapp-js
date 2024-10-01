@@ -1,4 +1,4 @@
-import {Dish} from "../../../../types/Dish.tsx";
+import {Dish} from "../../../../../types/Dish.tsx";
 
 interface Props {
     dish: Dish

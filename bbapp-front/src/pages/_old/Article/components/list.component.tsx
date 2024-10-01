@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {Article} from "../../../types/Article.tsx";
+import {Article} from "../../../../types/Article.tsx";
 import {ArticleContext} from "../article.page.tsx";
 
 export default function List() {

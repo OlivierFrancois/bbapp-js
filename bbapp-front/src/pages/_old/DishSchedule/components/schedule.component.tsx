@@ -2,8 +2,8 @@ import {useContext, useEffect, useState} from "react";
 import {DishScheduleContext} from "../dish-schedule.page.tsx";
 import dayjs from "dayjs";
 import {MoonIcon, SunIcon} from "@heroicons/react/16/solid";
-import {DishScheduleAPI} from "../../../api/DishScheduleAPI.tsx";
-import {DishScheduleItem} from "../../../types/DishScheduleItem.tsx";
+import {DishScheduleAPI} from "../../../../api/DishScheduleAPI.tsx";
+import {DishScheduleItem} from "../../../../types/DishScheduleItem.tsx";
 import Cell from "./cell.component.tsx";
 
 const moments = ['midi', 'soir'];

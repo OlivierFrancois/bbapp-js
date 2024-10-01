@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { RecipeItem } from '../../../../../types/RecipeItem.tsx';
+import { RecipeItem } from '../../../../../../types/RecipeItem.tsx';
 import { DishContext } from '../../../dish.page.tsx';
 
 interface RecipeItemProps {

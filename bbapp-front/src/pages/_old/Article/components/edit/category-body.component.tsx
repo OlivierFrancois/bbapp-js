@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import {ArticleContext} from "../../article.page.tsx";
-import {ArticleCategory} from "../../../../types/ArticleCategory.tsx";
-import {ArticleCategoryAPI} from "../../../../api/ArticleCategoryAPI.tsx";
+import {ArticleCategory} from "../../../../../types/ArticleCategory.tsx";
+import {ArticleCategoryAPI} from "../../../../../api/ArticleCategoryAPI.tsx";
 
 export default function CategoryBody() {
     const { selectedCategory, setSelectedCategory } = useContext(ArticleContext);

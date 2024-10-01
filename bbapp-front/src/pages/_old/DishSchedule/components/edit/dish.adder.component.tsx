@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import {DishAPI} from "../../../../api/DishAPI.tsx";
-import {Dish} from "../../../../types/Dish.tsx";
+import {DishAPI} from "../../../../../api/DishAPI.tsx";
+import {Dish} from "../../../../../types/Dish.tsx";
 
 interface DishAdderProps {
     handleDishSave: (dish: Dish | null) => void

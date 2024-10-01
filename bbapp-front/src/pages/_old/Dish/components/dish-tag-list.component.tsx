@@ -1,6 +1,6 @@
 import {useContext} from "react";
 import {DishContext} from "../dish.page.tsx";
-import {DishTag} from "../../../types/DishTag.tsx";
+import {DishTag} from "../../../../types/DishTag.tsx";
 
 export default function DishTagList() {
     const {setSelectedTag, dishTags} = useContext(DishContext);

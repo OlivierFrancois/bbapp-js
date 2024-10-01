@@ -1,7 +1,7 @@
 import React, {useCallback, useContext, useEffect, useState} from "react";
 import {ArticleContext} from "../../article.page.tsx";
-import {Article} from "../../../../types/Article.tsx";
-import {ArticleAPI} from "../../../../api/ArticleAPI.tsx";
+import {Article} from "../../../../../types/Article.tsx";
+import {ArticleAPI} from "../../../../../api/ArticleAPI.tsx";
 
 export default function ArticleBody() {
     const { selectedArticle, setSelectedArticle, categories } = useContext(ArticleContext);

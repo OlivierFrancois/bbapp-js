@@ -1,7 +1,7 @@
 import React, { useContext  } from 'react';
-import { Dish } from '../../../../types/Dish.tsx';
+import { Dish } from '../../../../../types/Dish.tsx';
 import { DishContext } from '../../dish.page.tsx';
-import {DishTag} from "../../../../types/DishTag.tsx";
+import {DishTag} from "../../../../../types/DishTag.tsx";
 
 interface DishInformationsProps {
     dish: Dish

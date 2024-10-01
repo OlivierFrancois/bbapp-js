@@ -2,15 +2,15 @@ import dayjs from "dayjs";
 import 'dayjs/locale/fr';
 import List from "./components/list.component.tsx";
 import React, {createContext, useEffect, useState} from "react";
-import {Article} from "../../types/Article.tsx";
+import {Article} from "../../../types/Article.tsx";
 import ArticleHeader from "./components/edit/article-header.component.tsx";
 import ArticleBody from "./components/edit/article-body.component.tsx";
-import {ArticleCategory} from "../../types/ArticleCategory.tsx";
-import {ArticleAPI} from "../../api/ArticleAPI.tsx";
-import {ArticleCategoryAPI} from "../../api/ArticleCategoryAPI.tsx";
+import {ArticleCategory} from "../../../types/ArticleCategory.tsx";
+import {ArticleAPI} from "../../../api/ArticleAPI.tsx";
+import {ArticleCategoryAPI} from "../../../api/ArticleCategoryAPI.tsx";
 import CategoryBody from "./components/edit/category-body.component.tsx";
 import CategoryHeader from "./components/edit/category-header.component.tsx";
-import SlideUpModal from "../../components/slide-up-modal/slide-up-modal.component.tsx";
+import SlideUpModal from "../../../components/slide-up-modal/slide-up-modal.component.tsx";
 dayjs.locale('fr');
 
 interface ArticleContextI {

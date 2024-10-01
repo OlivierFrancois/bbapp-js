@@ -1,9 +1,9 @@
 import RecipeItemRow from './recipe-item.component.tsx';
 import React, {useContext, useState} from 'react';
-import { RecipeItem } from '../../../../../types/RecipeItem.tsx';
+import { RecipeItem } from '../../../../../../types/RecipeItem.tsx';
 import { DishContext } from '../../../dish.page.tsx';
 import ArticleAdder from "../article-adder.component.tsx";
-import {Article} from "../../../../../types/Article.tsx";
+import {Article} from "../../../../../../types/Article.tsx";
 
 interface RecipeProps {
     recipeItems: RecipeItem[]

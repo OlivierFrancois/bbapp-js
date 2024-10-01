@@ -1,6 +1,6 @@
 import React, {useContext, useState} from "react";
-import {Article} from "../../../../types/Article.tsx";
-import {ArticleAPI} from "../../../../api/ArticleAPI.tsx";
+import {Article} from "../../../../../types/Article.tsx";
+import {ArticleAPI} from "../../../../../api/ArticleAPI.tsx";
 import {DishContext} from "../../dish.page.tsx";
 
 interface Props {

@@ -1,3 +1,5 @@
+import daisyui0 from "daisyui/src/theming/themes";
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -12,15 +14,14 @@ export default {
     themes: [
       {
         default : {
-          ...require("daisyui/src/theming/themes")["light"],
+          ...daisyui0["light"],
 
           "--rounded-btn": "0.3rem",
-          "primary": '#192749',
-          "primary-content": '#f0f3fa',
+          "primary": '#7ACFB0',
+          "primary-content": '#030F2B',
 
-          "secondary": '#87a8c9',
-          "secondary-focus": '#b1c9ef',
-          "secondary-content": '#fff',
+          "secondary": '#FBCE9E',
+          "secondary-content": '#030F2B',
 
           "accent": '#fff',
           "accent-focus": '#fff',

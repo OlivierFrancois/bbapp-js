@@ -3,10 +3,10 @@ import Schedule from "./components/schedule.component.tsx";
 import React, {createContext, useState} from "react";
 import dayjs from "dayjs";
 import 'dayjs/locale/fr';
-import {DishScheduleItem} from "../../types/DishScheduleItem.tsx";
+import {DishScheduleItem} from "../../../types/DishScheduleItem.tsx";
 import Header from "./components/edit/header.component.tsx";
 import Body from "./components/edit/body.component.tsx";
-import SlideUpModal from "../../components/slide-up-modal/slide-up-modal.component.tsx";
+import SlideUpModal from "../../../components/slide-up-modal/slide-up-modal.component.tsx";
 dayjs.locale('fr');
 
 interface SelectedCell {

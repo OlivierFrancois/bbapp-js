@@ -1,9 +1,9 @@
 import {useContext, useEffect, useRef, useState} from "react";
 import {DishScheduleContext} from "../../dish-schedule.page.tsx";
-import {Dish} from "../../../../types/Dish.tsx";
+import {Dish} from "../../../../../types/Dish.tsx";
 import DishItem from "./dish.item.component.tsx";
 import DishAdder from "./dish.adder.component.tsx";
-import {DishScheduleAPI} from "../../../../api/DishScheduleAPI.tsx";
+import {DishScheduleAPI} from "../../../../../api/DishScheduleAPI.tsx";
 
 export default function Body() {
     const {selectedCell} = useContext(DishScheduleContext)

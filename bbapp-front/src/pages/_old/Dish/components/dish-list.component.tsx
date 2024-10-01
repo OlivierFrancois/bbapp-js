@@ -1,6 +1,6 @@
 import {useContext} from "react";
 import {DishContext} from "../dish.page.tsx";
-import {Dish} from "../../../types/Dish.tsx";
+import {Dish} from "../../../../types/Dish.tsx";
 
 export default function DishList() {
     const {setSelectedDish, dishes} = useContext(DishContext);
