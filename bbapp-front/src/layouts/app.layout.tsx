@@ -17,7 +17,7 @@ export default function AppLayout() {
         <main className="flex flex-col min-h-screen overflow-hidden max-h-screen">
             <nav className={'absolute w-screen p-4 top-0 flex items-center justify-between'}>
                 <Link to={'/'} className={'btn btn-ghost btn-circle'}>
-                    <Logo color={'#FBCE9E'} />
+                    <Logo color={pathname === APP_ROUTES.home ? '#FBCE9E' : '#7ACFB0'} />
                 </Link>
 
                 <div className={'flex justify-end items-center gap-2'}>
@@ -30,7 +30,7 @@ export default function AppLayout() {
 
                     <Link
                         to={APP_ROUTES.shoppingList.index}
-                        className={`btn min-h-0 size-10 text-lg btn-circle ${pathname.includes(APP_ROUTES.schedule.index) ? 'btn-primary' : ''}\`}>`}
+                        className={`btn min-h-0 size-10 text-lg btn-circle ${pathname.includes(APP_ROUTES.shoppingList.index) ? 'btn-primary' : ''}\`}>`}
                     >
                         <i className="fa fa-shopping-basket"></i>
                     </Link>
