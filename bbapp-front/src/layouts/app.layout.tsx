@@ -23,14 +23,14 @@ export default function AppLayout() {
                 <div className={'flex justify-end items-center gap-2'}>
                     <Link
                         to={APP_ROUTES.schedule.index}
-                        className={`btn btn-sm btn-circle ${pathname.includes(APP_ROUTES.schedule.index) ? 'btn-primary' : ''}`}
+                        className={`btn min-h-0 size-10 text-lg btn-circle ${pathname.includes(APP_ROUTES.schedule.index) ? 'btn-primary' : ''}`}
                     >
                         <i className="fa fa-calendar"></i>
                     </Link>
 
                     <Link
                         to={APP_ROUTES.shoppingList.index}
-                        className={`btn btn-sm btn-circle ${pathname.includes(APP_ROUTES.schedule.index) ? 'btn-primary' : ''}\`}>`}
+                        className={`btn min-h-0 size-10 text-lg btn-circle ${pathname.includes(APP_ROUTES.schedule.index) ? 'btn-primary' : ''}\`}>`}
                     >
                         <i className="fa fa-shopping-basket"></i>
                     </Link>

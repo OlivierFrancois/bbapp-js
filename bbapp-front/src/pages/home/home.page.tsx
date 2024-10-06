@@ -11,8 +11,8 @@ export default function HomePage() {
             ></div>
 
             <div className={'text-white h-screen flex-1 flex items-center justify-center'}>
-                <div className={'flex flex-col animate-bounce'}>
-                    <MeliveSvg />
+                <div className={'flex flex-col'}>
+                    <MeliveSvg color={'#FBCE9E'} />
                     <div className={'self-end font-extralight'}>By Mel&Olive</div>
                 </div>
             </div>
