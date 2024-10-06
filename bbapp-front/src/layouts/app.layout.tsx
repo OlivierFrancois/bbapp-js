@@ -1,10 +1,12 @@
-import {useRef} from 'react';
-import {Outlet, useLocation} from 'react-router-dom';
+import { useRef } from 'react';
+import { Link, Outlet, useLocation } from 'react-router-dom';
+import Logo from '../components/logo.component.tsx';
+import { APP_ROUTES } from '../routes.ts';
 
 export default function AppLayout() {
-    const { pathname } = useLocation();
-
     const articleContainer = useRef<HTMLDivElement>(null);
+
+    const { pathname } = useLocation();
 
     //if (loading) return <AppLoader />;
 
@@ -12,14 +14,31 @@ export default function AppLayout() {
     //if (user?.role !== 'ADMIN') return <Navigate to="/" />;
 
     return (
-        <main className="flex min-h-screen overflow-hidden max-h-screen">
-            {pathname}
+        <main className="flex flex-col min-h-screen overflow-hidden max-h-screen">
+            <nav className={'absolute w-screen p-4 top-0 flex items-center justify-between'}>
+                <Link to={'/'} className={'btn btn-ghost btn-circle'}>
+                    <Logo color={'#FBCE9E'} />
+                </Link>
 
-            <article ref={articleContainer} className="container flex-1 px-8 py-4 overflow-y-auto">
-                <div className="flex flex-col gap-6">
+                <div className={'flex justify-end items-center gap-2'}>
+                    <Link
+                        to={APP_ROUTES.schedule.index}
+                        className={`btn btn-sm btn-circle ${pathname.includes(APP_ROUTES.schedule.index) ? 'btn-primary' : ''}`}
+                    >
+                        <i className="fa fa-calendar"></i>
+                    </Link>
 
-                    <Outlet />
+                    <Link
+                        to={APP_ROUTES.shoppingList.index}
+                        className={`btn btn-sm btn-circle ${pathname.includes(APP_ROUTES.schedule.index) ? 'btn-primary' : ''}\`}>`}
+                    >
+                        <i className="fa fa-shopping-basket"></i>
+                    </Link>
                 </div>
+            </nav>
+
+            <article ref={articleContainer} className="container flex-1 flex flex-col overflow-y-auto">
+                <Outlet />
             </article>
         </main>
     );

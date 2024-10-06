@@ -1,7 +1,5 @@
 /**/
 
 #root {
-    @apply relative min-h-screen overflow-hidden bg-white;
-    font-family: Figtree;
-    @apply md:flex md:ml-64;
+    font-family: "Reddit Sans", serif;
 }
