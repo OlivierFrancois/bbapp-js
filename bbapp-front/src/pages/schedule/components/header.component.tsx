@@ -1,6 +1,7 @@
 import { useContext, useMemo } from 'react';
 import dayjs from 'dayjs';
 import { DishScheduleContext } from '../schedule.page.tsx';
+import { LS_DATE } from '../../../routes.ts';
 
 export default function ScheduleHeader() {
     const { date, setDate } = useContext(DishScheduleContext);
@@ -13,6 +14,8 @@ export default function ScheduleHeader() {
         const dateObj = dayjs(date);
         const monday = dateObj.startOf('week').add(1, 'day');
         const sunday = dateObj.endOf('week');
+
+        localStorage.setItem(LS_DATE, dateObj.format('YYYY-MM-DD'));
 
         return `${monday.format('D MMMM')} - ${sunday.format('D MMMM YYYY')}`;
     }, [date]);

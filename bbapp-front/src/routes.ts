@@ -7,3 +7,5 @@ export const APP_ROUTES = {
         index: '/shopping-list',
     },
 };
+
+export const LS_DATE = 'BBAPP_DISH_SCHEDULE_DATE';
