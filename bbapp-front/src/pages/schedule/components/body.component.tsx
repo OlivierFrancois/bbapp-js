@@ -32,16 +32,22 @@ export default function ScheduleBody() {
         return datesMemo;
     }, [date]);
 
+    const scheduleItemsByDate = useMemo(() => {
+        return dates.map((date, dateKey) => {
+            return {
+                dateKey: dateKey,
+                dishScheduleItems: dishScheduleItems.filter(
+                    (scheduleItem) => dayjs(scheduleItem.date).format('YYYY-MM-DD') === date.format('YYYY-MM-DD')
+                ),
+            };
+        });
+    }, [dishScheduleItems]);
+
     return (
         <div className={'py-8 px-5 flex flex-col gap-3'}>
             {dates.map((date, dateKey) => (
                 <React.Fragment key={dateKey}>
-                    <DateRow
-                        date={date}
-                        scheduleItems={dishScheduleItems.filter(
-                            (scheduleItem) => dayjs(scheduleItem.date).format('YYYY-MM-DD') === date.format('YYYY-MM-DD')
-                        )}
-                    />
+                    <DateRow date={date} scheduleItems={scheduleItemsByDate.find((temp) => temp.dateKey === dateKey)?.dishScheduleItems ?? []} />
                     <hr className={'border-t-2'} />
                 </React.Fragment>
             ))}

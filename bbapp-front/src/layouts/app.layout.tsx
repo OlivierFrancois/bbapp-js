@@ -37,7 +37,7 @@ export default function AppLayout() {
                 </div>
             </nav>
 
-            <article ref={articleContainer} className="container flex-1 flex flex-col overflow-y-auto">
+            <article ref={articleContainer} className=" flex-1 flex flex-col overflow-y-auto">
                 <Outlet />
             </article>
         </main>
