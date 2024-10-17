@@ -1,25 +1,10 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { DishScheduleContext } from '../schedule.page.tsx';
-import dayjs from 'dayjs';
 import DateRow from './date-row.component.tsx';
-import { DishScheduleItem } from '../../../types/DishScheduleItem.tsx';
-import { DishScheduleAPI } from '../../../api/DishScheduleAPI.tsx';
+import dayjs from '../../../lib/dayjs.ts';
 
 export default function ScheduleBody() {
-    const [dishScheduleItems, setDishScheduleItems] = useState<DishScheduleItem[]>([]);
-
-    const { date } = useContext(DishScheduleContext);
-
-    useEffect(() => {
-        const payload = {
-            startDate: dayjs(date).startOf('week').format('YYYY-MM-DD'),
-            endDate: dayjs(date).endOf('week').format('YYYY-MM-DD'),
-        };
-
-        DishScheduleAPI.getPeriod(payload).then((res) => {
-            setDishScheduleItems(res);
-        });
-    }, [date]);
+    const { date, dishScheduleItems } = useContext(DishScheduleContext);
 
     const dates = useMemo(() => {
         const datesMemo = [];

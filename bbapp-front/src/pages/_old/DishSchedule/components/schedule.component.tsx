@@ -1,36 +1,35 @@
-import {useContext, useEffect, useState} from "react";
-import {DishScheduleContext} from "../dish-schedule.page.tsx";
-import dayjs from "dayjs";
-import {MoonIcon, SunIcon} from "@heroicons/react/16/solid";
-import {DishScheduleAPI} from "../../../../api/DishScheduleAPI.tsx";
-import {DishScheduleItem} from "../../../../types/DishScheduleItem.tsx";
-import Cell from "./cell.component.tsx";
+import { useContext, useEffect, useState } from 'react';
+import { DishScheduleContext } from '../dish-schedule.page.tsx';
+import dayjs from 'dayjs';
+import { MoonIcon, SunIcon } from '@heroicons/react/16/solid';
+import { DishScheduleAPI } from '../../../../lib/api/DishScheduleAPI.tsx';
+import { DishScheduleItem } from '../../../../types/DishScheduleItem.tsx';
+import Cell from './cell.component.tsx';
 
 const moments = ['midi', 'soir'];
 const cellHeight = 'h-[5.5rem]';
 
 export default function Schedule() {
-    const {date, selectedCell, swapMod, setSwapMod, swapItem1, swapItem2, setSwapItem1, setSwapItem2} = useContext(DishScheduleContext);
+    const { date, selectedCell, swapMod, setSwapMod, swapItem1, swapItem2, setSwapItem1, setSwapItem2 } = useContext(DishScheduleContext);
 
     const [dishScheduleItems, setDishScheduleItems] = useState<DishScheduleItem[]>([]);
 
     useEffect(() => {
         const payload = {
             startDate: dayjs(date).startOf('week').format('YYYY-MM-DD'),
-            endDate: dayjs(date).endOf('week').format('YYYY-MM-DD')
-        }
+            endDate: dayjs(date).endOf('week').format('YYYY-MM-DD'),
+        };
 
-        DishScheduleAPI.getPeriod(payload)
-            .then(res => {
-                setDishScheduleItems(res);
-            })
+        DishScheduleAPI.getPeriod(payload).then((res) => {
+            setDishScheduleItems(res);
+        });
     }, [date, selectedCell]);
 
     useEffect(() => {
         const payload = {
             startDate: dayjs(date).startOf('week').format('YYYY-MM-DD'),
-            endDate: dayjs(date).endOf('week').format('YYYY-MM-DD')
-        }
+            endDate: dayjs(date).endOf('week').format('YYYY-MM-DD'),
+        };
 
         if (swapItem1 && swapItem2) {
             const payload1 = {
@@ -42,19 +41,16 @@ export default function Schedule() {
                 date: new Date(swapItem1.date).toISOString(),
                 moment: swapItem1.moment,
                 dishIds: swapItem2.dishScheduleItem?.dishes.map((dish) => dish.id) ?? [],
-            }
+            };
 
-            DishScheduleAPI.save(payload1)
-                .then(() => {
-                    DishScheduleAPI.save(payload2)
-                        .then(() => {
-                            DishScheduleAPI.getPeriod(payload)
-                                .then(res => {
-                                    setSwapMod(false);
-                                    setDishScheduleItems(res);
-                                })
-                        })
+            DishScheduleAPI.save(payload1).then(() => {
+                DishScheduleAPI.save(payload2).then(() => {
+                    DishScheduleAPI.getPeriod(payload).then((res) => {
+                        setSwapMod(false);
+                        setDishScheduleItems(res);
+                    });
                 });
+            });
         }
 
         setSwapItem1(null);
@@ -63,7 +59,7 @@ export default function Schedule() {
 
     const handleSwapMod = () => {
         setSwapMod(!swapMod);
-    }
+    };
 
     const dates = [];
     let currentDate = dayjs(date).startOf('week');
@@ -86,14 +82,14 @@ export default function Schedule() {
                         </th>
 
                         <th className={'text-primary'}>
-                        <div className={'flex justify-center'}>
-                                <SunIcon className={'size-8'}/>
+                            <div className={'flex justify-center'}>
+                                <SunIcon className={'size-8'} />
                             </div>
                         </th>
 
                         <th className={'text-primary'}>
                             <div className={'flex justify-center'}>
-                                <MoonIcon className={'size-8'}/>
+                                <MoonIcon className={'size-8'} />
                             </div>
                         </th>
                     </tr>
@@ -115,7 +111,9 @@ export default function Schedule() {
                                         key={d.format('YYYY-MM-DD') + key}
                                         date={d.format('YYYY-MM-DD')}
                                         moment={moment}
-                                        dishScheduleItem={dishScheduleItems.find(p => dayjs(p.date).format('YYYY-MM-DD') === d.format('YYYY-MM-DD') && p.moment === moment)}
+                                        dishScheduleItem={dishScheduleItems.find(
+                                            (p) => dayjs(p.date).format('YYYY-MM-DD') === d.format('YYYY-MM-DD') && p.moment === moment
+                                        )}
                                     />
                                 </td>
                             ))}
@@ -124,5 +122,5 @@ export default function Schedule() {
                 </tbody>
             </table>
         </div>
-    )
+    );
 }

@@ -27,9 +27,9 @@ export default {
                     secondary: '#FBCE9E',
                     'secondary-content': '#030F2B',
 
-                    accent: '#fff',
-                    'accent-focus': '#fff',
-                    'accent-content': '#fff',
+                    accent: '#00BDC8',
+                    'accent-content': '#030F2B',
+                    'accent-focus': '#030F2B',
                 },
             },
             'dark',

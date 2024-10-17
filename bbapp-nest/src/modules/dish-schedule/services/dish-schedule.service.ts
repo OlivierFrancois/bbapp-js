@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { DishScheduleItem, Prisma } from '@prisma/client';
 import { PrismaService } from '../../../prisma.service';
+import { AddDishDto } from '../dtos/add-dish.dto';
 
 @Injectable()
 export class DishScheduleService {
@@ -23,6 +24,22 @@ export class DishScheduleService {
             include: {
                 dishes: true, // Charge les relations avec les plats associés
             },
+        });
+    }
+
+    async add(data: AddDishDto) {
+        return this.prisma.dishScheduleItem.upsert({
+            where: { date_moment: { date: data.date, moment: data.moment } },
+            update: { dishes: { connect: [{ id: data.dishId }] } },
+            create: { date: data.date, moment: data.moment, dishes: { connect: [{ id: data.dishId }] } },
+        });
+    }
+
+    async remove(data: AddDishDto) {
+        console.log(data);
+        return this.prisma.dishScheduleItem.update({
+            where: { date_moment: { date: data.date, moment: data.moment } },
+            data: { dishes: { disconnect: [{ id: data.dishId }] } },
         });
     }
 

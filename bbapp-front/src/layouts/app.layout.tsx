@@ -15,7 +15,7 @@ export default function AppLayout() {
 
     return (
         <main className="flex flex-col min-h-screen overflow-hidden max-h-screen">
-            <nav className={'absolute w-screen p-4 top-0 flex items-center justify-between'}>
+            <nav className={'z-10 absolute w-screen p-4 top-0 flex items-center justify-between'}>
                 <Link to={'/'} className={'btn btn-ghost btn-circle'}>
                     <Logo color={pathname === APP_ROUTES.home ? '#FBCE9E' : '#7ACFB0'} />
                 </Link>
@@ -23,14 +23,14 @@ export default function AppLayout() {
                 <div className={'flex justify-end items-center gap-2'}>
                     <Link
                         to={APP_ROUTES.schedule.index}
-                        className={`btn min-h-0 size-10 text-lg btn-circle ${pathname.includes(APP_ROUTES.schedule.index) ? 'btn-primary' : ''}`}
+                        className={`shadow btn min-h-0 size-10 text-lg btn-circle ${pathname.includes(APP_ROUTES.schedule.index) ? 'btn-primary' : ''}`}
                     >
                         <i className="fa fa-calendar"></i>
                     </Link>
 
                     <Link
                         to={APP_ROUTES.shoppingList.index}
-                        className={`btn min-h-0 size-10 text-lg btn-circle ${pathname.includes(APP_ROUTES.shoppingList.index) ? 'btn-primary' : ''}\`}>`}
+                        className={`shadow btn min-h-0 size-10 text-lg btn-circle ${pathname.includes(APP_ROUTES.shoppingList.index) ? 'btn-primary' : ''}\`}>`}
                     >
                         <i className="fa fa-shopping-basket"></i>
                     </Link>

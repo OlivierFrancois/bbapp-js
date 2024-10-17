@@ -52,7 +52,7 @@ export class DishService {
             data: {
                 ...data,
                 dishTags: {
-                    connect: dishTagIds.map((id) => ({ id: id })),
+                    connect: dishTagIds?.map((id) => ({ id: id })) ?? [],
                 },
             },
             include: { dishTags: true },

@@ -12,7 +12,7 @@ export default function ScheduleHeader() {
 
     const formattedDate = useMemo(() => {
         const dateObj = dayjs(date);
-        const monday = dateObj.startOf('week').add(1, 'day');
+        const monday = dateObj.startOf('week');
         const sunday = dateObj.endOf('week');
 
         localStorage.setItem(LS_DATE, dateObj.format('YYYY-MM-DD'));

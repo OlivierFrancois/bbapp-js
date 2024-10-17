@@ -43,6 +43,8 @@ model DishScheduleItem {
     date      DateTime
     moment    String
     dishes    Dish[]
+
+    @@unique([date, moment])
 }
 
 model Article {

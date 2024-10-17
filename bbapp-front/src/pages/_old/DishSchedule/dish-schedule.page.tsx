@@ -1,15 +1,14 @@
 import DateSelect from './components/date.select.component.tsx';
 import Schedule from './components/schedule.component.tsx';
 import React, { createContext, useState } from 'react';
-import dayjs from 'dayjs';
-import 'dayjs/locale/fr';
 import { DishScheduleItem } from '../../../types/DishScheduleItem.tsx';
 import Header from './components/edit/header.component.tsx';
 import Body from './components/edit/body.component.tsx';
 import SlideUpModal from '../../../components/slide-up-modal/slide-up-modal.component.tsx';
 import { LS_DATE } from '../../../routes.ts';
+import dayjs from '../../../lib/dayjs.ts';
 
-dayjs.locale('fr');
+// TODO : exporter un objet dayjs avec dayjs.utc
 
 interface SelectedCell {
     date: string;

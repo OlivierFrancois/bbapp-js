@@ -1,8 +1,9 @@
 import moments from '../../../types/Moment.tsx';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Dayjs } from 'dayjs';
 import { DishScheduleItem } from '../../../types/DishScheduleItem.tsx';
 import MomentRow from './moment-row.component.tsx';
+import { DishScheduleContext } from '../schedule.page.tsx';
 
 interface DateRowProps {
     date: Dayjs;
@@ -12,8 +13,10 @@ interface DateRowProps {
 export default function DateRow({ date, scheduleItems }: DateRowProps) {
     const [isOpened, setIsOpened] = useState<boolean>(scheduleItems.length > 0);
 
+    const { action } = useContext(DishScheduleContext);
+
     useEffect(() => {
-        setIsOpened(scheduleItems.length > 0);
+        setIsOpened(scheduleItems.filter((item) => item.dishes.length > 0).length > 0);
     }, [scheduleItems]);
 
     const containerRef = useRef<HTMLDivElement>(null);
@@ -21,11 +24,11 @@ export default function DateRow({ date, scheduleItems }: DateRowProps) {
 
     useEffect(() => {
         if (isOpened && containerRef.current) {
-            setMaxHeight(`${containerRef.current.scrollHeight}px`);
+            setMaxHeight(`${containerRef.current.scrollHeight + 5}px`);
         } else {
             setMaxHeight('0');
         }
-    }, [isOpened, moments]);
+    }, [isOpened, moments, action]);
 
     return (
         <div className={'flex flex-col gap-0'}>
@@ -38,7 +41,12 @@ export default function DateRow({ date, scheduleItems }: DateRowProps) {
             <div ref={containerRef} className={`transition-all overflow-hidden`} style={{ maxHeight }}>
                 <div className={'pt-4 flex flex-col gap-1 '}>
                     {moments.map((moment, momentKey) => (
-                        <MomentRow key={momentKey} moment={moment} scheduleItem={scheduleItems.find((item) => item.moment === moment.id)} />
+                        <MomentRow
+                            key={momentKey}
+                            date={date}
+                            moment={moment}
+                            scheduleItem={scheduleItems.find((item) => item.moment === moment.id)}
+                        />
                     ))}
                 </div>
             </div>
