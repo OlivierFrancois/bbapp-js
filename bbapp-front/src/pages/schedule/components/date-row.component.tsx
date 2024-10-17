@@ -39,7 +39,7 @@ export default function DateRow({ date, scheduleItems }: DateRowProps) {
             </div>
 
             <div ref={containerRef} className={`transition-all overflow-hidden`} style={{ maxHeight }}>
-                <div className={'pt-4 flex flex-col gap-1 '}>
+                <div className={'pt-3 flex flex-col gap-1 '}>
                     {moments.map((moment, momentKey) => (
                         <MomentRow
                             key={momentKey}

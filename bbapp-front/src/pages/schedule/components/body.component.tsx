@@ -29,7 +29,7 @@ export default function ScheduleBody() {
     }, [dishScheduleItems]);
 
     return (
-        <div className={'py-8 px-5 flex flex-col gap-3'}>
+        <div className={'py-4 px-5 flex flex-col gap-3'}>
             {dates.map((date, dateKey) => (
                 <React.Fragment key={dateKey}>
                     <DateRow date={date} scheduleItems={scheduleItemsByDate.find((temp) => temp.dateKey === dateKey)?.dishScheduleItems ?? []} />
