@@ -8,8 +8,6 @@ import SlideUpModal from '../../../components/slide-up-modal/slide-up-modal.comp
 import { LS_DATE } from '../../../routes.ts';
 import dayjs from '../../../lib/dayjs.ts';
 
-// TODO : exporter un objet dayjs avec dayjs.utc
-
 interface SelectedCell {
     date: string;
     moment: string;
