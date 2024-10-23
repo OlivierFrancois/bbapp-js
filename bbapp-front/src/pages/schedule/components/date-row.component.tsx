@@ -4,6 +4,7 @@ import { Dayjs } from 'dayjs';
 import { DishScheduleItem } from '../../../types/DishScheduleItem.tsx';
 import MomentRow from './moment-row.component.tsx';
 import { DishScheduleContext } from '../schedule.page.tsx';
+import dayjs from '../../../lib/dayjs.ts';
 
 interface DateRowProps {
     date: Dayjs;
@@ -11,12 +12,12 @@ interface DateRowProps {
 }
 
 export default function DateRow({ date, scheduleItems }: DateRowProps) {
-    const [isOpened, setIsOpened] = useState<boolean>(scheduleItems.length > 0);
+    const [isOpened, setIsOpened] = useState<boolean>(scheduleItems.length > 0 && date.isSameOrAfter(dayjs()));
 
     const { action } = useContext(DishScheduleContext);
 
     useEffect(() => {
-        setIsOpened(scheduleItems.filter((item) => item.dishes.length > 0).length > 0);
+        setIsOpened(scheduleItems.filter((item) => item.dishes.length > 0).length > 0 && date.isSameOrAfter(dayjs()));
     }, [scheduleItems]);
 
     const containerRef = useRef<HTMLDivElement>(null);

@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { Moment } from '../../../types/Moment.tsx';
 import { DishScheduleItem } from '../../../types/DishScheduleItem.tsx';
-import { DishScheduleContext } from '../schedule.page.tsx';
+import { DishScheduleContext, SwapItem } from '../schedule.page.tsx';
 import { useModal } from '../../../contexts/modal.provider.tsx';
 import AddDish from './add-dish.modal.tsx';
 import RemoveDish from './remove-dish.modal.tsx';
@@ -15,7 +15,7 @@ interface MomentRowProps {
 }
 
 export default function MomentRow({ moment, scheduleItem, date }: MomentRowProps) {
-    const { action, reloadSchedule } = useContext(DishScheduleContext);
+    const { action, reloadSchedule, swapItems, setSwapItems } = useContext(DishScheduleContext);
 
     const { openModal, closeModal } = useModal();
 
@@ -29,6 +29,8 @@ export default function MomentRow({ moment, scheduleItem, date }: MomentRowProps
         setRemoveMod(action?.id === 'remove');
         setSwapingMod(action?.id === 'swap');
         setCopyingMod(action?.id === 'copy');
+
+        console.log(copyingMod);
     }, [action]);
 
     const handleAddDish = (dishId: number) => {
@@ -44,8 +46,41 @@ export default function MomentRow({ moment, scheduleItem, date }: MomentRowProps
         });
     };
 
+    const handleSwapClick = () => {
+        if (!swapingMod) return;
+
+        const itemSwap: SwapItem = {
+            date: date.toISOString(),
+            moment: moment.id,
+            dishScheduleItem: scheduleItem,
+        };
+
+        if (!swapItems.from) {
+            setSwapItems({ ...swapItems, from: itemSwap });
+            return;
+        }
+
+        setSwapItems({ ...swapItems, to: itemSwap });
+        return;
+    };
+
+    const isSwaping = useMemo(() => {
+        return swapingMod && swapItems.from && swapItems.from.moment === moment.id && swapItems.from.date === date.toISOString();
+    }, [swapItems]);
+
     return (
-        <div className={`relative rounded-xl p-0.5 flex items-stretch text-${moment.theme} gap-2 text-sm`}>
+        <div
+            className={`${swapingMod && 'cursor-pointer'} ${isSwaping && 'bg-info/20'} transition-colors relative rounded p-0.5 flex items-stretch text-${moment.theme} gap-2 text-sm`}
+            onClick={handleSwapClick}
+        >
+            {isSwaping && (
+                <>
+                    <div className={'z-10 absolute top-0 right-0 h-full w-6 animate-pulse flex items-center justify-center'}>
+                        <i className="fa fa-right-left text-dark"></i>
+                    </div>
+                </>
+            )}
+
             <div className={'flex gap-2 items-center'}>
                 <div className={`transition-transform ${addingMod && 'rotate-45'}`}>{moment.icon}</div>
                 <div className={'w-8'}>{moment.name}</div>

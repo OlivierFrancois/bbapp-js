@@ -20,6 +20,12 @@ export const scheduleActions: ScheduleAction[] = [
     { id: 'swap', label: 'Échanger', icon: 'fa fa-right-left' },
 ];
 
+export type SwapItem = {
+    date: string;
+    moment: string;
+    dishScheduleItem?: DishScheduleItem;
+};
+
 type DishScheduleContextI = {
     dishScheduleItems: DishScheduleItem[];
     reloadSchedule: (date: string) => void;
@@ -29,12 +35,8 @@ type DishScheduleContextI = {
     setAction: React.Dispatch<React.SetStateAction<ScheduleAction | null>>;
     // selectedCell: SelectedCell | null;
     // setSelectedCell: React.Dispatch<React.SetStateAction<SelectedCell | null>>;
-    // swapItem1: SwapItem | null;
-    // setSwapItem1: React.Dispatch<React.SetStateAction<SwapItem | null>>;
-    // swapItem2: SwapItem | null;
-    // setSwapItem2: React.Dispatch<React.SetStateAction<SwapItem | null>>;
-    //  swapMod: boolean;
-    // setSwapMod: React.Dispatch<React.SetStateAction<boolean>>;
+    swapItems: { to: SwapItem | null; from: SwapItem | null };
+    setSwapItems: React.Dispatch<React.SetStateAction<{ to: SwapItem | null; from: SwapItem | null }>>;
 };
 export const DishScheduleContext = createContext<DishScheduleContextI>({} as DishScheduleContextI);
 
@@ -43,6 +45,7 @@ export default function SchedulePage() {
     const [date, setDate] = useState<string>(LS_date);
     const [action, setAction] = useState<ScheduleAction | null>(null);
     const [dishScheduleItems, setDishScheduleItems] = useState<DishScheduleItem[]>([]);
+    const [swapItems, setSwapItems] = useState<{ to: SwapItem | null; from: SwapItem | null }>({ to: null, from: null });
 
     const reloadSchedule = useCallback((date: string) => {
         const payload = {
@@ -66,7 +69,35 @@ export default function SchedulePage() {
         setDate,
         action,
         setAction,
+        swapItems,
+        setSwapItems,
     };
+
+    useEffect(() => {
+        setSwapItems({ to: null, from: null });
+    }, [action]);
+
+    useEffect(() => {
+        if (swapItems.from && swapItems.to) {
+            const payloadTo = {
+                date: swapItems.to.date,
+                moment: swapItems.to.moment,
+                dishIds: swapItems.from.dishScheduleItem?.dishes.map((dish) => dish.id) ?? [],
+            };
+            const payloadFrom = {
+                date: new Date(swapItems.from.date).toISOString(),
+                moment: swapItems.from.moment,
+                dishIds: swapItems.to.dishScheduleItem?.dishes.map((dish) => dish.id) ?? [],
+            };
+
+            DishScheduleAPI.save(payloadTo).then(() => {
+                DishScheduleAPI.save(payloadFrom).then(() => {
+                    reloadSchedule(date);
+                });
+            });
+            setSwapItems({ to: null, from: null });
+        }
+    }, [swapItems]);
 
     return (
         <DishScheduleContext.Provider value={context}>
