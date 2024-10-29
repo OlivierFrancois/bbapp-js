@@ -2,6 +2,7 @@ import { useContext, useMemo } from 'react';
 import dayjs from 'dayjs';
 import { LS_DATE } from '../../../routes.ts';
 import { DishScheduleContext } from '../schedule.utils.tsx';
+import background_blue from '../../../assets/images/background_blue.png';
 
 export default function ScheduleHeader() {
     const { date, setDate } = useContext(DishScheduleContext);
@@ -21,7 +22,7 @@ export default function ScheduleHeader() {
     }, [date]);
 
     return (
-        <div className={'h-[13rem] bg-center flex flex-col justify-end'} style={{ backgroundImage: `url('/public/background_blue.png')` }}>
+        <div className={'h-[13rem] bg-center flex flex-col justify-end'} style={{ backgroundImage: `url(${background_blue})` }}>
             <div className={'text-white px-5 py-3 flex flex-col'}>
                 <h3 className={''}>{formattedDate}</h3>
 

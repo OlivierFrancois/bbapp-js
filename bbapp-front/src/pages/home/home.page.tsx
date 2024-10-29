@@ -1,4 +1,5 @@
 import MeliveSvg from '../../components/melive.component.tsx';
+import background_green from '../../assets/images/background_green.png';
 
 export default function HomePage() {
     return (
@@ -6,7 +7,7 @@ export default function HomePage() {
             <div
                 className={'absolute h-screen w-screen top-0 left-0 bg-center -z-10'}
                 style={{
-                    backgroundImage: `url('/public/background_green.png')`,
+                    backgroundImage: `url(${background_green})`,
                 }}
             ></div>
 
