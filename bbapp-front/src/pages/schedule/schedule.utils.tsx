@@ -9,7 +9,7 @@ export type ScheduleAction = {
     label: string;
 };
 
-export type SwapItem = {
+export type AbstractItem = {
     date: string;
     moment: string;
     dishScheduleItem?: DishScheduleItem;
@@ -29,7 +29,9 @@ export type DishScheduleContextI = {
     setDate: React.Dispatch<React.SetStateAction<string>>;
     action: ScheduleAction | null;
     setAction: React.Dispatch<React.SetStateAction<ScheduleAction | null>>;
-    swapItems: { to: SwapItem | null; from: SwapItem | null };
-    setSwapItems: React.Dispatch<React.SetStateAction<{ to: SwapItem | null; from: SwapItem | null }>>;
+    swapItems: { to: AbstractItem | null; from: AbstractItem | null };
+    setSwapItems: React.Dispatch<React.SetStateAction<{ to: AbstractItem | null; from: AbstractItem | null }>>;
+    copyItems: { to: AbstractItem | null; from: AbstractItem | null };
+    setCopyItems: React.Dispatch<React.SetStateAction<{ to: AbstractItem | null; from: AbstractItem | null }>>;
 };
 export const DishScheduleContext = createContext<DishScheduleContextI>({} as DishScheduleContextI);

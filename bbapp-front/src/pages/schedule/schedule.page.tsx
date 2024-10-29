@@ -6,14 +6,15 @@ import { DishScheduleItem } from '../../types/DishScheduleItem.tsx';
 import { DishScheduleAPI } from '../../lib/api/DishScheduleAPI.tsx';
 import dayjs from '../../lib/dayjs.ts';
 import { LS_DATE } from '../../routes.ts';
-import { DishScheduleContext, DishScheduleContextI, ScheduleAction, SwapItem } from './schedule.utils.tsx';
+import { AbstractItem, DishScheduleContext, DishScheduleContextI, ScheduleAction } from './schedule.utils.tsx';
 
 export default function SchedulePage() {
     const LS_date = localStorage.getItem(LS_DATE) ? (localStorage.getItem(LS_DATE) as string) : dayjs().format('YYYY-MM-DD');
     const [date, setDate] = useState<string>(LS_date);
     const [action, setAction] = useState<ScheduleAction | null>(null);
     const [dishScheduleItems, setDishScheduleItems] = useState<DishScheduleItem[]>([]);
-    const [swapItems, setSwapItems] = useState<{ to: SwapItem | null; from: SwapItem | null }>({ to: null, from: null });
+    const [swapItems, setSwapItems] = useState<{ to: AbstractItem | null; from: AbstractItem | null }>({ to: null, from: null });
+    const [copyItems, setCopyItems] = useState<{ to: AbstractItem | null; from: AbstractItem | null }>({ to: null, from: null });
 
     const reloadSchedule = useCallback((date: string) => {
         const payload = {
@@ -39,6 +40,8 @@ export default function SchedulePage() {
         setAction,
         swapItems,
         setSwapItems,
+        copyItems,
+        setCopyItems,
     };
 
     useEffect(() => {
@@ -66,6 +69,21 @@ export default function SchedulePage() {
             setSwapItems({ to: null, from: null });
         }
     }, [swapItems]);
+
+    useEffect(() => {
+        if (copyItems.from && copyItems.to) {
+            const payloadTo = {
+                date: copyItems.to.date,
+                moment: copyItems.to.moment,
+                dishIds: copyItems.from.dishScheduleItem?.dishes.map((dish) => dish.id) ?? [],
+            };
+
+            DishScheduleAPI.save(payloadTo).then(() => {
+                reloadSchedule(date);
+            });
+            setCopyItems({ to: null, from: null });
+        }
+    }, [copyItems]);
 
     return (
         <DishScheduleContext.Provider value={context}>

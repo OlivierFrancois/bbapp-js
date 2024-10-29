@@ -1,12 +1,12 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { Moment } from '../../../types/Moment.tsx';
 import { DishScheduleItem } from '../../../types/DishScheduleItem.tsx';
-import { DishScheduleContext, SwapItem } from '../schedule.page.tsx';
 import { useModal } from '../../../contexts/modal.provider.tsx';
 import AddDish from './add-dish.modal.tsx';
 import RemoveDish from './remove-dish.modal.tsx';
 import { DishScheduleAPI } from '../../../lib/api/DishScheduleAPI.tsx';
 import { Dayjs } from 'dayjs';
+import { AbstractItem, DishScheduleContext } from '../schedule.utils.tsx';
 
 interface MomentRowProps {
     moment: Moment;
@@ -15,7 +15,7 @@ interface MomentRowProps {
 }
 
 export default function MomentRow({ moment, scheduleItem, date }: MomentRowProps) {
-    const { action, reloadSchedule, swapItems, setSwapItems } = useContext(DishScheduleContext);
+    const { action, reloadSchedule, swapItems, setSwapItems, copyItems, setCopyItems } = useContext(DishScheduleContext);
 
     const { openModal, closeModal } = useModal();
 
@@ -29,8 +29,6 @@ export default function MomentRow({ moment, scheduleItem, date }: MomentRowProps
         setRemoveMod(action?.id === 'remove');
         setSwapingMod(action?.id === 'swap');
         setCopyingMod(action?.id === 'copy');
-
-        console.log(copyingMod);
     }, [action]);
 
     const handleAddDish = (dishId: number) => {
@@ -46,37 +44,61 @@ export default function MomentRow({ moment, scheduleItem, date }: MomentRowProps
         });
     };
 
+    const handleClick = () => {
+        if (copyingMod) handleCopyClick();
+        else if (swapingMod) handleSwapClick();
+    };
     const handleSwapClick = () => {
         if (!swapingMod) return;
 
-        const itemSwap: SwapItem = {
+        const swapItem: AbstractItem = {
             date: date.toISOString(),
             moment: moment.id,
             dishScheduleItem: scheduleItem,
         };
 
         if (!swapItems.from) {
-            setSwapItems({ ...swapItems, from: itemSwap });
+            setSwapItems({ ...swapItems, from: swapItem });
             return;
         }
 
-        setSwapItems({ ...swapItems, to: itemSwap });
+        setSwapItems({ ...swapItems, to: swapItem });
+        return;
+    };
+    const handleCopyClick = () => {
+        if (!copyingMod) return;
+
+        const copyItem: AbstractItem = {
+            date: date.toISOString(),
+            moment: moment.id,
+            dishScheduleItem: scheduleItem,
+        };
+
+        if (!copyItems.from) {
+            setCopyItems({ ...copyItems, from: copyItem });
+            return;
+        }
+        setCopyItems({ ...copyItems, to: copyItem });
         return;
     };
 
     const isSwaping = useMemo(() => {
         return swapingMod && swapItems.from && swapItems.from.moment === moment.id && swapItems.from.date === date.toISOString();
     }, [swapItems]);
+    const isCopying = useMemo(() => {
+        return copyingMod && copyItems.from && copyItems.from.moment === moment.id && copyItems.from.date === date.toISOString();
+    }, [copyItems]);
 
     return (
         <div
-            className={`${swapingMod && 'cursor-pointer'} ${isSwaping && 'bg-info/20'} transition-colors relative rounded p-0.5 flex items-stretch text-${moment.theme} gap-2 text-sm`}
-            onClick={handleSwapClick}
+            className={`${(swapingMod || isCopying) && 'cursor-pointer'} ${(isSwaping || isCopying) && 'bg-info/20'} transition-colors relative rounded p-0.5 flex items-stretch text-${moment.theme} gap-2 text-sm`}
+            onClick={handleClick}
         >
-            {isSwaping && (
+            {(isSwaping || isCopying) && (
                 <>
                     <div className={'z-10 absolute top-0 right-0 h-full w-6 animate-pulse flex items-center justify-center'}>
-                        <i className="fa fa-right-left text-dark"></i>
+                        {isCopying && <i className="fa fa-copy text-dark"></i>}
+                        {isSwaping && <i className="fa fa-right-left text-dark"></i>}
                     </div>
                 </>
             )}
