@@ -1,7 +1,7 @@
 import React, { useContext, useMemo } from 'react';
-import { DishScheduleContext } from '../schedule.page.tsx';
 import DateRow from './date-row.component.tsx';
 import dayjs from '../../../lib/dayjs.ts';
+import { DishScheduleContext } from '../schedule.utils.tsx';
 
 export default function ScheduleBody() {
     const { date, dishScheduleItems } = useContext(DishScheduleContext);

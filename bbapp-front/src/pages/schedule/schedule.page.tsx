@@ -1,44 +1,12 @@
 import ScheduleHeader from './components/header.component.tsx';
-import React, { createContext, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import ScheduleBody from './components/body.component.tsx';
 import ScheduleActionBar from './components/action.component.tsx';
 import { DishScheduleItem } from '../../types/DishScheduleItem.tsx';
 import { DishScheduleAPI } from '../../lib/api/DishScheduleAPI.tsx';
 import dayjs from '../../lib/dayjs.ts';
-
-const LS_DATE = 'BBAPP_DISH_SCHEDULE_DATE';
-
-export type ScheduleAction = {
-    id: string;
-    icon: string;
-    label: string;
-};
-export const scheduleActions: ScheduleAction[] = [
-    { id: 'remove', label: 'Supprimer', icon: 'fa fa-trash' },
-    { id: 'add', label: 'Ajouter', icon: 'fa fa-plus' },
-    { id: 'copy', label: 'Copier', icon: 'fa fa-copy' },
-    { id: 'swap', label: 'Échanger', icon: 'fa fa-right-left' },
-];
-
-export type SwapItem = {
-    date: string;
-    moment: string;
-    dishScheduleItem?: DishScheduleItem;
-};
-
-type DishScheduleContextI = {
-    dishScheduleItems: DishScheduleItem[];
-    reloadSchedule: (date: string) => void;
-    date: string;
-    setDate: React.Dispatch<React.SetStateAction<string>>;
-    action: ScheduleAction | null;
-    setAction: React.Dispatch<React.SetStateAction<ScheduleAction | null>>;
-    // selectedCell: SelectedCell | null;
-    // setSelectedCell: React.Dispatch<React.SetStateAction<SelectedCell | null>>;
-    swapItems: { to: SwapItem | null; from: SwapItem | null };
-    setSwapItems: React.Dispatch<React.SetStateAction<{ to: SwapItem | null; from: SwapItem | null }>>;
-};
-export const DishScheduleContext = createContext<DishScheduleContextI>({} as DishScheduleContextI);
+import { LS_DATE } from '../../routes.ts';
+import { DishScheduleContext, DishScheduleContextI, ScheduleAction, SwapItem } from './schedule.utils.tsx';
 
 export default function SchedulePage() {
     const LS_date = localStorage.getItem(LS_DATE) ? (localStorage.getItem(LS_DATE) as string) : dayjs().format('YYYY-MM-DD');

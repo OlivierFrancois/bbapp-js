@@ -1,7 +1,7 @@
 import { useContext, useMemo } from 'react';
 import dayjs from 'dayjs';
-import { DishScheduleContext } from '../schedule.page.tsx';
 import { LS_DATE } from '../../../routes.ts';
+import { DishScheduleContext } from '../schedule.utils.tsx';
 
 export default function ScheduleHeader() {
     const { date, setDate } = useContext(DishScheduleContext);

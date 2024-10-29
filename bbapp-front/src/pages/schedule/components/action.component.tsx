@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { DishScheduleContext, ScheduleAction, scheduleActions } from '../schedule.page.tsx';
+import { DishScheduleContext, ScheduleAction, scheduleActions } from '../schedule.utils.tsx';
 
 export default function ScheduleActionBar() {
     const { action, setAction } = useContext(DishScheduleContext);

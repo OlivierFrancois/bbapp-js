@@ -3,8 +3,8 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { Dayjs } from 'dayjs';
 import { DishScheduleItem } from '../../../types/DishScheduleItem.tsx';
 import MomentRow from './moment-row.component.tsx';
-import { DishScheduleContext } from '../schedule.page.tsx';
 import dayjs from '../../../lib/dayjs.ts';
+import { DishScheduleContext } from '../schedule.utils.tsx';
 
 interface DateRowProps {
     date: Dayjs;
