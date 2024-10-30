@@ -87,7 +87,7 @@ export default function SchedulePage() {
 
     return (
         <DishScheduleContext.Provider value={context}>
-            <div>
+            <div className={'pb-14'}>
                 <ScheduleHeader />
                 <ScheduleBody />
                 <ScheduleActionBar />
