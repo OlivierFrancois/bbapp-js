@@ -50,6 +50,8 @@ export default function MomentRow({ moment, scheduleItem, date }: MomentRowProps
                     handleRemoveDish={handleRemoveDish}
                 />
             );
+        } else if (dish.url) {
+            window.open(dish.url, '_blank');
         }
     };
     const handleRemoveDish = (dishId: number) => {
