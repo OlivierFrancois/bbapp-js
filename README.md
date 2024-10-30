@@ -1,7 +1,5 @@
 TODO :
-* [FRONT + BACK] Permettre l'ajout de tag sur un dish + dans la liste des dishes, filtrer/trier par tags
-* [FRONT] Dans le dishSchedule, bouton pour vider des cases
-* [FRONT] Dans le dishSchedule, bouton pour dupliquer des cases
-* [FRONT] Refactoriser les dishes
-* [FRONT] Nouveau design de l'app + version desktop
-
+* [FRONT] Ouverture/fermeture des lignes plus ergo
+* [FRONT] Reset de l'action quand on clique dedans dans le menu action
+* [FRONT] Accès aux recettes
+* [FRONT] Pouvoir modifier le dish directement via le planning
