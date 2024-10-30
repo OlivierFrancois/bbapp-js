@@ -26,7 +26,7 @@ export default function ScheduleActionBar() {
                             <button
                                 onClick={() => handleActionChange(action)}
                                 key={key}
-                                className={'btn btn-sm btn-circle btn-accent text-xl tooltip'}
+                                className={'btn btn-sm btn-circle btn-primary text-xl tooltip'}
                                 data-tip={action.label}
                             >
                                 <i className={action.icon}></i>
@@ -36,7 +36,7 @@ export default function ScheduleActionBar() {
                 )}
 
                 {!open && action && (
-                    <button className={'btn btn-sm btn-circle btn-accent text-xl'}>
+                    <button onClick={() => setAction(null)} className={'btn btn-sm btn-circle btn-primary text-xl'}>
                         <i className={action.icon}></i>
                     </button>
                 )}
