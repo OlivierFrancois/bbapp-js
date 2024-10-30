@@ -10,8 +10,17 @@ import { AbstractItem, DishScheduleContext, DishScheduleContextI, LS_TYPE, Sched
 
 export default function SchedulePage() {
     const todayYmd = dayjs().format('YYYY-MM-DD');
-    const LS_date = localStorage.getItem(LS_DATE);
-    const LS_date_obj: LS_TYPE = LS_date ? JSON.parse(LS_date) : { date: todayYmd, lastUpdate: dayjs().toISOString() };
+
+    let LS_date_obj: LS_TYPE = { date: todayYmd, lastUpdate: dayjs().toISOString() };
+    try {
+        const LS_date = localStorage.getItem(LS_DATE);
+        if (LS_date) {
+            LS_date_obj = JSON.parse(LS_date);
+        }
+    } catch (error) {
+        console.error('Erreur lors du parsing du JSON depuis le localStorage :', error);
+    }
+
     const defaultDate = dayjs(LS_date_obj.lastUpdate).isBefore(dayjs().add(-10, 'minutes')) ? todayYmd : LS_date_obj.date;
 
     const [date, setDate] = useState<string>(defaultDate);
