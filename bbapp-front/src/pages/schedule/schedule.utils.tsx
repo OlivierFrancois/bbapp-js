@@ -1,8 +1,6 @@
 import { DishScheduleItem } from '../../types/DishScheduleItem.tsx';
 import React, { createContext } from 'react';
 
-export const LS_DATE = 'BBAPP_DISH_SCHEDULE_DATE';
-
 export type ScheduleAction = {
     id: string;
     icon: string;
@@ -35,3 +33,8 @@ export type DishScheduleContextI = {
     setCopyItems: React.Dispatch<React.SetStateAction<{ to: AbstractItem | null; from: AbstractItem | null }>>;
 };
 export const DishScheduleContext = createContext<DishScheduleContextI>({} as DishScheduleContextI);
+
+export type LS_TYPE = {
+    date: string;
+    lastUpdate?: string;
+};

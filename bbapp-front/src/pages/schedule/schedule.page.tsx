@@ -6,11 +6,15 @@ import { DishScheduleItem } from '../../types/DishScheduleItem.tsx';
 import { DishScheduleAPI } from '../../lib/api/DishScheduleAPI.tsx';
 import dayjs from '../../lib/dayjs.ts';
 import { LS_DATE } from '../../routes.ts';
-import { AbstractItem, DishScheduleContext, DishScheduleContextI, ScheduleAction } from './schedule.utils.tsx';
+import { AbstractItem, DishScheduleContext, DishScheduleContextI, LS_TYPE, ScheduleAction } from './schedule.utils.tsx';
 
 export default function SchedulePage() {
-    const LS_date = localStorage.getItem(LS_DATE) ? (localStorage.getItem(LS_DATE) as string) : dayjs().format('YYYY-MM-DD');
-    const [date, setDate] = useState<string>(LS_date);
+    const todayYmd = dayjs().format('YYYY-MM-DD');
+    const LS_date = localStorage.getItem(LS_DATE);
+    const LS_date_obj: LS_TYPE = LS_date ? JSON.parse(LS_date) : { date: todayYmd, lastUpdate: dayjs().toISOString() };
+    const defaultDate = dayjs(LS_date_obj.lastUpdate).isBefore(dayjs().add(-10, 'minutes')) ? todayYmd : LS_date_obj.date;
+
+    const [date, setDate] = useState<string>(defaultDate);
     const [action, setAction] = useState<ScheduleAction | null>(null);
     const [dishScheduleItems, setDishScheduleItems] = useState<DishScheduleItem[]>([]);
     const [swapItems, setSwapItems] = useState<{ to: AbstractItem | null; from: AbstractItem | null }>({ to: null, from: null });

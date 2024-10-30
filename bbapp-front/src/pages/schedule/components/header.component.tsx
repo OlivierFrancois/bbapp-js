@@ -16,7 +16,7 @@ export default function ScheduleHeader() {
         const monday = dateObj.startOf('week');
         const sunday = dateObj.endOf('week');
 
-        localStorage.setItem(LS_DATE, dateObj.format('YYYY-MM-DD'));
+        localStorage.setItem(LS_DATE, JSON.stringify({ date: dateObj.format('YYYY-MM-DD'), lastUpdate: dayjs().toISOString() }));
 
         return `${monday.format('D MMMM')} - ${sunday.format('D MMMM YYYY')}`;
     }, [date]);
