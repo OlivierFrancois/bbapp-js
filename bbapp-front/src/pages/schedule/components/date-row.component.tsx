@@ -1,5 +1,5 @@
 import moments from '../../../types/Moment.tsx';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { Dayjs } from 'dayjs';
 import { DishScheduleItem } from '../../../types/DishScheduleItem.tsx';
 import MomentRow from './moment-row.component.tsx';
@@ -12,13 +12,17 @@ interface DateRowProps {
 }
 
 export default function DateRow({ date, scheduleItems }: DateRowProps) {
-    const [isOpened, setIsOpened] = useState<boolean>(scheduleItems.length > 0 && date.isSameOrAfter(dayjs()));
-
     const { action } = useContext(DishScheduleContext);
 
+    const defaultIsOpened = useMemo(() => {
+        return (scheduleItems.length > 0 && date.isSameOrAfter(dayjs().startOf('d'))) || action !== null;
+    }, [scheduleItems, date, action]);
+
+    const [isOpened, setIsOpened] = useState<boolean>(defaultIsOpened);
+
     useEffect(() => {
-        setIsOpened(scheduleItems.filter((item) => item.dishes.length > 0).length > 0 && date.isSameOrAfter(dayjs()));
-    }, [scheduleItems]);
+        setIsOpened(defaultIsOpened);
+    }, [scheduleItems, action]);
 
     const containerRef = useRef<HTMLDivElement>(null);
     const [maxHeight, setMaxHeight] = useState('0');
