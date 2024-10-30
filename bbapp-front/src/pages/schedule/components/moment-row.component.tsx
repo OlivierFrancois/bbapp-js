@@ -3,10 +3,11 @@ import { Moment } from '../../../types/Moment.tsx';
 import { DishScheduleItem } from '../../../types/DishScheduleItem.tsx';
 import { useModal } from '../../../contexts/modal.provider.tsx';
 import AddDish from './add-dish.modal.tsx';
-import RemoveDish from './remove-dish.modal.tsx';
 import { DishScheduleAPI } from '../../../lib/api/DishScheduleAPI.tsx';
 import { Dayjs } from 'dayjs';
 import { AbstractItem, DishScheduleContext } from '../schedule.utils.tsx';
+import RemoveDish from './remove-dish.modal.tsx';
+import { Dish } from '../../../types/Dish.tsx';
 
 interface MomentRowProps {
     moment: Moment;
@@ -37,6 +38,20 @@ export default function MomentRow({ moment, scheduleItem, date }: MomentRowProps
             reloadSchedule(date.format('YYYY-MM-DD'));
         });
     };
+
+    const handleDishClick = (dish: Dish) => {
+        if (removeMod) {
+            openModal(
+                <RemoveDish
+                    key={`${date.format('YYYY-MM-DD')}_${moment.id}`}
+                    date={date}
+                    moment={moment}
+                    dish={dish}
+                    handleRemoveDish={handleRemoveDish}
+                />
+            );
+        }
+    };
     const handleRemoveDish = (dishId: number) => {
         DishScheduleAPI.remove({ date: date.toISOString(), moment: moment.id, dishId }).then(() => {
             closeModal();
@@ -44,7 +59,7 @@ export default function MomentRow({ moment, scheduleItem, date }: MomentRowProps
         });
     };
 
-    const handleClick = () => {
+    const handleRowClick = () => {
         if (copyingMod) handleCopyClick();
         else if (swapingMod) handleSwapClick();
     };
@@ -92,7 +107,7 @@ export default function MomentRow({ moment, scheduleItem, date }: MomentRowProps
     return (
         <div
             className={`${(swapingMod || isCopying) && 'cursor-pointer'} ${(isSwaping || isCopying) && 'bg-info/20'} transition-colors relative rounded p-0.5 flex items-stretch text-${moment.theme} gap-2 text-sm`}
-            onClick={handleClick}
+            onClick={handleRowClick}
         >
             {(isSwaping || isCopying) && (
                 <>
@@ -112,7 +127,7 @@ export default function MomentRow({ moment, scheduleItem, date }: MomentRowProps
 
             <div className={`transition-all flex-1 flex items-center gap-2 ${removeMod ? 'py-0.5' : ''} overflow-x-scroll no-scrollbar`}>
                 {scheduleItem?.dishes.map((dish, dishKey) => (
-                    <div key={dishKey} className={'relative'}>
+                    <div key={dishKey} className={`relative ${removeMod && 'cursor-pointer'}`} onClick={() => handleDishClick(dish)}>
                         <div
                             className={`bg-dark text-white px-3 py-0 rounded-full font-light text-[.7rem] first-letter:uppercase whitespace-nowrap max-w-40 overflow-hidden text-ellipsis`}
                             key={dishKey}
@@ -122,17 +137,6 @@ export default function MomentRow({ moment, scheduleItem, date }: MomentRowProps
 
                         <button
                             className={`${removeMod ? '-top-0.5 -right-1 ' : '-top-5 -right-10'} transition-all absolute text-white size-3 text-[.7rem] flex items-center justify-center bg-error rounded-full`}
-                            onClick={() =>
-                                openModal(
-                                    <RemoveDish
-                                        key={`${date.format('YYYY-MM-DD')}_${moment.id}`}
-                                        date={date}
-                                        moment={moment}
-                                        dish={dish}
-                                        handleRemoveDish={handleRemoveDish}
-                                    />
-                                )
-                            }
                         >
                             <i className="fa fa-times"></i>
                         </button>
