@@ -34,16 +34,16 @@ export default function ScheduleHeader() {
                     <div className={'flex items-center'}>
                         <button
                             onClick={() => handleDateChange(dayjs(date).add(-1, 'week').format('YYYY-MM-DD'))}
-                            className="btn btn-square btn-xs btn-ghost text-xl"
+                            className="btn btn-square btn-ghost size-10"
                         >
-                            <i className="fa fa-caret-left"></i>
+                            <i className="fa fa-fw fa-2x fa-caret-left"></i>
                         </button>
 
                         <button
                             onClick={() => handleDateChange(dayjs(date).add(1, 'week').format('YYYY-MM-DD'))}
-                            className="btn btn-square btn-xs btn-ghost text-xl"
+                            className="btn btn-square btn-ghost size-10"
                         >
-                            <i className="fa fa-caret-right"></i>
+                            <i className="fa fa-fw fa-2x fa-caret-right"></i>
                         </button>
                     </div>
                 </div>
