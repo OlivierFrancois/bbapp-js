@@ -1,0 +1,25 @@
+model User {
+    id        Int      @id @default(autoincrement())
+    username  String   @unique
+    email     String
+    role      Role     @default(USER)
+    password  String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    authLogs UserAuthLog[]
+}
+
+model UserAuthLog {
+    id     Int      @id @default(autoincrement())
+    userId Int
+    ip     String
+    at     DateTime @default(now())
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum Role {
+    ADMIN
+    USER
+}
