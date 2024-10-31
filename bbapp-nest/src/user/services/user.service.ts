@@ -8,7 +8,13 @@ export class UserService {
     saltOrRounds = 10;
     constructor(private readonly prismaService: PrismaService) {}
 
-    async findOne(username: string): Promise<User | undefined> {
+    async findOne(id: number): Promise<User | undefined> {
+        return this.prismaService.user.findFirst({
+            where: { id },
+        });
+    }
+
+    async findByUsername(username: string): Promise<User | undefined> {
         return this.prismaService.user.findFirst({
             where: { username: { contains: username } },
         });

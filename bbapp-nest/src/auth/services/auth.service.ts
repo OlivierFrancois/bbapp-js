@@ -18,7 +18,7 @@ export class AuthService {
 
     async signIn(signInDto: SignInDto, ip: string) {
         const { username, password } = signInDto;
-        const user = await this.userService.findOne(username);
+        const user = await this.userService.findByUsername(username);
         const isPasswordValid = user !== null && (await this.userService.comparePassword(password, user.password));
 
         if (!isPasswordValid) {

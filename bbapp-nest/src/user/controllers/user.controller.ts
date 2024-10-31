@@ -10,7 +10,7 @@ export class UserController {
 
     @Get('check-username-availability')
     async checkUsernameAvailability(@Query('username') username: string) {
-        return (await this.userService.findOne(username)) === null;
+        return (await this.userService.findByUsername(username)) === null;
     }
 
     @Post()
