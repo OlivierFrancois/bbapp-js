@@ -125,10 +125,7 @@ export const AuthProvider = ({ initialAuthDatas, children }: UserProviderProps) 
     }, []);
 
     const isAdmin = useMemo(() => {
-        if (session && session.user?.role === 'ADMIN') {
-            return true;
-        }
-        return false;
+        return !!(session && session.user?.role === 'ADMIN');
     }, [session]);
 
     return (
