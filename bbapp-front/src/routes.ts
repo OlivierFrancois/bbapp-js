@@ -20,6 +20,9 @@ export const API_ENDPOINTS = {
         login: `${API_HOST}/auth/login`,
         session: `${API_HOST}/auth/session`,
     },
+    user: {
+        changePassword: `${API_HOST}/user/password`,
+    },
     dishSchedule: {
         getPeriod: `${API_HOST}/dish-schedule/period`,
         save: `${API_HOST}/dish-schedule/save`,
