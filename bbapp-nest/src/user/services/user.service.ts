@@ -29,6 +29,13 @@ export class UserService {
         return this.prismaService.user.create({ data });
     }
 
+    async update(username: string, data: Prisma.UserUpdateInput): Promise<User> {
+        return this.prismaService.user.update({
+            where: { username },
+            data,
+        });
+    }
+
     async updatePassword(userId: number, data: UpdateUserPasswordDto): Promise<User> {
         const user = await this.findOne(userId);
         if (!user) {
