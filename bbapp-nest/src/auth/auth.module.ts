@@ -9,6 +9,7 @@ import { join } from 'path';
 import { PrismaService } from '../prisma.service';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth.guard';
+import { SessionService } from './services/session.service';
 
 @Module({
     imports: [
@@ -23,6 +24,7 @@ import { AuthGuard } from './auth.guard';
     providers: [
         AuthService,
         PrismaService,
+        SessionService,
         {
             provide: APP_GUARD,
             useClass: AuthGuard,

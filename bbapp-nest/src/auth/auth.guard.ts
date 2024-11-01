@@ -9,13 +9,15 @@ import { IS_PUBLIC_KEY } from './decorators/public.decorator';
 import { IS_ADMIN_KEY } from './decorators/admin.decorator';
 import { UserService } from '../user/services/user.service';
 import { JwtPayload } from './types/jwt.type';
+import { SessionService } from './services/session.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
     constructor(
         private readonly jwtService: JwtService,
         private readonly reflector: Reflector,
-        private readonly userService: UserService
+        private readonly userService: UserService,
+        private readonly sessionService: SessionService
     ) {}
 
     async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -43,7 +45,8 @@ export class AuthGuard implements CanActivate {
                 throw new UnauthorizedException();
             }
 
-            request.userSession = payload;
+            const userSession = await this.sessionService.createSessionFromPayload(payload);
+            request.userSession = userSession;
         } catch (e) {
             if (e instanceof TokenExpiredError) {
                 throw new HttpException('Token expired', 498);
