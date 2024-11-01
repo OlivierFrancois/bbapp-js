@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { APP_ROUTES } from '../routes.ts';
+import { APP_ROUTES, LS_TOKEN } from '../routes.ts';
 
-export const API_HOST = import.meta.env.VITE_API_HOST as string;
+export const API_HOST = import.meta.env.VITE_API_ENDPOINT as string;
 
 const api = axios.create({
     baseURL: API_HOST,
@@ -12,7 +12,7 @@ const api = axios.create({
 
 api.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem(LS_TOKEN);
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
@@ -29,7 +29,7 @@ api.interceptors.response.use(
     },
     (error) => {
         if (error.response.status === 498) {
-            localStorage.removeItem('token');
+            localStorage.removeItem(LS_TOKEN);
             window.location.href = APP_ROUTES.login;
         }
     }

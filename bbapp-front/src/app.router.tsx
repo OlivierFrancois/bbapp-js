@@ -8,10 +8,12 @@ import { Root } from './root.tsx';
 import HomePage from './pages/home/home.page.tsx';
 import SchedulePage from './pages/schedule/schedule.page.tsx';
 import { APP_ROUTES } from './routes.ts';
+import LoginPage from './pages/login.page.tsx';
+import LogoutPage from './pages/logout.page.tsx';
 
-export const routes = () => {
+export const routes = (initialAuthDatas: any) => {
     return createRoutesFromElements(
-        <Route element={<Root />} errorElement={<ErrorPage />}>
+        <Route element={<Root initialAuthDatas={initialAuthDatas} />} errorElement={<ErrorPage />}>
             <Route path={'old'} element={<AppLayout />}>
                 <Route path={'dish-schedule'} element={<DishSchedulePage />} />
                 <Route path={'dish'} element={<DishPage />} />
@@ -22,10 +24,13 @@ export const routes = () => {
                 <Route path={APP_ROUTES.home} element={<HomePage />} />
                 <Route path={APP_ROUTES.schedule.index} element={<SchedulePage />} />
             </Route>
+
+            <Route path={APP_ROUTES.login} element={<LoginPage />} />
+            <Route path={APP_ROUTES.logout} element={<LogoutPage />} />
         </Route>
     );
 };
 
-export default function AppRouter() {
-    return createBrowserRouter(routes());
+export default function AppRouter(initialAuthDatas: any) {
+    return createBrowserRouter(routes(initialAuthDatas));
 }
