@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { DishScheduleItem } from '../../types/DishScheduleItem.tsx';
 import { API_ENDPOINTS } from '../../routes.ts';
+import api from '../api.ts';
 
 type PayloadGetWeekI = {
     startDate: string;
@@ -19,7 +19,7 @@ type PayloadAdd = {
 
 export class DishScheduleAPI {
     static async getPeriod(payload: PayloadGetWeekI): Promise<DishScheduleItem[]> {
-        return axios
+        return api
             .get(API_ENDPOINTS.dishSchedule.getPeriod, {
                 params: payload,
             })
@@ -29,7 +29,7 @@ export class DishScheduleAPI {
     }
 
     static async save(payload: PayloadSave): Promise<DishScheduleItem> {
-        return axios
+        return api
             .post(API_ENDPOINTS.dishSchedule.save, {
                 ...payload,
             })
@@ -39,7 +39,7 @@ export class DishScheduleAPI {
     }
 
     static async add(payload: PayloadAdd): Promise<DishScheduleItem> {
-        return axios
+        return api
             .post(API_ENDPOINTS.dishSchedule.add, {
                 ...payload,
             })
@@ -49,7 +49,7 @@ export class DishScheduleAPI {
     }
 
     static async remove(payload: PayloadAdd): Promise<void> {
-        return axios
+        return api
             .post(API_ENDPOINTS.dishSchedule.remove, {
                 ...payload,
             })
