@@ -1,7 +1,10 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Put, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { UserService } from '../services/user.service';
 import { UserCreateDto } from '../create-user.dto';
+import { UpdateUserPasswordDto } from '../update-user-password.dto';
+import { UserSession } from '../../auth/decorators/session.decorator';
+import { Session } from '../../auth/types/session.type';
 
 @ApiTags('Users models')
 @Controller('/api/user')
@@ -16,5 +19,10 @@ export class UserController {
     @Post()
     async create(@Body() userCreateDto: UserCreateDto) {
         return await this.userService.create(userCreateDto);
+    }
+
+    @Put('password')
+    async update(@Body() updateUserPasswordDto: UpdateUserPasswordDto, @UserSession() userSession: Session) {
+        return await this.userService.updatePassword(userSession.user.id, updateUserPasswordDto);
     }
 }

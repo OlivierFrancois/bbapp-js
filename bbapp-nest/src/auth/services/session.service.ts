@@ -24,4 +24,8 @@ export class SessionService {
             userType: payload.userType,
         };
     }
+
+    retrieveSessionFromRequest(request: any) {
+        return request.userSession as Session;
+    }
 }

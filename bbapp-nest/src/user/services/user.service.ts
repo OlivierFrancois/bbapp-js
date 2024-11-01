@@ -1,7 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import { Prisma, User } from '@prisma/client';
 import { PrismaService } from '../../prisma.service';
 import * as bcrypt from 'bcrypt';
+import { UserCreateDto } from '../create-user.dto';
+import { UpdateUserPasswordDto } from '../update-user-password.dto';
 
 @Injectable()
 export class UserService {
@@ -20,17 +22,27 @@ export class UserService {
         });
     }
 
-    async create(data: Prisma.UserCreateInput): Promise<User> {
+    async create(data: UserCreateDto): Promise<User> {
         const plainPassword = data.password;
         data.password = await this.encodePassword(plainPassword);
 
         return this.prismaService.user.create({ data });
     }
 
-    async update(username: string, data: Prisma.UserUpdateInput): Promise<User> {
+    async updatePassword(userId: number, data: UpdateUserPasswordDto): Promise<User> {
+        const user = await this.findOne(userId);
+        if (!user) {
+            throw ForbiddenException;
+        }
+        const isOldPasswordValid = await this.comparePassword(data.oldPassword, user.password);
+        if (!isOldPasswordValid) {
+            throw ForbiddenException;
+        }
+
+        const newPassword = await this.encodePassword(data.newPassword);
         return this.prismaService.user.update({
-            where: { username },
-            data,
+            where: { id: userId },
+            data: { password: newPassword },
         });
     }
 

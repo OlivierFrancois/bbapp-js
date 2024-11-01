@@ -16,7 +16,6 @@ export class AuthController {
 
     @Get('session')
     getSession(@Req() req) {
-        console.log(req.userSession);
         return req.userSession;
     }
 }
