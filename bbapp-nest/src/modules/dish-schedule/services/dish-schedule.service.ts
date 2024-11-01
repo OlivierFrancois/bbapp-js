@@ -36,7 +36,6 @@ export class DishScheduleService {
     }
 
     async remove(data: AddDishDto) {
-        console.log(data);
         return this.prisma.dishScheduleItem.update({
             where: { date_moment: { date: data.date, moment: data.moment } },
             data: { dishes: { disconnect: [{ id: data.dishId }] } },
