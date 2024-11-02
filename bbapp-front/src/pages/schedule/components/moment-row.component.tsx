@@ -121,7 +121,7 @@ export default function MomentRow({ moment, scheduleItem, date }: MomentRowProps
             )}
 
             <div className={'flex gap-2 items-center'}>
-                <div className={`transition-transform ${addingMod && 'rotate-45'}`}>{moment.icon}</div>
+                <div className={``}>{moment.icon}</div>
                 <div className={'w-8'}>{moment.name}</div>
             </div>
 

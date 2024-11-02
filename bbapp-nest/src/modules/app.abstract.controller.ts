@@ -4,6 +4,6 @@ import { AppSessionInterceptor } from './app-session.interceptor';
 
 @Controller()
 @UseInterceptors(AppSessionInterceptor)
-export abstract class MainController {
+export abstract class AbstractController {
     public user: User;
 }
