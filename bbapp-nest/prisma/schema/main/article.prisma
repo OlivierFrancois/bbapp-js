@@ -1,0 +1,25 @@
+model Article {
+    id         Int      @id @default(autoincrement())
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+    name       String
+    sortOrder  Int?
+    categoryId Int?
+    homeId     Int
+
+    category    ArticleCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+    Home        Home             @relation(fields: [homeId], references: [id])
+    recipeItems RecipeItem[]
+}
+
+model ArticleCategory {
+    id        Int      @id @default(autoincrement())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    name      String
+    homeId    Int
+    sortOrder Int?
+
+    articles Article[]
+    Home     Home      @relation(fields: [homeId], references: [id])
+}

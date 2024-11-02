@@ -1,13 +1,28 @@
-model User {
+model Home {
     id        Int      @id @default(autoincrement())
-    username  String   @unique
-    email     String
-    role      Role     @default(USER)
-    password  String
+    name      String
     createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
 
-    authLogs UserAuthLog[]
+    users            User[]
+    Article          Article[]
+    ArticleCategory  ArticleCategory[]
+    Dish             Dish[]
+    RecipeItem       RecipeItem[]
+    DishTag          DishTag[]
+    DishScheduleItem DishScheduleItem[]
+}
+
+model User {
+    id        Int           @id @default(autoincrement())
+    username  String        @unique
+    email     String
+    role      Role          @default(USER)
+    password  String
+    createdAt DateTime      @default(now())
+    updatedAt DateTime      @updatedAt
+    homeId    Int?
+    Home      Home?         @relation(fields: [homeId], references: [id])
+    authLogs  UserAuthLog[]
 }
 
 model UserAuthLog {
@@ -21,5 +36,6 @@ model UserAuthLog {
 
 enum Role {
     ADMIN
+    HOME_LEADER
     USER
 }
