@@ -2,8 +2,8 @@ import { ForbiddenException, Injectable } from '@nestjs/common';
 import { Prisma, User } from '@prisma/client';
 import { PrismaService } from '../../prisma.service';
 import * as bcrypt from 'bcrypt';
-import { UserCreateDto } from '../create-user.dto';
-import { UpdateUserPasswordDto } from '../update-user-password.dto';
+import { UserCreateDto } from '../dtos/create-user.dto';
+import { UpdateUserPasswordDto } from '../dtos/update-user-password.dto';
 
 @Injectable()
 export class UserService {
