@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { UserAPI } from '../../../lib/api/user.api.tsx';
 import { toast } from 'react-toastify';
 
@@ -6,6 +6,10 @@ export default function ChangePassword() {
     const [oldPassword, setOldPassword] = useState<string>('');
     const [newPassword, setNewPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
+
+    const isPasswordCorrect = useMemo(() => {
+        return newPassword === confirmPassword;
+    }, [newPassword, confirmPassword]);
 
     const handleOldPasswordChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
         setOldPassword(target.value);
@@ -77,9 +81,15 @@ export default function ChangePassword() {
                     </label>
                 </div>
 
-                <button onClick={handlePasswordSubmit} className={'btn btn-sm btn-primary'}>
-                    Valider
-                </button>
+                {isPasswordCorrect && newPassword.length > 3 ? (
+                    <button onClick={handlePasswordSubmit} className={'btn btn-sm btn-primary'}>
+                        Valider
+                    </button>
+                ) : (
+                    <div className={'text-error flex flex-col'}>
+                        <div>Mot de passe incorrect.</div>
+                    </div>
+                )}
             </div>
         </div>
     );
