@@ -24,6 +24,7 @@ export const API_ENDPOINTS = {
     },
     user: {
         signIn: `${API_HOST}/user/sign-in`,
+        checkUsernameAvailability: `${API_HOST}/user/check-username-availability`,
         changePassword: `${API_HOST}/user/password`,
     },
     dishSchedule: {

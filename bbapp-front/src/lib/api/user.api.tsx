@@ -21,7 +21,7 @@ export class UserAPI {
         return api.post(API_ENDPOINTS.user.signIn, signInPayload).then((res) => res.data);
     }
 
-    static async checkUsernameAvailability(username: string): Promise<void> {
-        return api.get(API_ENDPOINTS.user.signIn, { params: { username } }).then((res) => res.data);
+    static async checkUsernameAvailability(username: string): Promise<boolean> {
+        return api.get(API_ENDPOINTS.user.checkUsernameAvailability, { params: { username } }).then((res) => res.data);
     }
 }

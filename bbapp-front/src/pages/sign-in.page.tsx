@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import background_green from '../assets/images/background_green.png';
 import MeliveSvg from '../components/melive.component.tsx';
@@ -12,6 +12,7 @@ export default function SignInPage() {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
+    const [isUsernameAvailable, setIsUsernameAvailable] = useState<boolean>(false);
 
     const { login } = useAuth();
 
@@ -44,8 +45,14 @@ export default function SignInPage() {
     };
 
     useEffect(() => {
-        // TODO : Check password confirm + avaibility username
-    }, []);
+        if (username.length > 3) {
+            UserAPI.checkUsernameAvailability(username).then((response) => setIsUsernameAvailable(response));
+        }
+    }, [username]);
+
+    const isPasswordCorrect = useMemo(() => {
+        return password === confirmPassword;
+    }, [password, confirmPassword]);
 
     return (
         <div
@@ -116,9 +123,16 @@ export default function SignInPage() {
                     />
                 </label>
 
-                <button onClick={handleSubmit} className={'btn btn-primary'}>
-                    Inscription
-                </button>
+                <div className={'text-error flex flex-col'}>
+                    {!isUsernameAvailable && <div>Le nom d'utilisateur est déjà pris.</div>}
+                    {!isPasswordCorrect && <div>Mot de passe incorrect.</div>}
+                </div>
+
+                {isUsernameAvailable && isPasswordCorrect && (
+                    <button onClick={handleSubmit} className={'btn btn-primary'} disabled={!isUsernameAvailable || !isPasswordCorrect}>
+                        Inscription
+                    </button>
+                )}
 
                 <Link className={'mt-4 text-lg text-white'} to={APP_ROUTES.login}>
                     Retour à l'accueil

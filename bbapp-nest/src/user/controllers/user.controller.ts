@@ -12,6 +12,7 @@ import { Public } from '../../auth/decorators/public.decorator';
 export class UserController {
     constructor(private readonly userService: UserService) {}
 
+    @Public()
     @Get('check-username-availability')
     async checkUsernameAvailability(@Query('username') username: string) {
         return (await this.userService.findByUsername(username)) === null;
