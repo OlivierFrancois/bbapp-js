@@ -45,7 +45,7 @@ export const AuthProvider = ({ initialAuthDatas, children }: UserProviderProps) 
         if (!token) {
             setLoaded(true);
             setLoading(false);
-            if (pathname !== '/login') {
+            if (pathname !== APP_ROUTES.login && pathname !== APP_ROUTES.signin && pathname !== APP_ROUTES.passwordForgotten) {
                 navigate(APP_ROUTES.login);
             }
         }
@@ -60,10 +60,10 @@ export const AuthProvider = ({ initialAuthDatas, children }: UserProviderProps) 
                     setLoaded(true);
                     setLoading(false);
                     setSession(session);
-                    if (!session.user && pathname !== '/login') {
+                    if (!session.user && pathname !== APP_ROUTES.login) {
                         navigate(APP_ROUTES.login);
                     }
-                    if (session.user && pathname === '/login') {
+                    if (session.user && pathname === APP_ROUTES.login) {
                         if (session.user.role === 'ADMIN') {
                             navigate(APP_ROUTES.admin.index);
                         } else {

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Credentials } from '../lib/auth/auth.handler.ts';
 import { useAuth } from './auth.context.tsx';
 import { APP_ROUTES } from '../routes.ts';
 import background_green from '../assets/images/background_green.png';
 import MeliveSvg from '../components/melive.component.tsx';
 
-export default function LoginPage() {
+export default function LogInPage() {
     const navigate = useNavigate();
 
     const [credentials, setCredentials] = useState<Credentials>({ username: '', password: '', rememberMe: false });
@@ -66,9 +66,21 @@ export default function LoginPage() {
                     </label>
                 </div>
 
-                <button onClick={handleSubmit} className={'btn btn-primary'}>
-                    Connexion
-                </button>
+                <div className="flex flex-col">
+                    <button onClick={handleSubmit} className={'btn btn-primary'}>
+                        Connexion
+                    </button>
+
+                    <div className="flex items-center justify-between">
+                        <Link to={APP_ROUTES.passwordForgotten} className={'btn btn-xs text-white btn-ghost'}>
+                            Mot de passe oublié
+                        </Link>
+
+                        <Link to={APP_ROUTES.signin} className={'btn btn-xs text-white btn-ghost'}>
+                            Créer un compte
+                        </Link>
+                    </div>
+                </div>
             </div>
         </div>
     );

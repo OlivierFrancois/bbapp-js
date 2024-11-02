@@ -3,7 +3,9 @@ import { API_HOST } from './lib/api.ts';
 export const APP_ROUTES = {
     home: '/',
     login: '/login',
+    signin: '/signin',
     logout: '/logout',
+    passwordForgotten: '/password-forgotten',
     admin: {
         index: '/admin',
     },
@@ -21,6 +23,7 @@ export const API_ENDPOINTS = {
         session: `${API_HOST}/auth/session`,
     },
     user: {
+        signIn: `${API_HOST}/user/sign-in`,
         changePassword: `${API_HOST}/user/password`,
     },
     dishSchedule: {
