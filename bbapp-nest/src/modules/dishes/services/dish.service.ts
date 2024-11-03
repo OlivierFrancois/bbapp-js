@@ -8,12 +8,12 @@ import { CreateDishDto } from '../dtos/create-dish.dto';
 export class DishService {
     constructor(private readonly prisma: PrismaService) {}
 
-    async getAll(): Promise<Dish[]> {
-        return this.prisma.dish.findMany();
+    async getAll(homeId: number): Promise<Dish[]> {
+        return this.prisma.dish.findMany({ where: { homeId } });
     }
 
-    async getAllWithDishTagIds() {
-        const dishes = await this.prisma.dish.findMany({ include: { dishTags: true } });
+    async getAllWithDishTagIds(homeId: number) {
+        const dishes = await this.prisma.dish.findMany({ where: { homeId }, include: { dishTags: true } });
         return dishes.map((dish) => ({
             ...dish,
             dishTags: undefined,
@@ -21,31 +21,19 @@ export class DishService {
         }));
     }
 
-    async parseWithDishTagIds(dish: Dish & { dishTags: DishTag[] }) {
-        return {
-            ...dish,
-            dishTags: undefined,
-            dishTagIds: dish.dishTags.map((dt) => dt.id),
-        };
-    }
-
-    async getById(id: number): Promise<Dish | null> {
+    async getById(homeId: number, id: number): Promise<Dish | null> {
         return this.prisma.dish.findUnique({
-            where: { id },
+            where: { id, homeId },
         });
     }
 
-    async getByName(name: string): Promise<Dish[]> {
+    async getByName(homeId: number, name: string): Promise<Dish[]> {
         return this.prisma.dish.findMany({
-            where: {
-                name: {
-                    contains: name.toLowerCase(),
-                },
-            },
+            where: { name: { contains: name.toLowerCase() }, homeId },
         });
     }
 
-    async create(createDishDto: CreateDishDto) {
+    async create(homeId: number, createDishDto: CreateDishDto) {
         const { dishTagIds, ...data } = createDishDto;
 
         const dish = await this.prisma.dish.create({
@@ -54,6 +42,7 @@ export class DishService {
                 dishTags: {
                     connect: dishTagIds?.map((id) => ({ id: id })) ?? [],
                 },
+                homeId,
             },
             include: { dishTags: true },
         });
@@ -65,11 +54,11 @@ export class DishService {
         };
     }
 
-    async update(id: number, data: UpdateDishWithRecipeDto) {
+    async update(homeId: number, id: number, data: UpdateDishWithRecipeDto) {
         const { recipeItems, dishTagIds, ...dishData } = data;
 
         const dish = await this.prisma.dish.update({
-            where: { id },
+            where: { id, homeId },
             data: {
                 ...dishData,
                 dishTags: {
@@ -80,22 +69,23 @@ export class DishService {
         });
 
         // Vider les recipeItems
-        await this.prisma.recipeItem.deleteMany({ where: { dishId: id } });
+        await this.prisma.recipeItem.deleteMany({ where: { dishId: id, homeId } });
 
         // Créer les recipeItems
         if (recipeItems) {
-            await this.prisma.recipeItem.createMany({ data: recipeItems.filter((r) => r.dishId === id) });
+            await this.prisma.recipeItem.createMany({
+                data: recipeItems.filter((r) => r.dishId === id).map((r) => ({ ...r, homeId })),
+            });
         }
-
         return {
             dish: { ...dish, dishTags: undefined, dishTagIds: dish.dishTags.map((dt) => dt.id) },
             recipeItems: dish.recipeItems,
         };
     }
 
-    async delete(id: number): Promise<void> {
+    async delete(homeId: number, id: number): Promise<void> {
         await this.prisma.dish.delete({
-            where: { id },
+            where: { id, homeId },
         });
     }
 }
