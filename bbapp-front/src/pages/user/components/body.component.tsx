@@ -78,19 +78,17 @@ export default function UserBody() {
                             className="input input-sm input-bordered w-full"
                         />
                     </label>
+
+                    {!isPasswordCorrect && newPassword.length > 3 && (
+                        <div className={'text-error flex flex-col'}>
+                            <div>Les mots de passes sont différents !</div>
+                        </div>
+                    )}
                 </div>
 
-                {isPasswordCorrect && newPassword.length > 3 && (
-                    <button onClick={handlePasswordSubmit} className={'btn btn-sm btn-primary'}>
-                        Mettre à jour
-                    </button>
-                )}
-
-                {!isPasswordCorrect && newPassword.length > 3 && (
-                    <div className={'text-error flex flex-col'}>
-                        <div>Veuillez vérifier votre mot de passe.</div>
-                    </div>
-                )}
+                <button onClick={handlePasswordSubmit} disabled={!(isPasswordCorrect && newPassword.length > 3)} className={'btn btn-sm btn-primary'}>
+                    Mettre à jour
+                </button>
             </div>
         </div>
     );

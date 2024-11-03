@@ -137,7 +137,9 @@ export default function SignUpPage() {
                         placeholder="Confirmez votre mot de passe"
                         className="input input-sm w-full"
                     />
-                    <div className={'mt-2 text-error text-sm flex flex-col'}>{!isPasswordCorrect && <div>Mot de passe incorrect.</div>}</div>
+                    <div className={'mt-2 text-error text-sm flex flex-col'}>
+                        {!isPasswordCorrect && <div>Les mots de passes sont différents !</div>}
+                    </div>
                 </label>
 
                 <div className="flex flex-col gap-2">
