@@ -6,40 +6,39 @@ import { CreateArticleCategoryDto } from '../dtos/create-article-category.dto';
 export class ArticleCategoryService {
     constructor(private readonly prisma: PrismaService) {}
 
-    async getAll() {
-        return this.prisma.articleCategory.findMany();
+    async getAll(homeId: number) {
+        return this.prisma.articleCategory.findMany({ where: { homeId } });
     }
 
-    async getById(id: number) {
+    async getById(homeId: number, id: number) {
         return this.prisma.articleCategory.findUnique({
-            where: { id },
+            where: { id, homeId },
         });
     }
 
-    async getByName(name: string) {
+    async getByName(homeId: number, name: string) {
         return this.prisma.articleCategory.findMany({
             where: {
-                name: {
-                    contains: name.toLowerCase(),
-                },
+                name: { contains: name.toLowerCase() },
+                homeId,
             },
         });
     }
 
-    async create(data: CreateArticleCategoryDto) {
-        return this.prisma.articleCategory.create({ data });
+    async create(homeId: number, data: CreateArticleCategoryDto) {
+        return this.prisma.articleCategory.create({ data: { ...data, homeId } });
     }
 
-    async update(id: number, data: CreateArticleCategoryDto) {
+    async update(homeId: number, id: number, data: CreateArticleCategoryDto) {
         return this.prisma.articleCategory.update({
-            where: { id },
+            where: { id, homeId },
             data,
         });
     }
 
-    async delete(id: number) {
+    async delete(homeId: number, id: number) {
         await this.prisma.articleCategory.delete({
-            where: { id },
+            where: { id, homeId },
         });
     }
 }
