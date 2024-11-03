@@ -5,10 +5,20 @@ import ScheduleActionBar from './components/action.component.tsx';
 import { DishScheduleItem } from '../../types/DishScheduleItem.tsx';
 import { DishScheduleAPI } from '../../lib/api/DishScheduleAPI.tsx';
 import dayjs from '../../lib/dayjs.ts';
-import { LS_DATE } from '../../routes.ts';
+import { APP_ROUTES, LS_DATE } from '../../routes.ts';
 import { AbstractItem, DishScheduleContext, DishScheduleContextI, LS_TYPE, ScheduleAction } from './schedule.utils.tsx';
+import { useAuth } from '../auth/auth.context.tsx';
+import { useNavigate } from 'react-router-dom';
 
 export default function SchedulePage() {
+    const { home } = useAuth();
+
+    const navigate = useNavigate();
+
+    if (!home) {
+        navigate(APP_ROUTES.home);
+    }
+
     const todayYmd = dayjs().format('YYYY-MM-DD');
 
     let LS_date_obj: LS_TYPE = { date: todayYmd, lastUpdate: dayjs().toISOString() };

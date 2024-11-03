@@ -31,6 +31,7 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ initialAuthDatas, children }: UserProviderProps) => {
     const [user, setUser] = useState<User | null>(initialAuthDatas?.user || null);
+    const [home, setHome] = useState<Home | null>(null);
     const loggedIn = useMemo(() => user !== null, [user]);
     const [loaded, setLoaded] = useState(initialAuthDatas === undefined ? false : initialAuthDatas.loaded);
     const [loading, setLoading] = useState(true);
@@ -61,6 +62,7 @@ export const AuthProvider = ({ initialAuthDatas, children }: UserProviderProps) 
                     setLoaded(true);
                     setLoading(false);
                     setSession(session);
+                    setHome(session.home);
                     if (!session.user && pathname !== APP_ROUTES.auth.login) {
                         navigate(APP_ROUTES.auth.login);
                     }
@@ -133,7 +135,7 @@ export const AuthProvider = ({ initialAuthDatas, children }: UserProviderProps) 
         <AuthContext.Provider
             value={{
                 user,
-                home: session?.home ?? null,
+                home,
                 loggedIn,
                 login,
                 logout,
