@@ -21,7 +21,7 @@ model User {
     createdAt DateTime      @default(now())
     updatedAt DateTime      @updatedAt
     homeId    Int?
-    Home      Home?         @relation(fields: [homeId], references: [id])
+    home      Home?         @relation(fields: [homeId], references: [id])
     authLogs  UserAuthLog[]
 }
 

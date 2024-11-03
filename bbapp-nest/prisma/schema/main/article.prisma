@@ -8,7 +8,7 @@ model Article {
     homeId     Int
 
     category    ArticleCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
-    Home        Home             @relation(fields: [homeId], references: [id])
+    home        Home             @relation(fields: [homeId], references: [id])
     recipeItems RecipeItem[]
 }
 
@@ -21,5 +21,5 @@ model ArticleCategory {
     sortOrder Int?
 
     articles Article[]
-    Home     Home      @relation(fields: [homeId], references: [id])
+    home     Home      @relation(fields: [homeId], references: [id])
 }
