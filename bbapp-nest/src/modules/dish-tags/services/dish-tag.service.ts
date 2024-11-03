@@ -6,34 +6,34 @@ import { CreateDishTagDto } from '../dtos/create-dish-tag.dto';
 export class DishTagService {
     constructor(private readonly prisma: PrismaService) {}
 
-    async getAll() {
-        return this.prisma.dishTag.findMany();
+    async getAll(homeId: number) {
+        return this.prisma.dishTag.findMany({ where: { homeId } });
     }
 
-    async getById(id: number) {
+    async getById(homeId: number, id: number) {
         return this.prisma.dishTag.findUnique({
-            where: { id },
+            where: { id, homeId },
         });
     }
 
-    async getByName(name: string) {
-        return this.prisma.dishTag.findMany({ where: { name: { contains: name.toLowerCase() } } });
+    async getByName(homeId: number, name: string) {
+        return this.prisma.dishTag.findMany({ where: { name: { contains: name.toLowerCase() }, homeId } });
     }
 
-    async create(data: CreateDishTagDto) {
-        return this.prisma.dishTag.create({ data });
+    async create(homeId: number, data: CreateDishTagDto) {
+        return this.prisma.dishTag.create({ data: { ...data, homeId } });
     }
 
-    async update(id: number, data: CreateDishTagDto) {
+    async update(homeId: number, id: number, data: CreateDishTagDto) {
         return this.prisma.dishTag.update({
-            where: { id },
+            where: { id, homeId },
             data,
         });
     }
 
-    async delete(id: number) {
+    async delete(homeId: number, id: number) {
         await this.prisma.dishTag.delete({
-            where: { id },
+            where: { id, homeId },
         });
     }
 }
