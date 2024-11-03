@@ -36,7 +36,7 @@ model DishScheduleItem {
     home   Home   @relation(fields: [homeId], references: [id])
     dishes Dish[]
 
-    @@unique([date, moment])
+    @@unique([date, moment, homeId])
 }
 
 model RecipeItem {
