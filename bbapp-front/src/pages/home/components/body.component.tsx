@@ -35,7 +35,7 @@ export default function HomeBody() {
                             </div>
 
                             <div>
-                                <span className={'font-bold'}>{dishCount}</span> plats on été créés
+                                <span className={'font-bold'}>{dishCount}</span> plats ont été créés
                             </div>
                         </div>
 
