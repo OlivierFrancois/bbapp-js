@@ -23,6 +23,9 @@ export default function SignInPage() {
     const handlePasswordChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
         setCredentials({ ...credentials, password: target.value });
     };
+    const handleRememberMeChange = () => {
+        setCredentials({ ...credentials, rememberMe: !credentials.rememberMe });
+    };
 
     useEffect(() => {
         if (loggedIn) {
@@ -48,7 +51,13 @@ export default function SignInPage() {
                         <span className="label-text text-white">Nom d'utilisateur</span>
                     </div>
 
-                    <input onInput={handleUsernameChange} type="text" placeholder="Type your username" className="input input-sm w-full" />
+                    <input
+                        value={credentials.username}
+                        onInput={handleUsernameChange}
+                        type="text"
+                        placeholder="Type your username"
+                        className="input input-sm w-full"
+                    />
                 </label>
 
                 <label className="form-control w-full">
@@ -56,12 +65,23 @@ export default function SignInPage() {
                         <span className="label-text text-white">Mot de passe</span>
                     </div>
 
-                    <input onInput={handlePasswordChange} type="password" placeholder="Type your password" className="input input-sm w-full" />
+                    <input
+                        value={credentials.password}
+                        onInput={handlePasswordChange}
+                        type="password"
+                        placeholder="Type your password"
+                        className="input input-sm w-full"
+                    />
                 </label>
 
                 <div className="flex">
                     <label className="label cursor-pointer flex gap-2">
-                        <input type="checkbox" defaultChecked className="checkbox checkbox-sm checkbox-primary" />
+                        <input
+                            checked={credentials.rememberMe}
+                            onChange={handleRememberMeChange}
+                            type="checkbox"
+                            className="checkbox checkbox-sm checkbox-primary"
+                        />
                         <span className="label-text  text-white">Se souvenir de moi</span>
                     </label>
                 </div>

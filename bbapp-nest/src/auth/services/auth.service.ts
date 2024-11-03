@@ -17,7 +17,7 @@ export class AuthService {
     ) {}
 
     async signIn(signInDto: SignInDto, ip: string) {
-        const { username, password } = signInDto;
+        const { username, password, rememberMe } = signInDto;
         const user = await this.userService.findByUsername(username);
         const isPasswordValid = user !== null && (await this.userService.comparePassword(password, user.password));
 
@@ -33,7 +33,7 @@ export class AuthService {
             userType: null,
         };
 
-        return this.generateJwtToken(jwtPayload);
+        return this.generateJwtToken(jwtPayload, rememberMe);
     }
 
     async logUserAuth({ userId, ip }: { userId: number; ip: string }): Promise<void> {
@@ -46,10 +46,10 @@ export class AuthService {
         });
     }
 
-    async generateJwtToken(payload: JwtPayload): Promise<string> {
+    async generateJwtToken(payload: JwtPayload, rememberMe: boolean): Promise<string> {
         return await this.jwtService.signAsync(payload, {
             privateKey: fs.readFileSync(join(process.cwd(), jwtConstants.secretPath)).toString(),
-            expiresIn: '12h',
+            expiresIn: rememberMe ? '9999 days' : '10s',
             algorithm: 'RS256',
         });
     }
