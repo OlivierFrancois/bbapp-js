@@ -73,6 +73,9 @@ export const AuthProvider = ({ initialAuthDatas, children }: UserProviderProps) 
                             navigate(APP_ROUTES.home);
                         }
                     }
+                    if (!session.home && ![APP_ROUTES.home, APP_ROUTES.user.edit].includes(pathname)) {
+                        navigate(APP_ROUTES.home);
+                    }
                     return session.user;
                 }
             });
