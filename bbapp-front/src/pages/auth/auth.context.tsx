@@ -46,25 +46,25 @@ export const AuthProvider = ({ initialAuthDatas, children }: UserProviderProps) 
         if (!token) {
             setLoaded(true);
             setLoading(false);
-            if (pathname !== APP_ROUTES.login && pathname !== APP_ROUTES.signin && pathname !== APP_ROUTES.passwordForgotten) {
-                navigate(APP_ROUTES.login);
+            if (pathname !== APP_ROUTES.auth.login && pathname !== APP_ROUTES.auth.signin && pathname !== APP_ROUTES.auth.passwordForgotten) {
+                navigate(APP_ROUTES.auth.login);
             }
         }
 
         if (token) {
             return AuthHandler.getSession().then((session) => {
                 if (!session) {
-                    navigate(APP_ROUTES.login);
+                    navigate(APP_ROUTES.auth.login);
                     return;
                 } else {
                     setUser(session.user);
                     setLoaded(true);
                     setLoading(false);
                     setSession(session);
-                    if (!session.user && pathname !== APP_ROUTES.login) {
-                        navigate(APP_ROUTES.login);
+                    if (!session.user && pathname !== APP_ROUTES.auth.login) {
+                        navigate(APP_ROUTES.auth.login);
                     }
-                    if (session.user && pathname === APP_ROUTES.login) {
+                    if (session.user && pathname === APP_ROUTES.auth.login) {
                         if (session.user.role === 'ADMIN') {
                             navigate(APP_ROUTES.admin.index);
                         } else {
@@ -81,7 +81,7 @@ export const AuthProvider = ({ initialAuthDatas, children }: UserProviderProps) 
         setUser(null);
         setSession(null);
         localStorage.removeItem(LS_TOKEN);
-        navigate(APP_ROUTES.login);
+        navigate(APP_ROUTES.auth.login);
     };
 
     const login = async (credentials: Credentials) => {
@@ -111,7 +111,7 @@ export const AuthProvider = ({ initialAuthDatas, children }: UserProviderProps) 
             check();
         }
         if (loaded && !user && pathname !== '/login') {
-            navigate(APP_ROUTES.login);
+            navigate(APP_ROUTES.auth.login);
         }
 
         const token = localStorage.getItem(LS_TOKEN);

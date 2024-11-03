@@ -30,7 +30,7 @@ api.interceptors.response.use(
     (error) => {
         if (error.response.status === 498) {
             localStorage.removeItem(LS_TOKEN);
-            window.location.href = APP_ROUTES.login;
+            window.location.href = APP_ROUTES.auth.login;
         }
     }
 );

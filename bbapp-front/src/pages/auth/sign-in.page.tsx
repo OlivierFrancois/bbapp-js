@@ -92,11 +92,11 @@ export default function SignInPage() {
                     </button>
 
                     <div className="flex items-center justify-between">
-                        <Link to={APP_ROUTES.passwordForgotten} className={'btn btn-xs text-white btn-ghost'}>
+                        <Link to={APP_ROUTES.auth.passwordForgotten} className={'btn btn-xs text-white btn-ghost'}>
                             Mot de passe oublié ?
                         </Link>
 
-                        <Link to={APP_ROUTES.signin} className={'btn btn-xs text-white btn-ghost'}>
+                        <Link to={APP_ROUTES.auth.signin} className={'btn btn-xs text-white btn-ghost'}>
                             Créer un compte
                         </Link>
                     </div>

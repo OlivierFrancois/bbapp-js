@@ -147,7 +147,7 @@ export default function SignUpPage() {
                         </button>
                     )}
 
-                    <Link className={'text-lg text-white btn btn-ghost btn-sm'} to={APP_ROUTES.login}>
+                    <Link className={'text-lg text-white btn btn-ghost btn-sm'} to={APP_ROUTES.auth.login}>
                         Retour à l'accueil
                     </Link>
                 </div>

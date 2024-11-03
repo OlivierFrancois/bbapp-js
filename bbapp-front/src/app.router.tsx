@@ -12,6 +12,7 @@ import SignInPage from './pages/auth/sign-in.page.tsx';
 import SignOutPage from './pages/auth/sign-out.page.tsx';
 import SignUpPage from './pages/auth/sign-up.page.tsx';
 import PasswordForgotten from './pages/auth/password-forgotten.page.tsx';
+import UserPage from './pages/user/user.page.tsx';
 
 export const routes = (initialAuthDatas: any) => {
     return createRoutesFromElements(
@@ -23,14 +24,15 @@ export const routes = (initialAuthDatas: any) => {
             </Route>
 
             <Route path={''} element={<AppLayout />}>
+                <Route path={APP_ROUTES.user.edit} element={<UserPage />} />
                 <Route path={APP_ROUTES.home} element={<HomePage />} />
                 <Route path={APP_ROUTES.schedule.index} element={<SchedulePage />} />
             </Route>
 
-            <Route path={APP_ROUTES.login} element={<SignInPage />} />
-            <Route path={APP_ROUTES.signin} element={<SignUpPage />} />
-            <Route path={APP_ROUTES.logout} element={<SignOutPage />} />
-            <Route path={APP_ROUTES.passwordForgotten} element={<PasswordForgotten />} />
+            <Route path={APP_ROUTES.auth.login} element={<SignInPage />} />
+            <Route path={APP_ROUTES.auth.signin} element={<SignUpPage />} />
+            <Route path={APP_ROUTES.auth.logout} element={<SignOutPage />} />
+            <Route path={APP_ROUTES.auth.passwordForgotten} element={<PasswordForgotten />} />
         </Route>
     );
 };

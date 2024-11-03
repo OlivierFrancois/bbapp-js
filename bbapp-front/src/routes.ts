@@ -1,11 +1,16 @@
 import { API_HOST } from './lib/api.ts';
 
 export const APP_ROUTES = {
+    auth: {
+        login: '/login',
+        signin: '/signin',
+        logout: '/logout',
+        passwordForgotten: '/password-forgotten',
+    },
     home: '/',
-    login: '/login',
-    signin: '/signin',
-    logout: '/logout',
-    passwordForgotten: '/password-forgotten',
+    user: {
+        edit: `/your-account`,
+    },
     admin: {
         index: '/admin',
     },
@@ -23,7 +28,7 @@ export const API_ENDPOINTS = {
         session: `${API_HOST}/auth/session`,
     },
     user: {
-        signUp: `${API_HOST}/user/sign-up`,
+        signUp: `${API_HOST}/user/sign-in`,
         checkUsernameAvailability: `${API_HOST}/user/check-username-availability`,
         changePassword: `${API_HOST}/user/password`,
     },

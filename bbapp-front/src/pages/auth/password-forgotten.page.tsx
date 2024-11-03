@@ -21,7 +21,7 @@ export default function PasswordForgottenPage() {
                 <div className="text-sm text-white">(wip)</div>
             </div>
 
-            <Link className={'mt-4 text-lg text-white'} to={APP_ROUTES.login}>
+            <Link className={'mt-4 text-lg text-white'} to={APP_ROUTES.auth.login}>
                 Retour à l'accueil
             </Link>
         </div>
