@@ -4,6 +4,9 @@ import { User } from '../../types/User.tsx';
 
 export class HomeAPI {
     static async getProps(): Promise<User> {
-        return api.get(API_ENDPOINTS.home.getProps).then((res) => res.data);
+        return api
+            .get(API_ENDPOINTS.home.getProps)
+            .then((res) => res.data)
+            .catch(() => ({}));
     }
 }
