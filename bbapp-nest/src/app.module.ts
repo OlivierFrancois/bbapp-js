@@ -9,9 +9,10 @@ import { ArticleCategoryModule } from './modules/article-categories/article-cate
 import { DishTagModule } from './modules/dish-tags/dish-tag.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { HomeModule } from './modules/homes/home.module';
 
 @Module({
-    imports: [DishModule, DishTagModule, DishScheduleModule, ArticleModule, ArticleCategoryModule, RecipeModule, AuthModule, UserModule],
+    imports: [DishModule, DishTagModule, DishScheduleModule, ArticleModule, ArticleCategoryModule, RecipeModule, AuthModule, UserModule, HomeModule],
     controllers: [AppController],
     providers: [AppService],
 })

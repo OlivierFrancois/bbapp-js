@@ -1,9 +1,9 @@
 export type User = {
     id: number;
     username: string;
-    email: string;
-    role: Role;
-    homeId: number | null;
+    email?: string;
+    role?: Role;
+    homeId?: number | null;
 };
 
 export type Home = {

@@ -13,6 +13,7 @@ import SignOutPage from './pages/auth/sign-out.page.tsx';
 import SignUpPage from './pages/auth/sign-up.page.tsx';
 import PasswordForgotten from './pages/auth/password-forgotten.page.tsx';
 import UserPage from './pages/user/user.page.tsx';
+import { HomeAPI } from './lib/api/home.api.tsx';
 
 export const routes = (initialAuthDatas: any) => {
     return createRoutesFromElements(
@@ -25,7 +26,7 @@ export const routes = (initialAuthDatas: any) => {
 
             <Route path={''} element={<AppLayout />}>
                 <Route path={APP_ROUTES.user.edit} element={<UserPage />} />
-                <Route path={APP_ROUTES.home} element={<HomePage />} />
+                <Route path={APP_ROUTES.home} element={<HomePage />} loader={() => HomeAPI.getProps()} />
                 <Route path={APP_ROUTES.schedule.index} element={<SchedulePage />} />
             </Route>
 

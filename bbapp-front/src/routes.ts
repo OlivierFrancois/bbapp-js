@@ -38,6 +38,9 @@ export const API_ENDPOINTS = {
         add: `${API_HOST}/dish-schedule/add`,
         remove: `${API_HOST}/dish-schedule/remove`,
     },
+    home: {
+        getProps: `${API_HOST}/home/props`,
+    },
 };
 
 export const LS_TOKEN = 'BBAPP_TOKEN';
