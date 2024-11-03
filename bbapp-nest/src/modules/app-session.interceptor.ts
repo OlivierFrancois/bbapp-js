@@ -9,8 +9,9 @@ export class AppSessionInterceptor implements NestInterceptor {
     async intercept(context: ExecutionContext, next: CallHandler): Promise<Observable<any>> {
         const controller = context.getClass().prototype;
         const request = context.switchToHttp().getRequest();
-        const { user } = this.sessionService.retrieveSessionFromRequest(request);
+        const { user, home } = this.sessionService.retrieveSessionFromRequest(request);
         controller.user = user;
+        controller.home = home;
 
         return next.handle();
     }
