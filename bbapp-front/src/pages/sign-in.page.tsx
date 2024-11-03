@@ -32,7 +32,7 @@ export default function SignInPage() {
 
     return (
         <div
-            className={'text-white h-screen flex-1 flex flex-col items-center gap-24 pt-24 p-4 bg-center'}
+            className={'text-white h-screen flex-1 flex flex-col items-center gap-8 pt-32 p-4 bg-center'}
             style={{
                 backgroundImage: `url(${background_green})`,
             }}
@@ -42,7 +42,7 @@ export default function SignInPage() {
                 <div className={'self-end font-extralight'}>By Mel&Olive</div>
             </div>
 
-            <div className="z-10 rounded-xl bg-black/60 w-full flex flex-col p-4 gap-4 text-dark">
+            <div className="z-10 rounded-xl bg-black/60 w-full flex flex-col p-4 gap-4 text-dark max-w-lg">
                 <label className="form-control w-full">
                     <div className="label">
                         <span className="label-text text-white">Username</span>
@@ -73,7 +73,7 @@ export default function SignInPage() {
 
                     <div className="flex items-center justify-between">
                         <Link to={APP_ROUTES.passwordForgotten} className={'btn btn-xs text-white btn-ghost'}>
-                            Mot de passe oublié
+                            Mot de passe oublié ?
                         </Link>
 
                         <Link to={APP_ROUTES.signin} className={'btn btn-xs text-white btn-ghost'}>

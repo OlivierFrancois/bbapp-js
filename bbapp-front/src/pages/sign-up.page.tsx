@@ -54,9 +54,17 @@ export default function SignUpPage() {
         return password === confirmPassword;
     }, [password, confirmPassword]);
 
+    const isEmailValid = useMemo(() => {
+        return String(email)
+            .toLowerCase()
+            .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+    }, [email]);
+
     return (
         <div
-            className={'text-white h-screen flex-1 flex flex-col items-center gap-24 pt-24 p-4 bg-center'}
+            className={'text-white h-screen flex-1 flex flex-col items-center gap-8 pt-32 p-4 bg-center'}
             style={{
                 backgroundImage: `url(${background_green})`,
             }}
@@ -66,7 +74,7 @@ export default function SignUpPage() {
                 <div className={'self-end font-extralight'}>By Mel&Olive</div>
             </div>
 
-            <div className="z-10 rounded-xl bg-black/60 w-full flex flex-col p-4 gap-4 text-dark">
+            <div className="z-10 rounded-xl bg-black/60 w-full flex flex-col p-4 gap-4 text-dark max-w-lg">
                 <label className="form-control w-full">
                     <div className="label">
                         <span className="label-text text-white">Nom d'utilisateur</span>
@@ -79,6 +87,10 @@ export default function SignUpPage() {
                         placeholder="Saisissez votre nom d'utilisateur"
                         className="input input-sm w-full"
                     />
+
+                    <div className={'mt-2 text-error text-sm flex flex-col'}>
+                        {username.length > 0 && !isUsernameAvailable && <div>Le nom d'utilisateur est déjà pris.</div>}
+                    </div>
                 </label>
 
                 <label className="form-control w-full">
@@ -93,6 +105,10 @@ export default function SignUpPage() {
                         placeholder="Saisissez votre adresse e-mail"
                         className="input input-sm w-full"
                     />
+
+                    <div className={'mt-2 text-error text-sm flex flex-col'}>
+                        {email.length > 5 && !isEmailValid && <div>Veuillez saisir une adresse mail valide.</div>}
+                    </div>
                 </label>
 
                 <label className="form-control w-full">
@@ -121,22 +137,20 @@ export default function SignUpPage() {
                         placeholder="Confirmez votre mot de passe"
                         className="input input-sm w-full"
                     />
+                    <div className={'mt-2 text-error text-sm flex flex-col'}>{!isPasswordCorrect && <div>Mot de passe incorrect.</div>}</div>
                 </label>
 
-                <div className={'text-error flex flex-col'}>
-                    {!isUsernameAvailable && <div>Le nom d'utilisateur est déjà pris.</div>}
-                    {!isPasswordCorrect && <div>Mot de passe incorrect.</div>}
+                <div className="flex flex-col gap-2">
+                    {isUsernameAvailable && isPasswordCorrect && (
+                        <button onClick={handleSubmit} className={'btn btn-primary'} disabled={!isUsernameAvailable || !isPasswordCorrect}>
+                            Inscription
+                        </button>
+                    )}
+
+                    <Link className={'text-lg text-white btn btn-ghost btn-sm'} to={APP_ROUTES.login}>
+                        Retour à l'accueil
+                    </Link>
                 </div>
-
-                {isUsernameAvailable && isPasswordCorrect && (
-                    <button onClick={handleSubmit} className={'btn btn-primary'} disabled={!isUsernameAvailable || !isPasswordCorrect}>
-                        Inscription
-                    </button>
-                )}
-
-                <Link className={'mt-4 text-lg text-white'} to={APP_ROUTES.login}>
-                    Retour à l'accueil
-                </Link>
             </div>
         </div>
     );

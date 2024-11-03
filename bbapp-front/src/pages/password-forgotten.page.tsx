@@ -18,7 +18,7 @@ export default function PasswordForgottenPage() {
 
             <div className="flex items-center justify-center flex-col">
                 <div className="text-6xl text-white font-bold animate-bounce">CHEEEEH</div>
-                <div className="text-sm text-white">(En construction)</div>
+                <div className="text-sm text-white">(wip)</div>
             </div>
 
             <Link className={'mt-4 text-lg text-white'} to={APP_ROUTES.login}>
