@@ -45,8 +45,7 @@ export class AuthGuard implements CanActivate {
                 throw new UnauthorizedException();
             }
 
-            const userSession = await this.sessionService.createSessionFromPayload(payload);
-            request.userSession = userSession;
+            request.userSession = await this.sessionService.createSessionFromPayload(payload);
         } catch (e) {
             if (e instanceof TokenExpiredError) {
                 throw new HttpException('Token expired', 498);

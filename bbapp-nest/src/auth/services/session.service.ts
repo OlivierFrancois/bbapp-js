@@ -13,15 +13,21 @@ export class SessionService {
     ) {}
 
     async createSessionFromPayload(payload: JwtPayload): Promise<Session> {
-        const user = await this.userService.findOne(payload.sub);
+        const user = await this.prismaService.user.findFirst({
+            where: { id: payload.sub },
+            include: { home: true },
+        });
+        const { home } = user;
 
         delete user.password;
         delete user.createdAt;
         delete user.updatedAt;
+        delete user.home;
 
         return {
             user: { ...user, role: user.role as Role },
             userType: payload.userType,
+            home,
         };
     }
 

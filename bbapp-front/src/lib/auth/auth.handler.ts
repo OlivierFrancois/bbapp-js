@@ -1,6 +1,6 @@
 import api from '../api';
 import { API_ENDPOINTS, LS_TOKEN } from '../../routes.ts';
-import { User } from '../../types/User.tsx';
+import { Home, Role, User } from '../../types/User.tsx';
 
 export type Credentials = {
     username: string;
@@ -9,6 +9,8 @@ export type Credentials = {
 };
 export type Session = {
     user: User;
+    userType: Role;
+    home: Home;
 };
 
 export class AuthHandler {

@@ -30,7 +30,7 @@ export class AuthService {
         const jwtPayload: JwtPayload = {
             sub: user.id,
             username: user.username,
-            userType: null,
+            userType: user.role,
         };
 
         return this.generateJwtToken(jwtPayload, rememberMe);
@@ -49,7 +49,7 @@ export class AuthService {
     async generateJwtToken(payload: JwtPayload, rememberMe: boolean): Promise<string> {
         return await this.jwtService.signAsync(payload, {
             privateKey: fs.readFileSync(join(process.cwd(), jwtConstants.secretPath)).toString(),
-            expiresIn: rememberMe ? '9999 days' : '10s',
+            expiresIn: rememberMe ? '9999 days' : '1h',
             algorithm: 'RS256',
         });
     }

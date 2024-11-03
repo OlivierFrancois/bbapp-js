@@ -2,13 +2,14 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { User } from '../../types/User.tsx';
+import { Home, User } from '../../types/User.tsx';
 import { AuthHandler, Credentials, Session } from '../../lib/auth/auth.handler.ts';
 import { APP_ROUTES, LS_TOKEN } from '../../routes.ts';
 
 type AuthContextType = {
     user: User | null;
     session: Session | null;
+    home: Home | null;
     loggedIn: boolean;
     login: (credentials: Credentials) => void;
     logout: () => void;
@@ -132,6 +133,7 @@ export const AuthProvider = ({ initialAuthDatas, children }: UserProviderProps) 
         <AuthContext.Provider
             value={{
                 user,
+                home: session?.home ?? null,
                 loggedIn,
                 login,
                 logout,
