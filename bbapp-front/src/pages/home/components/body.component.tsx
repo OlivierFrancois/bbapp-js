@@ -1,4 +1,4 @@
-import { useAuth } from '../../auth.context.tsx';
+import { useAuth } from '../../auth/auth.context.tsx';
 import { useModal } from '../../../contexts/modal.provider.tsx';
 import ChangePassword from './change-password.component.tsx';
 

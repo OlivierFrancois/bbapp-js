@@ -1,6 +1,6 @@
-import {createRoot, hydrateRoot} from 'react-dom/client';
-import {RouterProvider} from 'react-router-dom';
-import AppRouter from "./app.router.tsx";
+import { createRoot, hydrateRoot } from 'react-dom/client';
+import { RouterProvider } from 'react-router-dom';
+import AppRouter from './app.router.tsx';
 
 const container = document.getElementById('root');
 
@@ -11,7 +11,8 @@ if (import.meta.hot || !container?.innerText) {
     hydrateRoot(container!, <ClientApp />);
 }
 
+const initialAuthDatas = undefined;
 
 function ClientApp() {
-    return <RouterProvider router={AppRouter()} />;
+    return <RouterProvider router={AppRouter(initialAuthDatas)} />;
 }

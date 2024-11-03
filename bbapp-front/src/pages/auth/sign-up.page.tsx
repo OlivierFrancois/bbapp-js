@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import background_green from '../assets/images/background_green.png';
-import MeliveSvg from '../components/melive.component.tsx';
-import { APP_ROUTES } from '../routes.ts';
-import { SignUpPayload, UserAPI } from '../lib/api/user.api.tsx';
+import background_green from '../../assets/images/background_green.png';
+import MeliveSvg from '../../components/melive.component.tsx';
+import { APP_ROUTES } from '../../routes.ts';
+import { SignUpPayload, UserAPI } from '../../lib/api/user.api.tsx';
 import { toast } from 'react-toastify';
 import { useAuth } from './auth.context.tsx';
 

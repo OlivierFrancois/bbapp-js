@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Credentials } from '../lib/auth/auth.handler.ts';
+import { Credentials } from '../../lib/auth/auth.handler.ts';
 import { useAuth } from './auth.context.tsx';
-import { APP_ROUTES } from '../routes.ts';
-import background_green from '../assets/images/background_green.png';
-import MeliveSvg from '../components/melive.component.tsx';
+import { APP_ROUTES } from '../../routes.ts';
+import background_green from '../../assets/images/background_green.png';
+import MeliveSvg from '../../components/melive.component.tsx';
 
 export default function SignInPage() {
     const navigate = useNavigate();
@@ -45,7 +45,7 @@ export default function SignInPage() {
             <div className="z-10 rounded-xl bg-black/60 w-full flex flex-col p-4 gap-4 text-dark max-w-lg">
                 <label className="form-control w-full">
                     <div className="label">
-                        <span className="label-text text-white">Username</span>
+                        <span className="label-text text-white">Nom d'utilisateur</span>
                     </div>
 
                     <input onInput={handleUsernameChange} type="text" placeholder="Type your username" className="input input-sm w-full" />
@@ -53,7 +53,7 @@ export default function SignInPage() {
 
                 <label className="form-control w-full">
                     <div className="label">
-                        <span className="label-text text-white">Password</span>
+                        <span className="label-text text-white">Mot de passe</span>
                     </div>
 
                     <input onInput={handlePasswordChange} type="password" placeholder="Type your password" className="input input-sm w-full" />
@@ -62,7 +62,7 @@ export default function SignInPage() {
                 <div className="flex">
                     <label className="label cursor-pointer flex gap-2">
                         <input type="checkbox" defaultChecked className="checkbox checkbox-sm checkbox-primary" />
-                        <span className="label-text  text-white">Remember me</span>
+                        <span className="label-text  text-white">Se souvenir de moi</span>
                     </label>
                 </div>
 

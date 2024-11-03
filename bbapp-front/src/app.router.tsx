@@ -8,10 +8,10 @@ import { Root } from './root.tsx';
 import HomePage from './pages/home/home.page.tsx';
 import SchedulePage from './pages/schedule/schedule.page.tsx';
 import { APP_ROUTES } from './routes.ts';
-import SignInPage from './pages/sign-in.page.tsx';
-import SignOutPage from './pages/sign-out.page.tsx';
-import SignUpPage from './pages/sign-up.page.tsx';
-import PasswordForgotten from './pages/password-forgotten.page.tsx';
+import SignInPage from './pages/auth/sign-in.page.tsx';
+import SignOutPage from './pages/auth/sign-out.page.tsx';
+import SignUpPage from './pages/auth/sign-up.page.tsx';
+import PasswordForgotten from './pages/auth/password-forgotten.page.tsx';
 
 export const routes = (initialAuthDatas: any) => {
     return createRoutesFromElements(
@@ -27,10 +27,10 @@ export const routes = (initialAuthDatas: any) => {
                 <Route path={APP_ROUTES.schedule.index} element={<SchedulePage />} />
             </Route>
 
-            <Route path={APP_ROUTES.passwordForgotten} element={<PasswordForgotten />} />
-            <Route path={APP_ROUTES.signin} element={<SignUpPage />} />
             <Route path={APP_ROUTES.login} element={<SignInPage />} />
+            <Route path={APP_ROUTES.signin} element={<SignUpPage />} />
             <Route path={APP_ROUTES.logout} element={<SignOutPage />} />
+            <Route path={APP_ROUTES.passwordForgotten} element={<PasswordForgotten />} />
         </Route>
     );
 };

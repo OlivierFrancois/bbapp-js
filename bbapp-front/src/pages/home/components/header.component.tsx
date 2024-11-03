@@ -1,5 +1,5 @@
 import background_green from '../../../assets/images/background_green.png';
-import { useAuth } from '../../auth.context.tsx';
+import { useAuth } from '../../auth/auth.context.tsx';
 
 export default function HomeHeader() {
     const { user } = useAuth();

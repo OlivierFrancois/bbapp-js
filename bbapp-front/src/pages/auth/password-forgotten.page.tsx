@@ -1,7 +1,7 @@
-import background_green from '../assets/images/background_green.png';
-import MeliveSvg from '../components/melive.component.tsx';
+import background_green from '../../assets/images/background_green.png';
+import MeliveSvg from '../../components/melive.component.tsx';
 import { Link } from 'react-router-dom';
-import { APP_ROUTES } from '../routes.ts';
+import { APP_ROUTES } from '../../routes.ts';
 
 export default function PasswordForgottenPage() {
     return (

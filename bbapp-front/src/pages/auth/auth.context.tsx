@@ -2,9 +2,9 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { User } from '../types/User.tsx';
-import { AuthHandler, Credentials, Session } from '../lib/auth/auth.handler.ts';
-import { APP_ROUTES, LS_TOKEN } from '../routes.ts';
+import { User } from '../../types/User.tsx';
+import { AuthHandler, Credentials, Session } from '../../lib/auth/auth.handler.ts';
+import { APP_ROUTES, LS_TOKEN } from '../../routes.ts';
 
 type AuthContextType = {
     user: User | null;

@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import './index.css';
 import { ModalProvider } from './contexts/modal.provider.tsx';
-import { AuthProvider } from './pages/auth.context.tsx';
+import { AuthProvider } from './pages/auth/auth.context.tsx';
 import { Bounce, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
