@@ -18,7 +18,7 @@ export class UserService {
 
     async findByUsername(username: string): Promise<User | undefined> {
         return this.prismaService.user.findFirst({
-            where: { username: { contains: username } },
+            where: { username },
         });
     }
 

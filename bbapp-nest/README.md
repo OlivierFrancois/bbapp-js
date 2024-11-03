@@ -16,6 +16,11 @@ $ npm install
 
 ## Running the app
 
+```pm2
+$ pm2 stop api-bbapp
+$ pm2 start ecosystem.config.cjs
+```
+
 ```bash
 # development
 $ npm run start
