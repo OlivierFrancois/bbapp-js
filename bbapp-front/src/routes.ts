@@ -28,7 +28,7 @@ export const API_ENDPOINTS = {
         session: `${API_HOST}/auth/session`,
     },
     user: {
-        signUp: `${API_HOST}/user/sign-in`,
+        signUp: `${API_HOST}/user/sign-up`,
         checkUsernameAvailability: `${API_HOST}/user/check-username-availability`,
         changePassword: `${API_HOST}/user/password`,
     },
