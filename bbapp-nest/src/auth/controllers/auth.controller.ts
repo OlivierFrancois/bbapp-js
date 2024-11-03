@@ -9,7 +9,7 @@ export class AuthController {
     constructor(private authService: AuthService) {}
 
     @Public()
-    @Post('login')
+    @Post('sign-in')
     async signIn(@Body() signInDto: SignInDto, @Req() request: Request) {
         return { token: await this.authService.signIn(signInDto, request.ip) };
     }

@@ -1,7 +1,7 @@
 import api from '../api.ts';
 import { API_ENDPOINTS } from '../../routes.ts';
 
-export type SignInPayload = {
+export type SignUpPayload = {
     username: string;
     email: string;
     password: string;
@@ -17,8 +17,8 @@ export class UserAPI {
         return api.put(API_ENDPOINTS.user.changePassword, updatePasswordPayload).then((res) => res.data);
     }
 
-    static async signIn(signInPayload: SignInPayload): Promise<void> {
-        return api.post(API_ENDPOINTS.user.signIn, signInPayload).then((res) => res.data);
+    static async signUp(signUpPayload: SignUpPayload): Promise<void> {
+        return api.post(API_ENDPOINTS.user.signUp, signUpPayload).then((res) => res.data);
     }
 
     static async checkUsernameAvailability(username: string): Promise<boolean> {

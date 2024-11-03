@@ -8,9 +8,9 @@ import { Root } from './root.tsx';
 import HomePage from './pages/home/home.page.tsx';
 import SchedulePage from './pages/schedule/schedule.page.tsx';
 import { APP_ROUTES } from './routes.ts';
-import LogInPage from './pages/log-in.page.tsx';
-import LogOutPage from './pages/log-out.page.tsx';
 import SignInPage from './pages/sign-in.page.tsx';
+import SignOutPage from './pages/sign-out.page.tsx';
+import SignUpPage from './pages/sign-up.page.tsx';
 import PasswordForgotten from './pages/password-forgotten.page.tsx';
 
 export const routes = (initialAuthDatas: any) => {
@@ -28,9 +28,9 @@ export const routes = (initialAuthDatas: any) => {
             </Route>
 
             <Route path={APP_ROUTES.passwordForgotten} element={<PasswordForgotten />} />
-            <Route path={APP_ROUTES.signin} element={<SignInPage />} />
-            <Route path={APP_ROUTES.login} element={<LogInPage />} />
-            <Route path={APP_ROUTES.logout} element={<LogOutPage />} />
+            <Route path={APP_ROUTES.signin} element={<SignUpPage />} />
+            <Route path={APP_ROUTES.login} element={<SignInPage />} />
+            <Route path={APP_ROUTES.logout} element={<SignOutPage />} />
         </Route>
     );
 };

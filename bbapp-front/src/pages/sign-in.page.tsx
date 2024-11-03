@@ -1,58 +1,34 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Credentials } from '../lib/auth/auth.handler.ts';
+import { useAuth } from './auth.context.tsx';
+import { APP_ROUTES } from '../routes.ts';
 import background_green from '../assets/images/background_green.png';
 import MeliveSvg from '../components/melive.component.tsx';
-import { APP_ROUTES } from '../routes.ts';
-import { SignInPayload, UserAPI } from '../lib/api/user.api.tsx';
-import { toast } from 'react-toastify';
-import { useAuth } from './auth.context.tsx';
 
 export default function SignInPage() {
-    const [username, setUsername] = useState<string>('');
-    const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-    const [confirmPassword, setConfirmPassword] = useState<string>('');
-    const [isUsernameAvailable, setIsUsernameAvailable] = useState<boolean>(false);
+    const navigate = useNavigate();
 
-    const { login } = useAuth();
+    const [credentials, setCredentials] = useState<Credentials>({ username: '', password: '', rememberMe: false });
 
-    const handleUsernameChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-        setUsername(target.value);
-    };
-    const handleEmailchange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(target.value);
-    };
-    const handlePasswordChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(target.value);
-    };
-    const handleConfirmPasswordChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-        setConfirmPassword(target.value);
-    };
+    const { login, loggedIn } = useAuth();
 
     const handleSubmit = () => {
-        if (password !== confirmPassword) return;
+        login(credentials);
+    };
 
-        const payload: SignInPayload = {
-            username,
-            email,
-            password,
-        };
-
-        UserAPI.signIn(payload).then(() => {
-            toast.success('Compte créé avec succès. Bienvenue !');
-            login({ username, password });
-        });
+    const handleUsernameChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+        setCredentials({ ...credentials, username: target.value });
+    };
+    const handlePasswordChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+        setCredentials({ ...credentials, password: target.value });
     };
 
     useEffect(() => {
-        if (username.length > 3) {
-            UserAPI.checkUsernameAvailability(username).then((response) => setIsUsernameAvailable(response));
+        if (loggedIn) {
+            navigate(APP_ROUTES.home);
         }
-    }, [username]);
-
-    const isPasswordCorrect = useMemo(() => {
-        return password === confirmPassword;
-    }, [password, confirmPassword]);
+    }, []);
 
     return (
         <div
@@ -69,74 +45,42 @@ export default function SignInPage() {
             <div className="z-10 rounded-xl bg-black/60 w-full flex flex-col p-4 gap-4 text-dark">
                 <label className="form-control w-full">
                     <div className="label">
-                        <span className="label-text text-white">Nom d'utilisateur</span>
+                        <span className="label-text text-white">Username</span>
                     </div>
 
-                    <input
-                        value={username}
-                        onInput={handleUsernameChange}
-                        type="text"
-                        placeholder="Saisissez votre nom d'utilisateur"
-                        className="input input-sm w-full"
-                    />
+                    <input onInput={handleUsernameChange} type="text" placeholder="Type your username" className="input input-sm w-full" />
                 </label>
 
                 <label className="form-control w-full">
                     <div className="label">
-                        <span className="label-text text-white">Adresse e-mail</span>
+                        <span className="label-text text-white">Password</span>
                     </div>
 
-                    <input
-                        value={email}
-                        onInput={handleEmailchange}
-                        type="email"
-                        placeholder="Saisissez votre adresse e-mail"
-                        className="input input-sm w-full"
-                    />
+                    <input onInput={handlePasswordChange} type="password" placeholder="Type your password" className="input input-sm w-full" />
                 </label>
 
-                <label className="form-control w-full">
-                    <div className="label">
-                        <span className="label-text text-white">Mot de passe</span>
-                    </div>
-
-                    <input
-                        value={password}
-                        onInput={handlePasswordChange}
-                        type="password"
-                        placeholder="Saisissez votre mot de passe"
-                        className="input input-sm w-full"
-                    />
-                </label>
-
-                <label className="form-control w-full">
-                    <div className="label">
-                        <span className="label-text text-white">Confirmer votre mot de passe</span>
-                    </div>
-
-                    <input
-                        value={confirmPassword}
-                        onInput={handleConfirmPasswordChange}
-                        type="password"
-                        placeholder="Confirmez votre mot de passe"
-                        className="input input-sm w-full"
-                    />
-                </label>
-
-                <div className={'text-error flex flex-col'}>
-                    {!isUsernameAvailable && <div>Le nom d'utilisateur est déjà pris.</div>}
-                    {!isPasswordCorrect && <div>Mot de passe incorrect.</div>}
+                <div className="flex">
+                    <label className="label cursor-pointer flex gap-2">
+                        <input type="checkbox" defaultChecked className="checkbox checkbox-sm checkbox-primary" />
+                        <span className="label-text  text-white">Remember me</span>
+                    </label>
                 </div>
 
-                {isUsernameAvailable && isPasswordCorrect && (
-                    <button onClick={handleSubmit} className={'btn btn-primary'} disabled={!isUsernameAvailable || !isPasswordCorrect}>
-                        Inscription
+                <div className="flex flex-col">
+                    <button onClick={handleSubmit} className={'btn btn-primary'}>
+                        Connexion
                     </button>
-                )}
 
-                <Link className={'mt-4 text-lg text-white'} to={APP_ROUTES.login}>
-                    Retour à l'accueil
-                </Link>
+                    <div className="flex items-center justify-between">
+                        <Link to={APP_ROUTES.passwordForgotten} className={'btn btn-xs text-white btn-ghost'}>
+                            Mot de passe oublié
+                        </Link>
+
+                        <Link to={APP_ROUTES.signin} className={'btn btn-xs text-white btn-ghost'}>
+                            Créer un compte
+                        </Link>
+                    </div>
+                </div>
             </div>
         </div>
     );

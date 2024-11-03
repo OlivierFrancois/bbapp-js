@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAuth } from './auth.context.tsx';
 
-export default function LogOutPage() {
+export default function SignOutPage() {
     const { logout } = useAuth();
 
     useEffect(() => {

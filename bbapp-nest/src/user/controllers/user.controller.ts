@@ -19,8 +19,8 @@ export class UserController {
     }
 
     @Public()
-    @Post('sign-in')
-    async create(@Body() userCreateDto: UserCreateDto) {
+    @Post('sign-up')
+    async signUp(@Body() userCreateDto: UserCreateDto) {
         return await this.userService.create(userCreateDto);
     }
 

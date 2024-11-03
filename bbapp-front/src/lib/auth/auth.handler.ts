@@ -14,7 +14,7 @@ export type Session = {
 export class AuthHandler {
     static async storeToken(credentials: Credentials) {
         return api
-            .post(API_ENDPOINTS.auth.login, { ...credentials })
+            .post(API_ENDPOINTS.auth.signIn, { ...credentials })
             .then((response) => {
                 const { token } = response.data;
                 localStorage.setItem(LS_TOKEN, token);

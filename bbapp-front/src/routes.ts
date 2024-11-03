@@ -19,11 +19,11 @@ export const APP_ROUTES = {
 
 export const API_ENDPOINTS = {
     auth: {
-        login: `${API_HOST}/auth/login`,
+        signIn: `${API_HOST}/auth/sign-in`,
         session: `${API_HOST}/auth/session`,
     },
     user: {
-        signIn: `${API_HOST}/user/sign-in`,
+        signUp: `${API_HOST}/user/sign-up`,
         checkUsernameAvailability: `${API_HOST}/user/check-username-availability`,
         changePassword: `${API_HOST}/user/password`,
     },
