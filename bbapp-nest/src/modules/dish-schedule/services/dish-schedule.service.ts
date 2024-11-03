@@ -31,7 +31,7 @@ export class DishScheduleService {
 
     async add(homeId: number, data: AddDishDto) {
         return this.prisma.dishScheduleItem.upsert({
-            where: { date_moment: { date: data.date, moment: data.moment }, homeId },
+            where: { date_moment_homeId: { date: data.date, moment: data.moment, homeId } },
             update: { dishes: { connect: [{ id: data.dishId }] } },
             create: { date: data.date, moment: data.moment, dishes: { connect: [{ id: data.dishId }] }, homeId },
         });
@@ -39,7 +39,7 @@ export class DishScheduleService {
 
     async remove(homeId: number, data: AddDishDto) {
         return this.prisma.dishScheduleItem.update({
-            where: { date_moment: { date: data.date, moment: data.moment }, homeId },
+            where: { date_moment_homeId: { date: data.date, moment: data.moment, homeId: homeId } },
             data: { dishes: { disconnect: [{ id: data.dishId }] } },
         });
     }
