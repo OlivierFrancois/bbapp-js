@@ -7,80 +7,58 @@ import { CreateArticleDto } from '../dtos/create-article.dto';
 export class ArticleService {
     constructor(private readonly prisma: PrismaService) {}
 
-    async getAll(): Promise<Article[]> {
-        return this.prisma.article.findMany();
+    async getAll(homeId: number): Promise<Article[]> {
+        return this.prisma.article.findMany({ where: { homeId } });
     }
 
-    async getById(id: number): Promise<Article | null> {
+    async getById(homeId: number, id: number): Promise<Article | null> {
         return this.prisma.article.findUnique({
-            where: { id },
+            where: { id, homeId },
         });
     }
 
-    async getByName(name: string): Promise<Article[]> {
+    async getByName(homeId: number, name: string): Promise<Article[]> {
         return this.prisma.article.findMany({
             where: {
-                name: {
-                    contains: name.toLowerCase(),
-                },
+                name: { contains: name.toLowerCase() },
+                homeId,
             },
         });
     }
 
-    async create(createArticleDto: CreateArticleDto): Promise<Article> {
-        const { name, categoryId, sortOrder } = createArticleDto;
+    async create(homeId: number, createArticleDto: CreateArticleDto): Promise<Article> {
+        const { name, sortOrder } = createArticleDto;
+        let { categoryId } = createArticleDto;
 
-        let categoryConnect = undefined;
         if (categoryId) {
             const categoryExists = await this.prisma.articleCategory.findUnique({
-                where: { id: categoryId },
+                where: { id: categoryId, homeId },
             });
-
-            if (categoryExists) {
-                categoryConnect = { connect: { id: categoryId } };
-            }
+            if (!categoryExists) categoryId = undefined;
         }
-
-        const data: Prisma.ArticleCreateInput = {
-            name,
-            category: categoryConnect,
-            sortOrder,
-        };
 
         return this.prisma.article.create({
-            data,
+            data: { homeId, name, categoryId, sortOrder },
         });
     }
 
-    async update(id: number, updateArticleDto: CreateArticleDto): Promise<Article> {
-        const { name, categoryId, sortOrder } = updateArticleDto;
+    async update(homeId: number, id: number, updateArticleDto: CreateArticleDto): Promise<Article> {
+        const { name, sortOrder } = updateArticleDto;
+        let { categoryId } = updateArticleDto;
 
-        let categoryConnect = undefined;
         if (categoryId) {
             const categoryExists = await this.prisma.articleCategory.findUnique({
-                where: { id: categoryId },
+                where: { id: categoryId, homeId },
             });
-
-            if (categoryExists) {
-                categoryConnect = { connect: { id: categoryId } };
-            }
+            if (!categoryExists) categoryId = undefined;
         }
-
-        const data: Prisma.ArticleCreateInput = {
-            name,
-            category: categoryConnect,
-            sortOrder,
-        };
-
         return this.prisma.article.update({
-            where: { id },
-            data,
+            where: { id, homeId },
+            data: { name, categoryId, sortOrder },
         });
     }
 
-    async delete(id: number): Promise<void> {
-        await this.prisma.article.delete({
-            where: { id },
-        });
+    async delete(homeId: number, id: number): Promise<void> {
+        await this.prisma.article.delete({ where: { id, homeId } });
     }
 }

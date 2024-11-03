@@ -3,13 +3,13 @@ model Home {
     name      String
     createdAt DateTime @default(now())
 
-    users            User[]
-    Article          Article[]
-    ArticleCategory  ArticleCategory[]
-    Dish             Dish[]
-    RecipeItem       RecipeItem[]
-    DishTag          DishTag[]
-    DishScheduleItem DishScheduleItem[]
+    users             User[]
+    articles          Article[]
+    articleCategories ArticleCategory[]
+    dishes            Dish[]
+    recipeItems       RecipeItem[]
+    dishTags          DishTag[]
+    dishScheduleItems DishScheduleItem[]
 }
 
 model User {
