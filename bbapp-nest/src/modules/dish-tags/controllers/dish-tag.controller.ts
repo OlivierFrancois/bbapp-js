@@ -9,7 +9,6 @@ import { AbstractController } from '../../app.abstract.controller';
 export class DishTagController extends AbstractController {
     constructor(private readonly categoryService: DishTagService) {
         super();
-        if (!this.home) throw new ForbiddenException();
     }
 
     @Get('search/by-name')

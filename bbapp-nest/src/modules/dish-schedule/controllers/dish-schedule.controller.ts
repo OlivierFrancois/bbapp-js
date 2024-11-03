@@ -11,7 +11,6 @@ import { AbstractController } from '../../app.abstract.controller';
 export class DishScheduleController extends AbstractController {
     constructor(private readonly dishScheduleService: DishScheduleService) {
         super();
-        if (!this.home) throw new ForbiddenException();
     }
 
     @Get('period')

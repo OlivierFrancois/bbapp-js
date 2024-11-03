@@ -12,7 +12,6 @@ export class AppSessionInterceptor implements NestInterceptor {
         const { user, home } = this.sessionService.retrieveSessionFromRequest(request);
         controller.user = user;
         controller.home = home;
-
         return next.handle();
     }
 }

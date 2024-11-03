@@ -9,7 +9,6 @@ import { AbstractController } from '../../app.abstract.controller';
 export class ArticleCategoryController extends AbstractController {
     constructor(private readonly categoryService: ArticleCategoryService) {
         super();
-        if (!this.home) throw new ForbiddenException();
     }
 
     @Get('search/by-name')

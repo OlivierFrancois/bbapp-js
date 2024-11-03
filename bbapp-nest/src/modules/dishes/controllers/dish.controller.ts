@@ -10,7 +10,6 @@ import { AbstractController } from '../../app.abstract.controller';
 export class DishController extends AbstractController {
     constructor(private readonly dishService: DishService) {
         super();
-        if (!this.home) throw new ForbiddenException();
     }
 
     @Get('search/by-name')
