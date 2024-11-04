@@ -15,7 +15,7 @@ export default function DateRow({ date, scheduleItems }: DateRowProps) {
     const { action } = useContext(DishScheduleContext);
 
     const defaultIsOpened = useMemo(() => {
-        return (scheduleItems.length > 0 && date.isSameOrAfter(dayjs().startOf('d'))) || action !== null;
+        return (scheduleItems.filter((item) => item.dishes.length > 0).length > 0 && date.isSameOrAfter(dayjs().startOf('d'))) || action !== null;
     }, [scheduleItems, date, action]);
 
     const [isOpened, setIsOpened] = useState<boolean>(defaultIsOpened);
