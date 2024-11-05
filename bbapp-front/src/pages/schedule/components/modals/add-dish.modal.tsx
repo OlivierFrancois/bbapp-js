@@ -1,7 +1,7 @@
-import { Moment } from '../../../types/Moment.tsx';
+import { Moment } from '../../../../types/Moment.tsx';
 import React, { useState } from 'react';
-import { Dish } from '../../../types/Dish.tsx';
-import { DishAPI } from '../../../lib/api/DishAPI.tsx';
+import { Dish } from '../../../../types/Dish.tsx';
+import { DishAPI } from '../../../../lib/api/DishAPI.tsx';
 import { Dayjs } from 'dayjs';
 
 interface AddDishProps {

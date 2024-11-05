@@ -1,6 +1,6 @@
-import { Moment } from '../../../types/Moment.tsx';
-import { Dish } from '../../../types/Dish.tsx';
-import { useModal } from '../../../contexts/modal.provider.tsx';
+import { Moment } from '../../../../types/Moment.tsx';
+import { Dish } from '../../../../types/Dish.tsx';
+import { useModal } from '../../../../contexts/modal.provider.tsx';
 import { Dayjs } from 'dayjs';
 
 interface RemoveDishProps {
