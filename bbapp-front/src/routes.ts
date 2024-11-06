@@ -38,6 +38,14 @@ export const API_ENDPOINTS = {
         add: `${API_HOST}/dish-schedule/add`,
         remove: `${API_HOST}/dish-schedule/remove`,
     },
+    dish: {
+        get: (dishId: number | string) => `${API_HOST}/dish/${dishId}`,
+        getAll: `${API_HOST}/dish`,
+        getByName: `${API_HOST}/dish/search/by-name`,
+        create: `${API_HOST}/dish`,
+        update: (dishId: number | string) => `${API_HOST}/dish/${dishId}`,
+        delete: (dishId: number | string) => `${API_HOST}/dish/${dishId}`,
+    },
     home: {
         getProps: `${API_HOST}/home/props`,
     },
