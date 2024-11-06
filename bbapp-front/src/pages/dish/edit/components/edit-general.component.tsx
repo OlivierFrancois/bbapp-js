@@ -30,7 +30,7 @@ export default function DishEditGeneral({ dish }: EditDishProps) {
                     onDishSave();
                 }
             })
-            .catch((err) => {
+            .catch(() => {
                 toast.error('Une erreur est survenue.');
             });
     };
