@@ -2,12 +2,14 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import { Moment } from '../../../types/Moment.tsx';
 import { DishScheduleItem } from '../../../types/DishScheduleItem.tsx';
 import { useModal } from '../../../contexts/modal.provider.tsx';
-import AddDish from './add-dish.modal.tsx';
+import AddDish from './modals/add-dish.modal.tsx';
 import { DishScheduleAPI } from '../../../lib/api/DishScheduleAPI.tsx';
 import { Dayjs } from 'dayjs';
 import { AbstractItem, DishScheduleContext } from '../schedule.utils.tsx';
-import RemoveDish from './remove-dish.modal.tsx';
+import RemoveDish from './modals/remove-dish.modal.tsx';
 import { Dish } from '../../../types/Dish.tsx';
+import { useModalUp } from '../../../contexts/modal-up.provider.tsx';
+import DishEdit from '../../dish/edit/edit.modal.tsx';
 
 interface MomentRowProps {
     moment: Moment;
@@ -32,6 +34,8 @@ export default function MomentRow({ moment, scheduleItem, date }: MomentRowProps
         setCopyingMod(action?.id === 'copy');
     }, [action]);
 
+    const { openSlideUpModal } = useModalUp();
+
     const handleAddDish = (dishId: number) => {
         DishScheduleAPI.add({ date: date.toISOString(), moment: moment.id, dishId }).then(() => {
             closeModal();
@@ -50,8 +54,9 @@ export default function MomentRow({ moment, scheduleItem, date }: MomentRowProps
                     handleRemoveDish={handleRemoveDish}
                 />
             );
-        } else if (dish.url) {
-            window.open(dish.url, '_blank');
+        } else if (dish) {
+            openSlideUpModal(<DishEdit givenDish={dish} onDishSave={() => reloadSchedule(date.format('YYYY-MM-DD'))} />);
+            //window.open(dish.url, '_blank');
         }
     };
     const handleRemoveDish = (dishId: number) => {
@@ -148,7 +153,7 @@ export default function MomentRow({ moment, scheduleItem, date }: MomentRowProps
                 <button
                     className={`${addingMod ? 'right-0' : '-right-32'} transition-all absolute  bg-gray-200 flex items-center gap-2 text-xs font-light rounded-full py-0.5 text-dark px-2`}
                     onClick={() =>
-                        openModal(
+                        openSlideUpModal(
                             <AddDish key={`${date.format('YYYY-MM-DD')}_${moment.id}`} date={date} moment={moment} handleAddDish={handleAddDish} />,
                             'overflow-visible'
                         )
