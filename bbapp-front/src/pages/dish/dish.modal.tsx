@@ -6,6 +6,7 @@ import { DishAPI } from '../../lib/api/DishAPI.tsx';
 import { DishContext } from './dish.context.tsx';
 import { Article } from '../../types/Article.tsx';
 import { ArticleAPI } from '../../lib/api/ArticleAPI.tsx';
+import DishView from './view/dish-view.component.tsx';
 
 interface EditDishProps {
     givenDish: Dish;
@@ -37,11 +38,7 @@ export default function DishModal({ givenDish, onDishSave }: EditDishProps) {
 
                 <hr />
 
-                {editMod ? (
-                    <DishEdit dish={dish} />
-                ) : (
-                    <pre className="w-full p-4 bg-gray-100 rounded-xl overflow-auto">{JSON.stringify(dish, null, '  ')}</pre>
-                )}
+                {editMod ? <DishEdit dish={dish} /> : <DishView dish={dish} />}
             </div>
         </DishContext.Provider>
     );

@@ -55,7 +55,7 @@ export default function MomentRow({ moment, scheduleItem, date }: MomentRowProps
                 />
             );
         } else if (dish) {
-            openSlideUpModal(<DishModal givenDish={dish} onDishSave={() => reloadSchedule(date.format('YYYY-MM-DD'))} />);
+            openSlideUpModal(<DishModal key={dish.id} givenDish={dish} onDishSave={() => reloadSchedule(date.format('YYYY-MM-DD'))} />);
             //window.open(dish.url, '_blank');
         }
     };

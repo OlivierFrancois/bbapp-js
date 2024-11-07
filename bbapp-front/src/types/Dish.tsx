@@ -6,6 +6,8 @@ export type Dish = {
     name: string;
     url?: string;
     dishTagIds?: number[];
+    createdAt?: string;
+    updatedAt?: string;
 
     recipeItems?: Partial<RecipeItem[]>;
     dishTags?: Partial<DishTag[]>;
