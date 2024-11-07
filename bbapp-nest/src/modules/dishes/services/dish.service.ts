@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { Dish, DishTag } from '@prisma/client';
+import { Dish } from '@prisma/client';
 import { PrismaService } from '../../../prisma.service';
 import { UpdateDishWithRecipeDto } from '../dtos/update-dish-with-recipe.dto';
 import { CreateDishDto } from '../dtos/create-dish.dto';
+import { UpdateDishDto } from '../dtos/update-dish.dto';
 
 @Injectable()
 export class DishService {
@@ -21,9 +22,10 @@ export class DishService {
         }));
     }
 
-    async getById(homeId: number, id: number): Promise<Dish | null> {
+    async getById(homeId: number, id: number) {
         return this.prisma.dish.findUnique({
             where: { id, homeId },
+            include: { recipeItems: true },
         });
     }
 
@@ -54,33 +56,28 @@ export class DishService {
         };
     }
 
-    async update(homeId: number, id: number, data: UpdateDishWithRecipeDto) {
-        const { recipeItems, dishTagIds, ...dishData } = data;
+    async update(homeId: number, id: number, data: UpdateDishDto) {
+        const { recipeItems, ...dishData } = data;
 
         const dish = await this.prisma.dish.update({
             where: { id, homeId },
-            data: {
-                ...dishData,
-                dishTags: {
-                    set: dishTagIds?.map((dishTagId) => ({ id: dishTagId })),
-                },
-            },
-            include: { dishTags: true, recipeItems: true },
+            data: { ...dishData },
+            include: { recipeItems: true },
         });
 
         // Vider les recipeItems
-        await this.prisma.recipeItem.deleteMany({ where: { dishId: id, homeId } });
-
-        // Créer les recipeItems
         if (recipeItems) {
-            await this.prisma.recipeItem.createMany({
-                data: recipeItems.filter((r) => r.dishId === id).map((r) => ({ ...r, homeId })),
-            });
+            await this.prisma.recipeItem.deleteMany({ where: { dishId: id, homeId } });
+
+            // Créer les recipeItems
+            if (recipeItems) {
+                await this.prisma.recipeItem.createMany({
+                    data: recipeItems.filter((r) => r.dishId === id).map((r) => ({ ...r, homeId })),
+                });
+            }
+            return { ...dish, recipeItems };
         }
-        return {
-            dish: { ...dish, dishTags: undefined, dishTagIds: dish.dishTags.map((dt) => dt.id) },
-            recipeItems: dish.recipeItems,
-        };
+        return dish;
     }
 
     async delete(homeId: number, id: number): Promise<void> {

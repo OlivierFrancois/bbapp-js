@@ -1,5 +1,4 @@
 import { Dish } from '../../types/Dish.tsx';
-import { RecipeItem } from '../../types/RecipeItem.tsx';
 import api from '../api.ts';
 import { API_ENDPOINTS } from '../../routes.ts';
 
@@ -32,8 +31,8 @@ export class DishAPI {
         });
     }
 
-    static async update(dish: Dish, recipeItems: RecipeItem[]): Promise<{ dish: Dish; recipeItems: RecipeItem[] }> {
-        return api.put(API_ENDPOINTS.dish.update(dish.id), { ...dish, recipeItems }).then((res) => {
+    static async update(dish: Dish): Promise<Dish> {
+        return api.put(API_ENDPOINTS.dish.update(dish.id), { ...dish }).then((res) => {
             return res.data;
         });
     }

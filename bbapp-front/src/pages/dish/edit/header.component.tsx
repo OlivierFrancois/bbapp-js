@@ -1,13 +1,13 @@
 import { useContext } from 'react';
-import { Dish } from '../../../../types/Dish.tsx';
-import { DishEditContext } from '../edit.modal.tsx';
+import { Dish } from '../../../types/Dish.tsx';
+import { DishContext } from '../dish.context.tsx';
 
 interface EditDishHeaderProps {
     dish: Dish;
 }
 
-export default function DishEditHeader({ dish }: EditDishHeaderProps) {
-    const { editMod, setEditMod } = useContext(DishEditContext);
+export default function DishHeader({ dish }: EditDishHeaderProps) {
+    const { editMod, setEditMod } = useContext(DishContext);
     return (
         <div className="flex justify-between items-center">
             <div className={'font-bold text-xl first-letter:uppercase'}>{dish.name}</div>

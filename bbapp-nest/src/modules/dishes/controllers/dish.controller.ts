@@ -2,8 +2,8 @@ import { Controller, Get, Param, Query, Body, Post, Delete, Put } from '@nestjs/
 import { DishService } from '../services/dish.service';
 import { CreateDishDto } from '../dtos/create-dish.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { UpdateDishWithRecipeDto } from '../dtos/update-dish-with-recipe.dto';
 import { AbstractController } from '../../app.abstract.controller';
+import { UpdateDishDto } from '../dtos/update-dish.dto';
 
 @ApiTags('Dishes')
 @Controller('api/dish')
@@ -33,8 +33,8 @@ export class DishController extends AbstractController {
     }
 
     @Put(':id')
-    async update(@Param('id') id: string, @Body() updateDishRecipeDto: UpdateDishWithRecipeDto) {
-        return this.dishService.update(this.home.id, Number(id), updateDishRecipeDto);
+    async update(@Param('id') id: string, @Body() dto: UpdateDishDto) {
+        return this.dishService.update(this.home.id, Number(id), dto);
     }
 
     @Delete(':id')

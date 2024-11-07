@@ -9,7 +9,7 @@ import { AbstractItem, DishScheduleContext } from '../schedule.utils.tsx';
 import RemoveDish from './modals/remove-dish.modal.tsx';
 import { Dish } from '../../../types/Dish.tsx';
 import { useModalUp } from '../../../contexts/modal-up.provider.tsx';
-import DishEdit from '../../dish/edit/edit.modal.tsx';
+import DishModal from '../../dish/dish.modal.tsx';
 
 interface MomentRowProps {
     moment: Moment;
@@ -55,7 +55,7 @@ export default function MomentRow({ moment, scheduleItem, date }: MomentRowProps
                 />
             );
         } else if (dish) {
-            openSlideUpModal(<DishEdit givenDish={dish} onDishSave={() => reloadSchedule(date.format('YYYY-MM-DD'))} />);
+            openSlideUpModal(<DishModal givenDish={dish} onDishSave={() => reloadSchedule(date.format('YYYY-MM-DD'))} />);
             //window.open(dish.url, '_blank');
         }
     };
