@@ -17,7 +17,14 @@ export const Root = ({ initialAuthDatas }: RootProps) => {
                 <ModalUpProvider>
                     <AuthProvider initialAuthDatas={initialAuthDatas}>
                         <Outlet />
-                        <ToastContainer closeOnClick={true} position="bottom-right" theme="colored" transition={Bounce} autoClose={5000} />
+                        <ToastContainer
+                            style={{ zIndex: 1000 }}
+                            closeOnClick={true}
+                            position="bottom-right"
+                            theme="colored"
+                            transition={Bounce}
+                            autoClose={50000}
+                        />
                     </AuthProvider>
                 </ModalUpProvider>
             </ModalProvider>

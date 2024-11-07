@@ -117,12 +117,10 @@ export default function MomentRow({ moment, scheduleItem, date }: MomentRowProps
             onClick={handleRowClick}
         >
             {(isSwaping || isCopying) && (
-                <>
-                    <div className={'z-10 absolute top-0 right-0 h-full w-6 animate-pulse flex items-center justify-center'}>
-                        {isCopying && <i className="fa fa-copy text-dark"></i>}
-                        {isSwaping && <i className="fa fa-right-left text-dark"></i>}
-                    </div>
-                </>
+                <div className={'z-10 absolute top-0 right-0 h-full w-6 animate-pulse flex items-center justify-center'}>
+                    {isCopying && <i className="fa fa-copy text-dark"></i>}
+                    {isSwaping && <i className="fa fa-right-left text-dark"></i>}
+                </div>
             )}
 
             <div className={'flex gap-2 items-center'}>
@@ -153,7 +151,7 @@ export default function MomentRow({ moment, scheduleItem, date }: MomentRowProps
                 <button
                     className={`${addingMod ? 'right-0' : '-right-32'} transition-all absolute  bg-gray-200 flex items-center gap-2 text-xs font-light rounded-full py-0.5 text-dark px-2`}
                     onClick={() =>
-                        openSlideUpModal(
+                        openModal(
                             <AddDish key={`${date.format('YYYY-MM-DD')}_${moment.id}`} date={date} moment={moment} handleAddDish={handleAddDish} />,
                             'overflow-visible'
                         )

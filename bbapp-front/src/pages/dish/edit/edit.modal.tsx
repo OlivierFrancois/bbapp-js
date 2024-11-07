@@ -34,11 +34,6 @@ export default function DishEdit({ givenDish, onDishSave }: EditDishProps) {
 
                 <hr />
 
-                <div className={'flex items-center gap-3 mb-3'}>
-                    <button className="btn btn-primary btn-neutral btn-xs">Informations générales</button>
-                    <button className="btn btn-outline btn-neutral btn-xs">Ingrédients</button>
-                </div>
-
                 {editMod ? (
                     <DishEditGeneral dish={dish} />
                 ) : (

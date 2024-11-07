@@ -36,8 +36,10 @@ export default function DishEditGeneral({ dish }: EditDishProps) {
     };
 
     return (
-        <div className="flex-1 flex flex-col justify-between">
-            <div className="flex flex-col gap-4 flex-1">
+        <div className="flex-1 flex flex-col gap-6">
+            <div className="flex flex-col gap-2 ">
+                <div className="font-semibold">Informations générales</div>
+
                 <label className="form-control w-full">
                     <div className="label">
                         <span className="label-text">Nom du plat</span>
@@ -59,17 +61,56 @@ export default function DishEditGeneral({ dish }: EditDishProps) {
                     />
                 </label>
 
-                <div className="flex justify-between items-center gap-2">
-                    <button onClick={() => setEditedDish(dish)} className={'flex-1 btn btn-neutral btn-outline btn-sm'}>
-                        Annuler
-                    </button>
-                    <button onClick={handleSave} className={'flex-1 btn btn-primary btn-sm'}>
-                        Sauvegarder
-                    </button>
-                </div>
+                <button onClick={handleSave} className={'hidden btn btn-error btn-outline btn-sm mt-4'}>
+                    Supprimer
+                </button>
             </div>
 
-            <button className={'btn btn-outline btn-error btn-sm'}>Supprimer le plat</button>
+            <hr />
+
+            <div className="flex flex-col gap-2 ">
+                <div className="flex justify-between items-center">
+                    <h3 className={'font-semibold'}>Ingrédients</h3>
+
+                    <button className={'btn btn-xs btn-neutral'}>Ajouter</button>
+                </div>
+
+                <table className={'table table-xs'}>
+                    <thead>
+                        <tr>
+                            <th>Ingrédient</th>
+                            <th>Quantité</th>
+                            <th>Unité</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>Café</td>
+                            <td>30</td>
+                            <td>cl</td>
+                        </tr>
+
+                        <tr>
+                            <td>Farine</td>
+                            <td>500</td>
+                            <td>g</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <hr />
+
+            <div className="flex justify-end gap-3">
+                <button onClick={() => setEditMod(false)} className={'btn btn-neutral btn-ghost btn-sm'}>
+                    Annuler
+                </button>
+
+                <button onClick={handleSave} className={'btn btn-primary btn-sm'}>
+                    Sauvegarder
+                </button>
+            </div>
         </div>
     );
 }
