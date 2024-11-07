@@ -1,8 +1,5 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
 import AppLayout from './layouts/app.layout.tsx';
-import ArticlePage from './pages/_old/Article/article.page.tsx';
-import DishSchedulePage from './pages/_old/DishSchedule/dish-schedule.page.tsx';
-import DishPage from './pages/_old/Dish/dish.page.tsx';
 import ErrorPage from './error.page.tsx';
 import { Root } from './root.tsx';
 import HomePage from './pages/home/home.page.tsx';
@@ -18,12 +15,6 @@ import { HomeAPI } from './lib/api/home.api.tsx';
 export const routes = (initialAuthDatas: any) => {
     return createRoutesFromElements(
         <Route element={<Root initialAuthDatas={initialAuthDatas} />} errorElement={<ErrorPage />}>
-            <Route path={'old'} element={<AppLayout />}>
-                <Route path={'dish-schedule'} element={<DishSchedulePage />} />
-                <Route path={'dish'} element={<DishPage />} />
-                <Route path={'article'} element={<ArticlePage />} />
-            </Route>
-
             <Route path={''} element={<AppLayout />}>
                 <Route path={APP_ROUTES.user.edit} element={<UserPage />} />
                 <Route path={APP_ROUTES.home} element={<HomePage />} loader={() => HomeAPI.getProps()} />
