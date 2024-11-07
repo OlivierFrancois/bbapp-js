@@ -46,6 +46,14 @@ export const API_ENDPOINTS = {
         update: (dishId: number | string) => `${API_HOST}/dish/${dishId}`,
         delete: (dishId: number | string) => `${API_HOST}/dish/${dishId}`,
     },
+    articles: {
+        getByName: `${API_HOST}/article/search/by-name`,
+        get: (articleId: number | string) => `${API_HOST}/article/${articleId}`,
+        getAll: `${API_HOST}/article`,
+        create: `${API_HOST}/article/`,
+        update: (articleId: number | string) => `${API_HOST}/article/${articleId}`,
+        delete: (articleId: number | string) => `${API_HOST}/article/${articleId}`,
+    },
     home: {
         getProps: `${API_HOST}/home/props`,
     },
