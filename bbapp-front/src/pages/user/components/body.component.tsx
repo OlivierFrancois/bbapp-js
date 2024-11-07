@@ -45,7 +45,7 @@ export default function UserBody() {
                         onInput={handleOldPasswordChange}
                         value={oldPassword}
                         type="password"
-                        placeholder="Type your password"
+                        placeholder="Saisissez votre mot de passe actuel"
                         className="input input-sm input-bordered w-full"
                     />
                 </label>
@@ -60,7 +60,7 @@ export default function UserBody() {
                             onInput={handleNewPasswordChange}
                             value={newPassword}
                             type="password"
-                            placeholder="Type your password"
+                            placeholder="Saisissez votre nouveau mot de passe"
                             className="input input-sm input-bordered w-full"
                         />
                     </label>
@@ -74,7 +74,7 @@ export default function UserBody() {
                             onInput={handleConfirmNewPasswordChange}
                             value={confirmPassword}
                             type="password"
-                            placeholder="Type your password"
+                            placeholder="Confirmez votre nouveau mot de passe"
                             className="input input-sm input-bordered w-full"
                         />
                     </label>

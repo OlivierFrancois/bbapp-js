@@ -55,7 +55,7 @@ export default function SignInPage() {
                         value={credentials.username}
                         onInput={handleUsernameChange}
                         type="text"
-                        placeholder="Type your username"
+                        placeholder="Saisissez votre nom d'utilisateur"
                         className="input input-sm w-full"
                     />
                 </label>
@@ -69,7 +69,7 @@ export default function SignInPage() {
                         value={credentials.password}
                         onInput={handlePasswordChange}
                         type="password"
-                        placeholder="Type your password"
+                        placeholder="Saisissez votre mot de passe"
                         className="input input-sm w-full"
                     />
                 </label>
