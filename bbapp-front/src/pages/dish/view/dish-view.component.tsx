@@ -9,7 +9,7 @@ interface EditDishProps {
 }
 
 export default function DishView({ dish }: EditDishProps) {
-    const { articles, setEditMod } = useContext(DishContext);
+    const { articles, setEditMod, countUses } = useContext(DishContext);
 
     return (
         <div className="flex-1 flex flex-col gap-6">
@@ -23,7 +23,7 @@ export default function DishView({ dish }: EditDishProps) {
 
                 <div className="text-sm flex items-center gap-1">
                     <div className="">Plat utilisé</div>
-                    <div className={'font-medium'}>(TODO)</div>
+                    <div className={'font-medium'}>{countUses}</div>
                     <div className="">fois</div>
                 </div>
             </div>

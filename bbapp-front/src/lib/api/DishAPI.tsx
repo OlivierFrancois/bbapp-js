@@ -19,6 +19,12 @@ export class DishAPI {
             });
     }
 
+    static async getStats(id: number): Promise<{ countUses: number }> {
+        return api.get(API_ENDPOINTS.dish.getStats(id)).then((res) => {
+            return res.data;
+        });
+    }
+
     static async getAll(): Promise<Dish[]> {
         return api.get(API_ENDPOINTS.dish.getAll).then((res) => {
             return res.data;

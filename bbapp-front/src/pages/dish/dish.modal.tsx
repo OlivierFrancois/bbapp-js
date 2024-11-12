@@ -17,10 +17,12 @@ export default function DishModal({ givenDish, onDishSave }: EditDishProps) {
     const [editMod, setEditMod] = useState(false);
     const [dish, setDish] = useState<Dish>(givenDish);
     const [articles, setArticles] = useState<Article[]>([]);
+    const [countUses, setCountUses] = useState<number>(0);
 
     useEffect(() => {
         reloadArticles();
         DishAPI.get(dish.id).then((res) => setDish(res));
+        DishAPI.getStats(dish.id).then((res) => setCountUses(res.countUses));
     }, [givenDish]);
 
     const reloadArticles = useCallback(() => {
@@ -32,7 +34,7 @@ export default function DishModal({ givenDish, onDishSave }: EditDishProps) {
     };
 
     return (
-        <DishContext.Provider value={{ dish, editMod, setEditMod, reloadDish, reloadArticles, onDishSave, articles }}>
+        <DishContext.Provider value={{ dish, editMod, setEditMod, reloadDish, reloadArticles, onDishSave, articles, countUses }}>
             <div className={'h-full flex flex-col gap-2'}>
                 <DishHeader dish={dish} />
 

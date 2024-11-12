@@ -10,6 +10,7 @@ export type DishEditContextT = {
     reloadArticles: () => void;
     onDishSave?: () => void;
     articles: Article[];
+    countUses: number;
 };
 
 export const DishContext = createContext<DishEditContextT>({} as DishEditContextT);

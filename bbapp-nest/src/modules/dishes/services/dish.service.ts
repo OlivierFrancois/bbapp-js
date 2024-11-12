@@ -35,6 +35,14 @@ export class DishService {
         });
     }
 
+    async getStats(homeId: number, dishId: number) {
+        const relatedScheduleItems = await this.prisma.dishScheduleItem.findMany({
+            where: { homeId, dishes: { some: { id: dishId } } },
+        });
+
+        return { countUses: relatedScheduleItems.length };
+    }
+
     async create(homeId: number, createDishDto: CreateDishDto) {
         const { dishTagIds, ...data } = createDishDto;
 

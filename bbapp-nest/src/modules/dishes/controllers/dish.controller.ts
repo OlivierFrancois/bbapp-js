@@ -27,6 +27,11 @@ export class DishController extends AbstractController {
         return this.dishService.getAllWithDishTagIds(this.home.id);
     }
 
+    @Get(':id/stats')
+    async getStats(@Param('id') id: string) {
+        return this.dishService.getStats(this.home.id, Number(id));
+    }
+
     @Post()
     async create(@Body() createDishDto: CreateDishDto) {
         return this.dishService.create(this.home.id, createDishDto);

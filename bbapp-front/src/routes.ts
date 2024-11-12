@@ -40,6 +40,7 @@ export const API_ENDPOINTS = {
     },
     dish: {
         get: (dishId: number | string) => `${API_HOST}/dish/${dishId}`,
+        getStats: (dishId: number | string) => `${API_HOST}/dish/${dishId}/stats`,
         getAll: `${API_HOST}/dish`,
         getByName: `${API_HOST}/dish/search/by-name`,
         create: `${API_HOST}/dish`,
