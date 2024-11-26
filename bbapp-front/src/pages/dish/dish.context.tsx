@@ -12,5 +12,11 @@ export type DishEditContextT = {
     articles: Article[];
     countUses: number;
 };
-
 export const DishContext = createContext<DishEditContextT>({} as DishEditContextT);
+
+type DishIndexContextT = {
+    dishes: Dish[];
+    reloadDishes: () => void;
+};
+
+export const DishIndexContext = createContext<DishIndexContextT>({} as DishIndexContextT);

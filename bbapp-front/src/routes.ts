@@ -20,6 +20,9 @@ export const APP_ROUTES = {
     shoppingList: {
         index: '/shopping-list',
     },
+    dish: {
+        index: '/dish',
+    },
 };
 
 export const API_ENDPOINTS = {

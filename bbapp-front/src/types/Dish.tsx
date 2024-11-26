@@ -9,6 +9,10 @@ export type Dish = {
     createdAt?: string;
     updatedAt?: string;
 
+    countUses?: number;
+    mostRecentUse?: string;
+    nextUpcomingUse?: string;
+
     recipeItems?: Partial<RecipeItem[]>;
     dishTags?: Partial<DishTag[]>;
 };

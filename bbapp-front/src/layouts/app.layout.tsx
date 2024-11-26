@@ -25,6 +25,13 @@ export default function AppLayout() {
                 {home && (
                     <div className={'flex justify-end items-center gap-2'}>
                         <Link
+                            to={APP_ROUTES.dish.index}
+                            className={`shadow btn min-h-0 size-10 text-lg btn-circle ${pathname.includes(APP_ROUTES.dish.index) ? 'btn-primary' : ''}`}
+                        >
+                            <i className="fa fa-utensils"></i>
+                        </Link>
+
+                        <Link
                             to={APP_ROUTES.schedule.index}
                             className={`shadow btn min-h-0 size-10 text-lg btn-circle ${pathname.includes(APP_ROUTES.schedule.index) ? 'btn-primary' : ''}`}
                         >

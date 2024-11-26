@@ -13,6 +13,42 @@ export class DishService {
         return this.prisma.dish.findMany({ where: { homeId } });
     }
 
+    async getAllWithStats(homeId: number) {
+        const dishesWithCountAndDates = await this.prisma.dish.findMany({
+            where: { homeId },
+            include: {
+                _count: { select: { dishScheduleItems: true } },
+                dishScheduleItems: { select: { date: true } },
+            },
+        });
+
+        return dishesWithCountAndDates.map((dish) => {
+            const today = new Date();
+
+            // Dernière utilisation
+            const previousUses = dish.dishScheduleItems.filter((scheduleItem) => {
+                const date = new Date(scheduleItem.date);
+                return date < today;
+            });
+            const mostRecentUse = previousUses.length > 0 ? new Date(Math.max(...previousUses.map((item) => new Date(item.date).getTime()))) : null;
+
+            // Prochaine utilisation
+            const upcomingUses = dish.dishScheduleItems.filter((scheduleItem) => {
+                const date = new Date(scheduleItem.date);
+                return date >= today;
+            });
+            const nextUpcomingUse = upcomingUses.length > 0 ? new Date(Math.min(...upcomingUses.map((item) => new Date(item.date).getTime()))) : null;
+
+            const { dishScheduleItems, ...dishWithoutScheduleItems } = dish;
+            return {
+                ...dishWithoutScheduleItems,
+                countUses: dish._count.dishScheduleItems,
+                mostRecentUse,
+                nextUpcomingUse,
+            };
+        });
+    }
+
     async getAllWithDishTagIds(homeId: number) {
         const dishes = await this.prisma.dish.findMany({ where: { homeId }, include: { dishTags: true } });
         return dishes.map((dish) => ({
