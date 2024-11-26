@@ -24,13 +24,13 @@ export default function DishIndexBody() {
         <div className={'py-4 px-5 flex flex-col gap-3'}>
             <div className="flex flex-wrap gap-2">
                 {[orderByName, orderByCountUses, orderByMostRecentUse, orderByNextUpcomingUse].map((item) => (
-                    <button onClick={() => setOrderBy(item)} className={'btn btn-xs btn-neutral'}>
+                    <button onClick={() => setOrderBy(item)} className={`btn btn-xs btn-neutral ${item.id === orderBy.id ? '' : 'btn-outline'}`}>
                         {item.label}
                     </button>
                 ))}
             </div>
 
-            <table className={'table'}>
+            <table className={'table table-sm'}>
                 <thead>
                     <tr>
                         <th className={'w-10'}>#</th>
@@ -59,7 +59,7 @@ export default function DishIndexBody() {
                         .map((dish, dishKey) => (
                             <tr onClick={() => openSlideUpModal(<DishModal givenDish={dish} onDishSave={reloadDishes} />)}>
                                 <td>{dishKey + 1}</td>
-                                <td className={'first-letter:uppercase overflow-hidden text-ellipsis'}>{dish.name}</td>
+                                <td className={'first-letter:uppercase whitespace-nowrap overflow-hidden text-ellipsis'}>{dish.name}</td>
 
                                 {orderBy.id === 'countUses' && <td>{dish.countUses}</td>}
 
