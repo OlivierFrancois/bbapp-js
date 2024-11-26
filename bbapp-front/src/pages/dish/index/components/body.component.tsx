@@ -44,22 +44,22 @@ export default function DishIndexBody() {
                     {dishes
                         .sort((a, b) => {
                             if (a.countUses && b.countUses && orderBy.id === 'countUses') {
-                                return a.countUses - b.countUses;
+                                return a.countUses > b.countUses ? -1 : 1;
                             } else if (a.mostRecentUse && b.mostRecentUse && orderBy.id === 'mostRecentUse') {
                                 const aMostRecentUse = dayjs(a.mostRecentUse);
                                 const bMostRecentUse = dayjs(b.mostRecentUse);
-                                return aMostRecentUse.isBefore(bMostRecentUse) ? -1 : 1;
+                                return aMostRecentUse.isBefore(bMostRecentUse) ? 1 : -1;
                             } else if (a.nextUpcomingUse && b.nextUpcomingUse && orderBy.id === 'nextUpcomingUse') {
                                 const aMostRecentUse = dayjs(a.mostRecentUse);
                                 const bMostRecentUse = dayjs(b.mostRecentUse);
-                                return aMostRecentUse.isBefore(bMostRecentUse) ? -1 : 1;
+                                return aMostRecentUse.isBefore(bMostRecentUse) ? 1 : -1;
                             }
                             return a.name.localeCompare(b.name);
                         })
                         .map((dish, dishKey) => (
                             <tr onClick={() => openSlideUpModal(<DishModal givenDish={dish} onDishSave={reloadDishes} />)}>
                                 <td>{dishKey + 1}</td>
-                                <td className={'first-letter:uppercase'}>{dish.name}</td>
+                                <td className={'first-letter:uppercase overflow-hidden text-ellipsis'}>{dish.name}</td>
 
                                 {orderBy.id === 'countUses' && <td>{dish.countUses}</td>}
                                 {orderBy.id === 'mostRecentUse' && <td>{dayjs(dish.mostRecentUse).format('DD/MM/YYYY')}</td>}
