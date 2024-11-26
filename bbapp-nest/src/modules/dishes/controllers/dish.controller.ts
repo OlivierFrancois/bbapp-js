@@ -24,7 +24,6 @@ export class DishController extends AbstractController {
 
     @Get()
     async getAll() {
-        console.log(await this.dishService.getAllWithStats(this.home.id));
         return this.dishService.getAllWithStats(this.home.id);
     }
 
