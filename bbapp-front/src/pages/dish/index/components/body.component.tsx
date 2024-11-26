@@ -43,7 +43,7 @@ export default function DishIndexBody() {
                 <tbody>
                     {dishes
                         .sort((a, b) => {
-                            if (a.countUses && b.countUses && orderBy.id === 'countUses') {
+                            if (a.countUses !== undefined && b.countUses !== undefined && orderBy.id === 'countUses') {
                                 return a.countUses > b.countUses ? -1 : 1;
                             } else if (a.mostRecentUse && b.mostRecentUse && orderBy.id === 'mostRecentUse') {
                                 const aMostRecentUse = dayjs(a.mostRecentUse);
@@ -62,8 +62,14 @@ export default function DishIndexBody() {
                                 <td className={'first-letter:uppercase overflow-hidden text-ellipsis'}>{dish.name}</td>
 
                                 {orderBy.id === 'countUses' && <td>{dish.countUses}</td>}
-                                {orderBy.id === 'mostRecentUse' && <td>{dayjs(dish.mostRecentUse).format('DD/MM/YYYY')}</td>}
-                                {orderBy.id === 'nextUpcomingUse' && <td>{dayjs(dish.nextUpcomingUse).format('DD/MM/YYYY')}</td>}
+
+                                {orderBy.id === 'mostRecentUse' && (
+                                    <td>{dish.mostRecentUse ? dayjs(dish.mostRecentUse).format('DD/MM/YYYY') : '/'}</td>
+                                )}
+
+                                {orderBy.id === 'nextUpcomingUse' && (
+                                    <td>{dish.nextUpcomingUse ? dayjs(dish.nextUpcomingUse).format('DD/MM/YYYY') : '/'}</td>
+                                )}
                             </tr>
                         ))}
                 </tbody>
