@@ -59,7 +59,7 @@ export default function DishIndexBody() {
                         .map((dish, dishKey) => (
                             <tr onClick={() => openSlideUpModal(<DishModal givenDish={dish} onDishSave={reloadDishes} />)}>
                                 <td>{dishKey + 1}</td>
-                                <td className={'first-letter:uppercase whitespace-nowrap overflow-hidden text-ellipsis'}>{dish.name}</td>
+                                <td className={'first-letter:uppercase max-w-20 whitespace-nowrap overflow-hidden text-ellipsis'}>{dish.name}</td>
 
                                 {orderBy.id === 'countUses' && <td>{dish.countUses}</td>}
 
