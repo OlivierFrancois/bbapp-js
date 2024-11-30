@@ -54,12 +54,11 @@ export default function MomentRow({ moment, scheduleItem, date }: MomentRowProps
                     handleRemoveDish={handleRemoveDish}
                 />
             );
-        } else if (swapingMod) {
+        } else if (swapingMod || copyingMod) {
             // fix par bboi !!
             return;
         } else if (dish) {
             openSlideUpModal(<DishModal key={dish.id} givenDish={dish} onDishSave={() => reloadSchedule(date.format('YYYY-MM-DD'))} />);
-            //window.open(dish.url, '_blank');
         }
     };
     const handleRemoveDish = (dishId: number) => {
