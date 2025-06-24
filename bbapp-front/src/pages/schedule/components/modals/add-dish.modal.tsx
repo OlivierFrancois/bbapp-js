@@ -49,7 +49,6 @@ export default function AddDish({ date, moment, handleAddDish }: AddDishProps) {
             <div className={'relative'}>
                 <input
                     type="text"
-                    autoFocus
                     onInput={handleInput}
                     placeholder={'Recherchez un plat à ajouter'}
                     value={dishInput}

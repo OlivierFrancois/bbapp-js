@@ -1,7 +1,15 @@
 /**/
 
+body {
+    @apply bg-gray-900;
+}
+
 #root {
     font-family: "Reddit Sans", serif;
+    max-width: 720px;
+    margin: 0 auto;
+    background-color: white;
+    position: relative;
 }
 
 

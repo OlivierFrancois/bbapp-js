@@ -16,8 +16,8 @@ export default function AppLayout() {
     //if (user?.role !== 'ADMIN') return <Navigate to="/" />;
 
     return (
-        <main className="flex flex-col min-h-screen overflow-hidden max-h-screen">
-            <nav className={'z-10 absolute w-screen p-4 top-0 flex items-center justify-between'}>
+        <main className="flex flex-col min-h-screen overflow-hidden max-h-screen w-full">
+            <nav className={'z-10 rounded-full absolute w-full p-4 top-1 flex items-center justify-between'}>
                 <Link to={'/'} className={'btn btn-ghost btn-circle'}>
                     <Logo color={pathname === APP_ROUTES.home ? '#FBCE9E' : '#7ACFB0'} />
                 </Link>
@@ -40,7 +40,7 @@ export default function AppLayout() {
 
                         <Link
                             to={APP_ROUTES.shoppingList.index}
-                            className={`shadow btn min-h-0 size-10 text-lg btn-circle ${pathname.includes(APP_ROUTES.shoppingList.index) ? 'btn-primary' : ''}\`}>`}
+                            className={`shadow btn min-h-0 size-10 text-lg btn-circle ${pathname.includes(APP_ROUTES.shoppingList.index) ? 'btn-primary' : ''}`}
                         >
                             <i className="fa fa-shopping-basket"></i>
                         </Link>

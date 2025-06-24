@@ -16,7 +16,7 @@ export default function ScheduleActionBar() {
     };
 
     return (
-        <div className={`${open && 'w-full'} right-0 fixed bottom-4 px-5 flex justify-end`}>
+        <div className={`${open && 'w-full'} right-0 absolute bottom-4 px-5 flex justify-end`}>
             <div
                 className={`overflow-hidden transition-all rounded-full bg-dark px-4 p-1 flex gap-5 h-12 items-center justify-center max-w-full ${open ? ' w-full' : !action ? 'w-16' : 'w-28'}`}
             >
