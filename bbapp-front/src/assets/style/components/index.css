@@ -1,1 +1,5 @@
 @import "_nav.css";
+
+.modal {
+    @apply mx-auto max-w-[720px];
+}
