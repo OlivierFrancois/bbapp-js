@@ -5,6 +5,7 @@ export type Dish = {
     id: number;
     name: string;
     url?: string;
+    comment?: string;
     dishTagIds?: number[];
     createdAt?: string;
     updatedAt?: string;

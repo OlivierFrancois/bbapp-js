@@ -23,7 +23,7 @@ export const Root = ({ initialAuthDatas }: RootProps) => {
                             position="bottom-right"
                             theme="colored"
                             transition={Bounce}
-                            autoClose={50000}
+                            autoClose={5000}
                         />
                     </AuthProvider>
                 </ModalUpProvider>

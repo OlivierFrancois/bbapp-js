@@ -9,10 +9,10 @@ interface EditDishProps {
 }
 
 export default function DishView({ dish }: EditDishProps) {
-    const { articles, setEditMod, countUses } = useContext(DishContext);
+    const { articles, countUses } = useContext(DishContext);
 
     return (
-        <div className="flex-1 flex flex-col gap-6">
+        <div className="flex-1 flex flex-col gap-6 py-1">
             <div className="flex flex-col gap-1 ">
                 <div className="font-semibold">Informations générales</div>
 
@@ -27,6 +27,28 @@ export default function DishView({ dish }: EditDishProps) {
                     <div className="">fois</div>
                 </div>
             </div>
+
+            <hr />
+
+            {dish.url ? (
+                <Link to={dish.url} target={'_blank'} className={'mt-2 btn btn-neutral btn-sm'}>
+                    Consulter la recette
+                </Link>
+            ) : (
+                <div className={'italic'}>Recette non-renseignée.</div>
+            )}
+
+            {dish.comment && (
+                <>
+                    <hr />
+                    <div className="flex justify-between items-center">
+                        <h3 className={'font-semibold'}>Commentaire</h3>
+                    </div>
+                    <pre style={{ fontFamily: 'Reddit Sans' }} className={'text-sm'}>
+                        {dish.comment}
+                    </pre>
+                </>
+            )}
 
             <hr />
 
@@ -64,23 +86,9 @@ export default function DishView({ dish }: EditDishProps) {
                         </tbody>
                     </table>
                 ) : (
-                    <button className={'btn btn-outline btn-neutral btn-sm'} onClick={() => setEditMod(true)}>
-                        Renseigner des ingrédients
-                    </button>
+                    <div className={'italic'}>Ingrédients non-renseignés.</div>
                 )}
             </div>
-
-            <hr />
-
-            {dish.url ? (
-                <Link to={dish.url} target={'_blank'} className={'mt-2 btn btn-neutral btn-sm'}>
-                    Consulter la recette
-                </Link>
-            ) : (
-                <button className={'btn btn-outline btn-neutral btn-sm'} onClick={() => setEditMod(true)}>
-                    Renseigner une recette
-                </button>
-            )}
         </div>
     );
 }

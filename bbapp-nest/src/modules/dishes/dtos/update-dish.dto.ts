@@ -1,6 +1,7 @@
 export class UpdateDishDto {
     name: string;
     url?: string;
+    comment?: string;
     recipeItems?: RecipeItemDto[];
 }
 

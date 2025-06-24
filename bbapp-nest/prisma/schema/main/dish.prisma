@@ -1,57 +1,58 @@
 model Dish {
-    id        Int      @id @default(autoincrement())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    name      String
-    url       String?
-    homeId    Int
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String
+  url       String?
+  comment   String?  @db.Text
+  homeId    Int
 
-    home              Home               @relation(fields: [homeId], references: [id])
-    dishTags          DishTag[]
-    dishScheduleItems DishScheduleItem[]
-    recipeItems       RecipeItem[]
+  home              Home               @relation(fields: [homeId], references: [id])
+  dishTags          DishTag[]
+  dishScheduleItems DishScheduleItem[]
+  recipeItems       RecipeItem[]
 }
 
 model DishTag {
-    id        Int      @id @default(autoincrement())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    name      String
-    sortOrder Int?
-    color     String?
-    homeId    Int
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String
+  sortOrder Int?
+  color     String?
+  homeId    Int
 
-    home   Home   @relation(fields: [homeId], references: [id])
-    dishes Dish[]
+  home   Home   @relation(fields: [homeId], references: [id])
+  dishes Dish[]
 }
 
 model DishScheduleItem {
-    id        Int      @id @default(autoincrement())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    date      DateTime
-    moment    String
-    homeId    Int
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  date      DateTime
+  moment    String
+  homeId    Int
 
-    home   Home   @relation(fields: [homeId], references: [id])
-    dishes Dish[]
+  home   Home   @relation(fields: [homeId], references: [id])
+  dishes Dish[]
 
-    @@unique([date, moment, homeId])
+  @@unique([date, moment, homeId])
 }
 
 model RecipeItem {
-    id        Int      @id @default(autoincrement())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    quantity  Int
-    unit      String
-    dishId    Int
-    articleId Int
-    homeId    Int
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  quantity  Int
+  unit      String
+  dishId    Int
+  articleId Int
+  homeId    Int
 
-    dish    Dish    @relation(fields: [dishId], references: [id], onDelete: Cascade)
-    article Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
-    home    Home    @relation(fields: [homeId], references: [id])
+  dish    Dish    @relation(fields: [dishId], references: [id], onDelete: Cascade)
+  article Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  home    Home    @relation(fields: [homeId], references: [id])
 
-    @@unique([dishId, articleId])
+  @@unique([dishId, articleId])
 }
