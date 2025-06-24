@@ -44,7 +44,7 @@ export default function DishView({ dish }: EditDishProps) {
                     <div className="flex justify-between items-center">
                         <h3 className={'font-semibold'}>Commentaire</h3>
                     </div>
-                    <pre style={{ fontFamily: 'Reddit Sans' }} className={'text-sm'}>
+                    <pre style={{ fontFamily: 'Reddit Sans' }} className={'text-sm whitespace-pre-wrap overflow-auto'}>
                         {dish.comment}
                     </pre>
                 </>
